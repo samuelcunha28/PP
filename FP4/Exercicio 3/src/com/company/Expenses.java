@@ -119,7 +119,7 @@ public class Expenses {
         Expenses.descriptionFood = descriptionFood;
     }
 
-    //setget food values
+    //set get food values
     public static double[] getFoodValues() {
         return foodValues;
     }
