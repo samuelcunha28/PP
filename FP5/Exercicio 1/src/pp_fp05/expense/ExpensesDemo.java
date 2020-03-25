@@ -39,7 +39,7 @@ public class ExpensesDemo {
 
         System.out.println("");
 
-        // USER 1 EXPENSES OUTPUT
+        // USER 2 EXPENSES OUTPUT
         System.out.println("User2 Expense ID: " + user2.expenses[1].id);
         System.out.println("User2 Expense Type: " + user2.expenses[1].type);
         System.out.println("User2 Expense Amount: " + user2.expenses[1].amount);
