@@ -19,11 +19,10 @@ public class RoadBike extends Bicycle {
     }
 
     // contrutor para RoadBike
-    public RoadBike(int id, int numberOfGears, String mainColor, double wheelSize, BrakeType brakes, MaterialType material, double price, int guarantee, String handlebelt​, float framesize, String[] observation) {
+    public RoadBike(int id, int numberOfGears, String mainColor, double wheelSize, BrakeType brakes, MaterialType material, double price, int guarantee, String handlebelt​, float framesize) {
         super(id, numberOfGears, mainColor, wheelSize, brakes, material, price, guarantee);
         this.handlebelt​ = handlebelt​;
         this.framesize = framesize;
-        this.observation = observation;
     }
 
     // TODOS GETTERS AND SETTERS
@@ -153,5 +152,9 @@ public class RoadBike extends Bicycle {
         System.out.println(framesize);
         System.out.println("---------Observations : ");
         System.out.println(printobs());
+    }
+
+    public String printRoad() {
+        return "ID: " + super.getId() + " Cor: " + super.getMainColor() + " Frame size: " + this.getFramesize();
     }
 }

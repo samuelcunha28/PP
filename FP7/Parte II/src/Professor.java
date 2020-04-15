@@ -58,4 +58,13 @@ public class Professor extends Pessoa {
                 + "Unidade curriculares : " + disciplinas + "\n";
         return text;
     }
+
+    /**
+     * Método especifico para imprimir só professores
+     *
+     * @return Bikes
+     */
+    public String printProfessor() {
+        return "ID: " + super.getId() + " Nome: " + super.getNome() + " Data: " + super.getDate() + " Morada: " + super.getMorada();
+    }
 }

@@ -46,4 +46,13 @@ public class Funcionario extends Pessoa {
                 + "Tipo de contrato : " + contrato + "\n";
         return text;
     }
+
+    /**
+     * Método especifico para imprimir só funcionarios
+     *
+     * @return Bikes
+     */
+    public String printFuncionario() {
+        return "ID: " + super.getId() + " Nome: " + super.getNome() + " Data: " + super.getDate() + " Morada: " + super.getMorada();
+    }
 }

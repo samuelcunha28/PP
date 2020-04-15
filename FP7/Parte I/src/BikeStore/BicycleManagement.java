@@ -6,7 +6,6 @@ public class BicycleManagement {
     private int count = 0;
 
     /**
-     *
      * @param bike
      */
     public void addbike(Bicycle bike) {
@@ -17,6 +16,46 @@ public class BicycleManagement {
             System.out.println("MAX Bikes");
         }
     }
+
+    public String imprimir() {
+        String resp = "";
+        for (int i = 0; i < this.count; i++) {
+            if (this.bikelist[i] instanceof MountainBike) {
+                MountainBike mountainbike = (MountainBike) this.bikelist[i];
+                resp += mountainbike.printMountain(); // imprime mountain bikes
+            } else if (this.bikelist[i] instanceof RoadBike) {
+                RoadBike roadBike = (RoadBike) this.bikelist[i];
+                resp += roadBike.printRoad(); // imprime road bikes
+            } else {
+                resp += this.bikelist[i].toString(); // imprime default bicycle
+            }
+            resp += "\n";
+        }
+        return resp;
+    }
+
+    public String imprimirMountainBikes() {
+        String resp = "";
+        for (int i = 0; i < this.count; i++) {
+            if (this.bikelist[i] instanceof MountainBike) {
+                MountainBike mountainbike = (MountainBike) this.bikelist[i];
+                resp += mountainbike.printMountain(); // imprime mountain bikes
+            }
+        }
+        return resp;
+    }
+
+    public String imprimirRoadBikes() {
+        String resp = "";
+        for (int i = 0; i < this.count; i++) {
+            if (this.bikelist[i] instanceof RoadBike) {
+                RoadBike roadBike = (RoadBike) this.bikelist[i];
+                resp += roadBike.printRoad(); // imprime road bikes
+            }
+        }
+        return resp;
+    }
+
 
     @Override
     public String toString() {

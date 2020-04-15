@@ -46,4 +46,13 @@ public class Aluno extends Pessoa {
                 + "Unidades curriculares : " + disciplinas + "\n";
         return text;
     }
+
+    /**
+     * Método especifico para imprimir só alunos
+     *
+     * @return Bikes
+     */
+    public String printAluno() {
+        return "ID: " + super.getId() + " Nome: " + super.getNome() + " Data: " + super.getDate() + " Morada: " + super.getMorada();
+    }
 }

@@ -53,7 +53,6 @@ public class MountainBike extends Bicycle {
         this.bikeTools = bikeTools;
     }
 
-
     /**
      * print bike
      */
@@ -82,7 +81,7 @@ public class MountainBike extends Bicycle {
     }
 
     /**
-     * Printar all Bikes
+     * Printar all Bikes atraves do metodo toString
      *
      * @return Bikes
      */
@@ -99,5 +98,14 @@ public class MountainBike extends Bicycle {
                 + "Number of Lights : " + getNumberOfLights() + "\n"
                 + "Suspension : " + getSuspension() + "\n";
         return text;
+    }
+
+    /**
+     * Método especifico para imprimir só mountain bikes
+     *
+     * @return Bikes
+     */
+    public String printMountain() {
+        return "ID: " + super.getId() + " Cor: " + super.getMainColor() + " Number of lights: " + this.getNumberOfLights();
     }
 }
