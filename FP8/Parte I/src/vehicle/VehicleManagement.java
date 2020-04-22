@@ -45,7 +45,7 @@ public class VehicleManagement {
         return resp;
     }
 
-
+    // metodo para remover um objeto (veiculo)
     public Vehicle removeObject(int position) {
         if (position < listvehicles.length && position != -1) {
             if (listvehicles[position] == null) {
