@@ -69,7 +69,6 @@ public class SchoolManagement {
         return resp;
     }
 
-
     @Override
     public String toString() {
         String text = "";
