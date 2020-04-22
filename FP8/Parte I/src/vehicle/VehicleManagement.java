@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class VehicleManagement {
-    // adicionar metodos para listar professores, alunos e funcionarios
     private final int MAXVEHICLES = 20;
     private Vehicle[] listvehicles = new Vehicle[MAXVEHICLES];
     private int count = 0;
