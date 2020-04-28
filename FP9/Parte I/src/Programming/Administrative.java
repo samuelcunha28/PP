@@ -16,7 +16,7 @@ public class Administrative extends Person {
     }
 
     // construtor de Administrative
-    public Administrative(String name, String date, String address, int citizenCard, int vatNumber, double baseSalary, String initials, ContractType contractType, LiteraryAbilities literaryAbility, String beginContract, String endContract) {
+    public Administrative(String name, String date, String address, int citizenCard, int vatNumber, int baseSalary, String initials, ContractType contractType, LiteraryAbilities literaryAbility, String beginContract, String endContract) {
         super(name, date, address, citizenCard, vatNumber, baseSalary);
         this.initials = initials;
         this.contractType = contractType;
@@ -66,8 +66,22 @@ public class Administrative extends Person {
         this.endContract = endContract;
     }
 
+    @Override
+    public double getBaseSalary() {
+        if (this.getLiteraryAbility() == LiteraryAbilities.GRADUATION) {
+            return (super.getBaseSalary() + super.getBaseSalary() * 0.10);
+        } else if (this.getLiteraryAbility() == LiteraryAbilities.MASTER) {
+            return (super.getBaseSalary() + super.getBaseSalary() * 0.20);
+        } else if (this.getLiteraryAbility() == LiteraryAbilities.DOCTORATE) {
+            return (super.getBaseSalary() + super.getBaseSalary() * 0.30);
+        } else {
+            return super.getBaseSalary();
+        }
+    }
+
     // metodo toString para imprimir
     public String toString() {
+        System.out.print(super.toString());
         String text = "Sigla : " + initials + "\n"
                 + "Tipo de contrato : " + contractType + "\n"
                 + "Habilitações literárias : " + literaryAbility + "\n"

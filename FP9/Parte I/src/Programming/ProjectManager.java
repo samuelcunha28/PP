@@ -1,19 +1,20 @@
 package Programming;
 
 import java.util.Arrays;
+import java.util.Date;
 
 public class ProjectManager extends Person {
     // variaveis de instancia de ProjectManager
     private int code;
     private String projects[];
-    private String contractDate;
+    private Date contractDate;
 
     // construtor default de ProjectManager
     public ProjectManager() {
     }
 
     // construtor de ProjectManager
-    public ProjectManager(String name, String date, String address, int citizenCard, int vatNumber, double baseSalary, int code, String[] projects, String contractDate) {
+    public ProjectManager(String name, String date, String address, int citizenCard, int vatNumber, int baseSalary, int code, String[] projects, Date contractDate) {
         super(name, date, address, citizenCard, vatNumber, baseSalary);
         this.code = code;
         this.projects = projects;
@@ -37,16 +38,23 @@ public class ProjectManager extends Person {
         this.projects = project;
     }
 
-    public String getContractDate() {
+    public Date getContractDate() {
         return contractDate;
     }
 
-    public void setContractDate(String contractDate) {
+    public void setContractDate(Date contractDate) {
         this.contractDate = contractDate;
+    }
+
+    @Override
+    @Deprecated
+    public double getBaseSalary() {
+        return (super.getBaseSalary() + super.getBaseSalary() * 0.15 + this.getContractDate().getYear() * 0.015 + super.getBaseSalary() + super.getBaseSalary() * 0.01 * this.projects.length);
     }
 
     // metodo toString para imprimir
     public String toString() {
+        System.out.print(super.toString());
         String text = "Código de funcionário: " + code + "\n"
                 + "Conjunto de projetos que gere : " + Arrays.toString(projects) + "\n"
                 + "Data da contratação : " + contractDate + "\n";

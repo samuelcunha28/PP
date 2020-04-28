@@ -7,14 +7,14 @@ public class Person {
     private String address;
     private int citizenCard;
     private int vatNumber;
-    private double baseSalary;
+    private int baseSalary;
 
     // contrutor default de Person
     public Person() {
     }
 
     // construtor de Person
-    public Person(String name, String date, String address, int citizenCard, int vatNumber, double baseSalary) {
+    public Person(String name, String date, String address, int citizenCard, int vatNumber, int baseSalary) {
         this.name = name;
         this.date = date;
         this.address = address;
@@ -68,7 +68,7 @@ public class Person {
         return baseSalary;
     }
 
-    public void setBaseSalary(double baseSalary) {
+    public void setBaseSalary(int baseSalary) {
         this.baseSalary = baseSalary;
     }
 
@@ -79,7 +79,7 @@ public class Person {
                 + "Morada : " + address + "\n"
                 + "Número cartão de cidadão : " + citizenCard + "\n"
                 + "NIF : " + vatNumber + "\n"
-                + "Salário base : " + baseSalary + "\n";
+                + "Salário base : " + getBaseSalary() + "\n";
         return text;
     }
 }

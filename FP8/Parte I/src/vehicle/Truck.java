@@ -69,7 +69,6 @@ public class Truck extends Vehicle {
         } else {
             return (int) (super.getPrice() * 0.85);
         }
-
     }
 
     // metodo toString para imprimir
