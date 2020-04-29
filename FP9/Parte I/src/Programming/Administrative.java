@@ -89,4 +89,8 @@ public class Administrative extends Person {
                 + "Data de fim de contrato : " + endContract + "\n";
         return text;
     }
+
+    public String printAdministrative() {
+        return super.toString();
+    }
 }

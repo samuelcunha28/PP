@@ -74,4 +74,8 @@ public class JavaProgrammer extends Person {
                 + "Tipo de programador : " + programmerType + "\n";
         return text;
     }
+
+    public String printJavaProgrammer() {
+        return super.toString();
+    }
 }

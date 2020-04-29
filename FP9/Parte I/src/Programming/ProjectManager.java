@@ -49,7 +49,7 @@ public class ProjectManager extends Person {
     @Override
     @Deprecated
     public double getBaseSalary() {
-        return (super.getBaseSalary() + super.getBaseSalary() * 0.15 + this.getContractDate().getYear() * 0.015 + super.getBaseSalary() + super.getBaseSalary() * 0.01 * this.projects.length);
+        return (super.getBaseSalary() + super.getBaseSalary() * 0.15 + this.getContractDate().getYear() * 0.015 + super.getBaseSalary() * 0.01 * this.projects.length);
     }
 
     // metodo toString para imprimir
@@ -59,5 +59,9 @@ public class ProjectManager extends Person {
                 + "Conjunto de projetos que gere : " + Arrays.toString(projects) + "\n"
                 + "Data da contratação : " + contractDate + "\n";
         return text;
+    }
+
+    public String printProjectManager() {
+        return super.toString();
     }
 }
