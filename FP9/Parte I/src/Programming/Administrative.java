@@ -67,16 +67,15 @@ public class Administrative extends Person {
     }
 
     @Override
-    public double getBaseSalary() {
+    double calculateFinalSalary() {
         if (this.getLiteraryAbility() == LiteraryAbilities.GRADUATION) {
-            return (super.getBaseSalary() + super.getBaseSalary() * 0.10);
-        } else if (this.getLiteraryAbility() == LiteraryAbilities.MASTER) {
-            return (super.getBaseSalary() + super.getBaseSalary() * 0.20);
+            return (getBaseSalary() + getBaseSalary() * 0.10);
+        } else if (getLiteraryAbility() == LiteraryAbilities.MASTER) {
+            return (getBaseSalary() + getBaseSalary() * 0.20);
         } else if (this.getLiteraryAbility() == LiteraryAbilities.DOCTORATE) {
-            return (super.getBaseSalary() + super.getBaseSalary() * 0.30);
-        } else {
-            return super.getBaseSalary();
+            return (getBaseSalary() + getBaseSalary() * 0.30);
         }
+        return getBaseSalary();
     }
 
     // metodo toString para imprimir

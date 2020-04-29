@@ -56,13 +56,14 @@ public class JavaProgrammer extends Person {
         this.programmerType = programmerType;
     }
 
-    public double getBaseSalary() {
+    @Override
+    double calculateFinalSalary() {
         if (this.programmerType == ProgrammerType.JUNIOR) {
-            return (super.getBaseSalary() + super.getBaseSalary() * 0.10 + super.getBaseSalary() * 0.05 * this.programmingYears);
+            return (getBaseSalary() + getBaseSalary() * 0.10 + getBaseSalary() * 0.05 * this.programmingYears);
         } else if (this.programmerType == ProgrammerType.SENIOR) {
-            return (super.getBaseSalary() + super.getBaseSalary() * 0.20 + super.getBaseSalary() * 0.05 * this.programmingYears);
+            return (getBaseSalary() + getBaseSalary() * 0.20 + getBaseSalary() * 0.05 * this.programmingYears);
         }
-        return super.getBaseSalary();
+        return getBaseSalary();
     }
 
     // metodo toString para imprimir

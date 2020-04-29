@@ -48,8 +48,8 @@ public class ProjectManager extends Person {
 
     @Override
     @Deprecated
-    public double getBaseSalary() {
-        return (super.getBaseSalary() + super.getBaseSalary() * 0.15 + this.getContractDate().getYear() * 0.015 + super.getBaseSalary() * 0.01 * this.projects.length);
+    public double calculateFinalSalary() {
+        return (getBaseSalary() + getBaseSalary() * 0.15 + this.getContractDate().getYear() * 0.015 + getBaseSalary() * 0.01 * this.projects.length);
     }
 
     // metodo toString para imprimir

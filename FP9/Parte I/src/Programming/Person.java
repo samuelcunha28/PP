@@ -1,6 +1,6 @@
 package Programming;
 
-public class Person {
+abstract class Person {
     // variaveis de instância de Person
     private String name;
     private String date;
@@ -68,6 +68,8 @@ public class Person {
         return baseSalary;
     }
 
+    abstract double calculateFinalSalary();
+
     public void setBaseSalary(int baseSalary) {
         this.baseSalary = baseSalary;
     }
@@ -79,7 +81,7 @@ public class Person {
                 + "Morada : " + address + "\n"
                 + "Número cartão de cidadão : " + citizenCard + "\n"
                 + "NIF : " + vatNumber + "\n"
-                + "Salário base : " + getBaseSalary() + "\n";
+                + "Salário base : " + calculateFinalSalary() + "\n";
         return text;
     }
 }
