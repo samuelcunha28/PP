@@ -1,21 +1,21 @@
 package Exercicio3;
 
-public class Company {
+abstract class Company {
+
     // variaveis de instância de Company
     private String name;
     private int vatNumber;
-    
+
     // construtor default de Company
     public Company() {
     }
-    
+
     // construtor de Company
     public Company(String name, int vatNumber) {
         this.name = name;
         this.vatNumber = vatNumber;
     }
-    
-    
+
     // GETTERS E SETTERS
     public String getName() {
         return name;
@@ -31,8 +31,8 @@ public class Company {
 
     public void setVatNumber(int vatNumber) {
         this.vatNumber = vatNumber;
-    } 
-    
+    }
+
     @Override
     public String toString() {
         String text = "";

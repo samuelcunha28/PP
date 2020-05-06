@@ -1,6 +1,6 @@
 package Exercicio1;
 
-public class Company {
+abstract class Company {
     // variaveis de instância de Company
     private String name;
     private int vatNumber;
