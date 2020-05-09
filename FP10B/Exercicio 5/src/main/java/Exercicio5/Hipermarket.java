@@ -2,20 +2,32 @@ package Exercicio5;
 import Exercicio5.Interfaces.HipermarketService;
 
 /**
- *
+ * Classe abstrata Hipermarket é uma subclasse de Supermarket e implementa a interface HipermarketService
  * @author Samuel
  */
 abstract class Hipermarket extends Supermarket implements HipermarketService {
-    // variaveis de instancia de Hipermarket
+    /**
+     * variaveis de instancia de Hipermarket
+     */
     private double coffeePrice;
     private double gasPrice;
     private double aRate;
 
-    // construtor default de Hipermarket
+    /**
+     * construtor default de Hipermarket
+     */
     public Hipermarket() {
     }
     
-    // construtor de Hipermarket
+    /**
+     * construtor de Hipermarket
+     * @param coffeePrice
+     * @param gasPrice
+     * @param aRate
+     * @param potatoesPrice
+     * @param name
+     * @param vatNumber 
+     */
     public Hipermarket(double coffeePrice, double gasPrice, double aRate, double potatoesPrice, String name, int vatNumber) {
         super(potatoesPrice, name, vatNumber);
         this.coffeePrice = coffeePrice;
@@ -23,20 +35,36 @@ abstract class Hipermarket extends Supermarket implements HipermarketService {
         this.aRate = aRate;
     }
     
-    // não implementa este método
+    /**
+     * método abstrato
+     * @param purchaseValue
+     * @return 
+     */
     abstract int getPoints(double purchaseValue);
 
-    
+    /**
+     * Getter para coffee price
+     * @return coffeePrice
+     */
     @Override
     public double getCoffeePrice() {
         return coffeePrice;
     }
 
+    /**
+     * Setter para coffee price
+     * @param p 
+     */
     @Override
     public void setCoffeePrice(double p) {
         coffeePrice = p;
     }
 
+    /**
+     * Método para calcular preço total de coffees
+     * @param coffees
+     * @return total
+     */
     @Override
     public double getCoffeeTotal(int coffees) {
         double total;
@@ -44,17 +72,30 @@ abstract class Hipermarket extends Supermarket implements HipermarketService {
         return total;
     }
 
+    /**
+     * Getter para annual rate
+     * @return aRate
+     */
     @Override
     public double getAnnualRate() {
         return aRate;
     }
 
+    /**
+     * Setter para AnnualRate
+     * @param r 
+     */
     @Override
     public void setAnnualRate(double r) {
         aRate = r;
     }   
 
-    // com o calculo do enunciado
+    /**
+     * Faz o calculo pedido no enunciado para pagamentos e rates 
+     * @param ammount
+     * @param months
+     * @return payment
+     */
     @Override
     public double computeMonthlyPayment(double ammount, int months) {
         double monthlyRate;
@@ -66,16 +107,29 @@ abstract class Hipermarket extends Supermarket implements HipermarketService {
         return payment;
     }
 
+    /**
+     * Getter para gas price
+     * @return gasPrice
+     */
     @Override
     public double getGasPrice() {
         return gasPrice;
     }
 
+    /**
+     * Setter para gas price
+     * @param p 
+     */
     @Override
     public void setGasPrice(double p) {
         gasPrice = p;
     }
 
+    /**
+     * Método para calcular o total de gas
+     * @param litres
+     * @return total
+     */
     @Override
     public double getGasTotal(double litres) {
         double total;
@@ -83,6 +137,10 @@ abstract class Hipermarket extends Supermarket implements HipermarketService {
         return total;
     }
 
+    /**
+     * Método toString para imprimir
+     * @return text
+     */
     @Override
     public String toString() {
         String text = "";
