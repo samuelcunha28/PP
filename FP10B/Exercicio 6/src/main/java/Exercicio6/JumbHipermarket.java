@@ -8,16 +8,32 @@ import java.util.Calendar;
  */
 public class JumbHipermarket extends Hipermarket {
 
-    // construtor default de JumbHipermarket
+    /**
+     * Construtor default de JumbHipermarket
+     */
     public JumbHipermarket() {
     }
 
-    // construtor de JumbHipermarket
+    /**
+     * Construtor de JumbHipermarket
+     * @param coffeePrice preço de cafe
+     * @param gasPrice preço do gas
+     * @param aRate taxa de juro
+     * @param potatoPrice preço das batatas
+     * @param name nome da companhia
+     * @param vatNumber numero de contribuinte
+     */
     public JumbHipermarket(double coffeePrice, double gasPrice,
             double aRate, double potatoPrice, String name, int vatNumber) {
         super(coffeePrice, gasPrice, aRate, potatoPrice, name, vatNumber);
     }
 
+    /**
+     * Metodo que calcula os pontos dados pelo valor da compra
+     * dependendo do dia da semana
+     * @param purchaseValue valor da compra
+     * @return pontos
+     */
     @Override
     int getPoints(double purchaseValue) {
         Calendar c = Calendar.getInstance();
