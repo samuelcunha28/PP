@@ -3,7 +3,7 @@ package Exercicio6;
 import java.util.Calendar;
 
 /**
- *
+ * Classe Jumb Hipermarket que e subclasse de hipermarket
  * @author Samuel
  */
 public class JumbHipermarket extends Hipermarket {
