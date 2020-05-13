@@ -64,6 +64,30 @@ public class ShapeManagement {
         }
     }
 
+    /**
+     * Metodo que substitui um objeto no array por um novo recebido Retorna true
+     * se a operação foi um sucesso/false se falhou
+     * @param position
+     * @param shape
+     * @return shape
+     */
+    protected boolean setObject(int position, Shape shape) {
+        if (position < listshape.length) {
+            if (listshape[position] == null) {
+                System.out.println("Não existe nenhum objeto nesta postição.");
+                return false;
+            } else {
+                listshape[position] = shape;
+                return true;
+            }
+
+        } else {
+            System.out.println("Posição Inexistente");
+            return false;
+        }
+
+    }
+
     public String imprimir() {
         String resp = "";
         for (int i = 0; i < this.count; i++) {

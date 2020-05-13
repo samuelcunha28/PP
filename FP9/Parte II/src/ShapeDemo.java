@@ -22,6 +22,9 @@ public class ShapeDemo {
         list.addShape(shape2);
         list.addShape(shape3);
 
+        // editar shape
+        list.setObject(1, shape1);
+
         // remover objetos do array
         // list.removeObject(0); // vai remover shape1 porque está na posicao 0 do array
 
