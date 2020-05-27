@@ -15,7 +15,7 @@ public class PPodDemo {
         File f3 = new File("cc","mp3", 1.0, 120);
         File f4 = new File("dd","mp3", 1.0, 120);
         File f5 = new File("ee","mp3", 1.0, 120);
-        File f6 = new File("ff","mp3", 1.0, 120);
+        File f6 = new File("ff","mp4", 1.0, 120);
 
         try {
             pod1.addFile(f1);
