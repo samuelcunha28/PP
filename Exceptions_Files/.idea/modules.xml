@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Exceptions/task/Exceptions-task.iml" filepath="$PROJECT_DIR$/.idea/modules/Exceptions/task/Exceptions-task.iml" group="PP.Ficha_13/Exceptions-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Exceptions/task/Exceptions-task_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Exceptions/task/Exceptions-task_main.iml" group="PP.Ficha_13/Exceptions-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Exceptions/task/Exceptions-task_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Exceptions/task/Exceptions-task_test.iml" group="PP.Ficha_13/Exceptions-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Input_Output/task/Input_Output-task.iml" filepath="$PROJECT_DIR$/.idea/modules/Input_Output/task/Input_Output-task.iml" group="PP.Ficha_13/Input_Output-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Input_Output/task/Input_Output-task_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Input_Output/task/Input_Output-task_main.iml" group="PP.Ficha_13/Input_Output-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Input_Output/task/Input_Output-task_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Input_Output/task/Input_Output-task_test.iml" group="PP.Ficha_13/Input_Output-task" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PP.Ficha_13.iml" filepath="$PROJECT_DIR$/.idea/modules/PP.Ficha_13.iml" group="PP.Ficha_13" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util.iml" group="PP.Ficha_13/util" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util_main.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util_main.iml" group="PP.Ficha_13/util" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/util_test.iml" filepath="$PROJECT_DIR$/.idea/modules/util/util_test.iml" group="PP.Ficha_13/util" />
+    </modules>
+  </component>
+</project>

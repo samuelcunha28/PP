@@ -1,0 +1,917 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 270
+    length: 34
+    placeholder_text: '//ToDo: Create and print a contact'
+    dependency:
+      lesson: Exceptions
+      task: InternationalContact
+      file: src/Task.java
+      placeholder: 1
+      is_visible: false
+    initial_state:
+      length: 34
+      offset: 270
+    initialized_from_dependency: false
+    possible_answer: |2-
+              //create and instantiate a contact
+              IContact contact = null;
+              try {
+                  contact = new Contact("John", "Doe", "984736437");
+              } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                  System.out.println(e.getMessage());
+              }
+    selected: false
+    status: Unchecked
+  - offset: 306
+    length: 39
+    placeholder_text: '//ToDo: create an international contact'
+    dependency:
+      lesson: Exceptions
+      task: InternationalContact
+      file: src/Task.java
+      placeholder: 2
+      is_visible: false
+    initial_state:
+      length: 39
+      offset: 306
+    initialized_from_dependency: false
+    possible_answer: |2-
+              //create and instantiate a international contact
+              IInternationalContact ic = null;
+              try {
+                  ic = new InternationalContact("John", "Doe", "987634756", "0034", "Somecountry");
+              } catch (InvalidContactNameException | InvalidPhoneNumberException | InvalidCountryCodeException e) {
+                  System.out.println(e.getMessage());
+              }
+    selected: false
+    status: Unchecked
+  - offset: 348
+    length: 41
+    placeholder_text: '//ToDo: create a PhoneManager and test it'
+    initial_state:
+      length: 41
+      offset: 348
+    initialized_from_dependency: false
+    possible_answer: |2-
+              //create and add some contacts to manager
+              IPhoneManager pm = new PhoneManager();
+              try {
+                  pm.addContact(contact);
+              } catch (PhoneManagerException e) {
+                  System.out.println(e.getMessage());
+              }
+              try {
+                  pm.addContact(ic);
+              } catch (PhoneManagerException e) {
+                  System.out.println(e.getMessage());
+              }
+    selected: false
+    status: Unchecked
+  text: |-
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidCountryCodeException;
+    import exceptions.InvalidPhoneNumberException;
+    import exceptions.PhoneManagerException;
+    import phoneBook.*;
+
+    public class Task {
+
+        public static void main(String[] args) {
+
+    //ToDo: Create and print a contact
+
+    //ToDo: create an international contact
+
+
+    //ToDo: create a PhoneManager and test it
+
+        }
+
+    }
+  learner_created: false
+- name: src/phoneBook/IContact.java
+  visible: true
+  text: |
+    package phoneBook;
+
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidPhoneNumberException;
+
+    public interface IContact {
+
+        /**
+         * Getter for the {@link IContact contact} <code>firstName</code>
+         *
+         * @return {@link IContact contact} <code>firstName</code>
+         */
+        String getFirstName();
+
+        /**
+         * Setter for the {@link IContact contact} <code>firstName</code>
+         *
+         * @param firstName the first name of the {@link IContact contact}
+         * @throws InvalidContactNameException thrown when first name is not valid
+         */
+        void setFirstName(String firstName) throws InvalidContactNameException;
+
+        /**
+         * Getter for the {@link IContact contact} <code>lastName</code>
+         *
+         * @return {@link IContact contact} <code>lastName</code>
+         */
+        String getLastName();
+
+        /**
+         * Setter for the {@link IContact contact} <code>lastName</code>
+         *
+         * @param lastName the last name of the {@link IContact contact}
+         * @throws InvalidContactNameException thrown when last name is not valid
+         */
+        void setLastName(String lastName) throws InvalidContactNameException;
+
+        /**
+         * Getter for the {@link IContact contact} <code>phoneNumber</code>
+         *
+         * @return {@link IContact contact} <code>phoneNumber</code>
+         */
+        String getPhoneNumber();
+
+        /**
+         * Setter for the {@link IContact contact} <code>phoneNumber</code>
+         *
+         * @param phoneNumber the phone number of the {@link IContact contact}
+         * @throws InvalidPhoneNumberException thrown when phone number is not valid
+         */
+        void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException;
+
+        /**
+         * Returns a string representation of the object. In general, the toString
+         * method returns a string that "textually represents" this object. The
+         * result should be a concise but informative representation that is easy
+         * for a person to read
+         *
+         * @return A string representation of the object
+         */
+        @Override
+        String toString();
+
+    }
+  learner_created: false
+- name: src/exceptions/InvalidPhoneNumberException.java
+  visible: true
+  placeholders:
+  - offset: 83
+    length: 37
+    placeholder_text: '//ToDo: Add exception construtor here'
+    dependency:
+      lesson: Exceptions
+      task: InternationalContact
+      file: src/exceptions/InvalidPhoneNumberException.java
+      placeholder: 1
+      is_visible: false
+    initial_state:
+      length: 37
+      offset: 83
+    initialized_from_dependency: false
+    possible_answer: |2-
+          public InvalidPhoneNumberException(String message) {
+              super("Invalid Phone number: " + message);
+          }
+    selected: false
+    status: Unchecked
+  text: |
+    package exceptions;
+
+    public class InvalidPhoneNumberException extends Exception {
+
+    //ToDo: Add exception construtor here
+
+    }
+  learner_created: false
+- name: src/phoneBook/Contact.java
+  visible: true
+  placeholders:
+  - offset: 159
+    length: 37
+    placeholder_text: |-
+      //ToDo:
+      //Add variables
+      //Add methods
+    dependency:
+      lesson: Exceptions
+      task: InternationalContact
+      file: src/phoneBook/Contact.java
+      placeholder: 1
+      is_visible: false
+    initial_state:
+      length: 37
+      offset: 159
+    initialized_from_dependency: false
+    possible_answer: |2-
+          private String firstName;
+          private String lastName;
+          private String phoneNumber;
+
+          public Contact(String firstName, String lastName, String phoneNumber) throws InvalidContactNameException, InvalidPhoneNumberException {
+              this.setFirstName(firstName);
+              this.setLastName(lastName);
+              this.setPhoneNumber(phoneNumber);
+          }
+
+          protected boolean isName(String exe) {
+              if (exe == null || exe.equals(""))
+                  return false;
+
+              if (exe.charAt(0) < 'A' || exe.charAt(0) > 'Z')
+                  return false;
+
+              for (char a : exe.substring(1).toCharArray()) {
+                  if (a < 'a' || a > 'z')
+                      return false;
+              }
+
+              return true;
+          }
+
+          private boolean isNineDigits(String num) {
+              if (num == null || num.equals("") || num.length() != 9)
+                  return false;
+
+              for (char a : num.toCharArray()) {
+                  if (a < '0' || a > '9')
+                      return false;
+              }
+
+              return true;
+          }
+
+          @Override
+          public String getFirstName() {
+              return firstName;
+          }
+
+          @Override
+          public void setFirstName(String firstName) throws InvalidContactNameException {
+              if (isName(firstName)) {
+                  this.firstName = firstName;
+              } else {
+                  throw new InvalidContactNameException("Invalid first name");
+              }
+          }
+
+          @Override
+          public String getLastName() {
+              return lastName;
+          }
+
+          @Override
+          public void setLastName(String lastName) throws InvalidContactNameException {
+              if (isName(lastName)) {
+                  this.lastName = lastName;
+              } else {
+                  throw new InvalidContactNameException("Invalid last name");
+              }
+          }
+
+          @Override
+          public String getPhoneNumber() {
+              return phoneNumber;
+          }
+
+          @Override
+          public void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
+              if (isNineDigits(phoneNumber)) {
+                  this.phoneNumber = phoneNumber;
+              } else {
+                  throw new InvalidPhoneNumberException("invalid phone number");
+              }
+          }
+
+          @Override
+          public String toString() {
+              return "Contact{" +
+                      "firstName='" + firstName + '\'' +
+                      ", lastName='" + lastName + '\'' +
+                      ", phoneNumber='" + phoneNumber + '\'' +
+                      '}';
+          }
+    selected: false
+    status: Unchecked
+  text: |
+    package phoneBook;
+
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidPhoneNumberException;
+
+    public class Contact implements IContact {
+
+    //ToDo:
+    //Add variables
+    //Add methods
+
+
+    }
+  learner_created: false
+- name: src/exceptions/InvalidContactNameException.java
+  visible: true
+  placeholders:
+  - offset: 83
+    length: 37
+    placeholder_text: '//ToDo: Add exception construtor here'
+    dependency:
+      lesson: Exceptions
+      task: InternationalContact
+      file: src/exceptions/InvalidContactNameException.java
+      placeholder: 1
+      is_visible: false
+    initial_state:
+      length: 37
+      offset: 83
+    initialized_from_dependency: false
+    possible_answer: |2-
+          public InvalidContactNameException(String message) {
+              super("Invalid Contact Format: " + message);
+          }
+    selected: false
+    status: Unchecked
+  text: |
+    package exceptions;
+
+    public class InvalidContactNameException extends Exception {
+
+    //ToDo: Add exception construtor here
+
+    }
+  learner_created: false
+- name: src/phoneBook/IInternationalContact.java
+  visible: true
+  text: |
+    package phoneBook;
+
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidCountryCodeException;
+
+    public interface IInternationalContact extends IContact {
+
+        /**
+         * Getter for the {@link IInternationalContact internationalContact} <code>countryCode</code>
+         *
+         * @return {@link IInternationalContact internationalContact} <code>countryCode</code>
+         */
+        String getCountryCode();
+
+        /**
+         * Setter for the {@link IInternationalContact internationalContact} <code>countryCode</code>
+         *
+         * @param countryCode the country code of the {@link IInternationalContact internationalContact}
+         * @throws InvalidCountryCodeException thrown when country code is not valid
+         */
+        void setCountryCode(String countryCode) throws InvalidCountryCodeException;
+
+        /**
+         * Getter for the {@link IInternationalContact internationalContact} <code>countryName</code>
+         *
+         * @return {@link IInternationalContact internationalContact} <code>countryName</code>
+         */
+        String getCountryName();
+
+        /**
+         * Setter for the {@link IInternationalContact internationalContact} <code>countryName</code>
+         *
+         * @param countryName the country name of the {@link IInternationalContact internationalContact}
+         * @throws InvalidContactNameException thrown when country name is not valid
+         */
+        void setCountryName(String countryName) throws InvalidContactNameException;
+
+        /**
+         * Returns a string representation of the object. In general, the toString
+         * method returns a string that "textually represents" this object. The
+         * result should be a concise but informative representation that is easy
+         * for a person to read
+         *
+         * @return A string representation of the object
+         */
+        @Override
+        String toString();
+
+    }
+  learner_created: false
+- name: src/exceptions/InvalidCountryCodeException.java
+  visible: true
+  placeholders:
+  - offset: 83
+    length: 23
+    placeholder_text: '//ToDo: add constructor'
+    dependency:
+      lesson: Exceptions
+      task: InternationalContact
+      file: src/exceptions/InvalidCountryCodeException.java
+      placeholder: 1
+      is_visible: false
+    initial_state:
+      length: 23
+      offset: 83
+    initialized_from_dependency: false
+    possible_answer: |2-
+          public InvalidCountryCodeException(String message) {
+              super("Invalid country code: " + message);
+          }
+    selected: false
+    status: Unchecked
+  text: |
+    package exceptions;
+
+    public class InvalidCountryCodeException extends Exception {
+
+    //ToDo: add constructor
+
+    }
+  learner_created: false
+- name: src/phoneBook/InternationalContact.java
+  visible: true
+  placeholders:
+  - offset: 248
+    length: 36
+    placeholder_text: |-
+      //ToDo
+      //Add variables
+      //Add methods
+    dependency:
+      lesson: Exceptions
+      task: InternationalContact
+      file: src/phoneBook/InternationalContact.java
+      placeholder: 1
+      is_visible: false
+    initial_state:
+      length: 36
+      offset: 248
+    initialized_from_dependency: false
+    possible_answer: |2-
+          private String countryName;
+          private String countryCode;
+
+          public InternationalContact(String firstName, String lastName, String phoneNumber, String countryCode, String countryName) throws InvalidContactNameException, InvalidPhoneNumberException, InvalidCountryCodeException {
+              super(firstName, lastName, phoneNumber);
+              setCountryCode(countryCode);
+              setCountryName(countryName);
+          }
+
+          private boolean isCountryCode(String num) {
+              if (num == null || num.equals("") || num.length() < 2)
+                  return false;
+
+              if (num.charAt(0) != '0' || num.charAt(1) != '0') {
+                  return false;
+              }
+
+              for (char a : num.toCharArray()) {
+                  if (a < '0' || a > '9')
+                      return false;
+              }
+
+              return true;
+          }
+
+          @Override
+          public String getCountryCode() {
+              return countryCode;
+          }
+
+          @Override
+          public void setCountryCode(String countryCode) throws InvalidCountryCodeException {
+              if (isCountryCode(countryCode)) {
+                  this.countryCode = countryCode;
+              } else {
+                  throw new InvalidCountryCodeException("invalid");
+              }
+          }
+
+          @Override
+          public String getCountryName() {
+              return countryName;
+          }
+
+          @Override
+          public void setCountryName(String countryName) throws InvalidContactNameException {
+              if (isName(countryName)) {
+                  this.countryName = countryName;
+              } else {
+                  throw new InvalidContactNameException("Country name invalid");
+              }
+          }
+
+          @Override
+          public String toString() {
+              return "InternationalContact{" + super.toString() +
+                      "countryName='" + countryName + '\'' +
+                      ", countryCode='" + countryCode + '\'' +
+                      '}';
+          }
+    selected: false
+    status: Unchecked
+  text: |
+    package phoneBook;
+
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidCountryCodeException;
+    import exceptions.InvalidPhoneNumberException;
+
+    public class InternationalContact extends Contact implements IInternationalContact {
+
+    //ToDo
+    //Add variables
+    //Add methods
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidCountryCodeException;
+    import exceptions.InvalidPhoneNumberException;
+    import exceptions.PhoneManagerException;
+    import org.junit.Assert;
+    import org.junit.Test;
+    import phoneBook.*;
+
+    public class Tests {
+        @Test
+        public void addContact() {
+            //create and instantiate a contact
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly instantiating a contact");
+            }
+
+            //create and add some contacts to manager
+            IPhoneManager pm = new PhoneManager();
+
+            try {
+                pm.getContact("984736437");
+                Assert.fail("Searching an empty or null list should throw an exception");
+            } catch (PhoneManagerException ignored) {
+
+            }
+
+            try {
+                pm.removeContact("984736437");
+                Assert.fail("Removing an empty or null list should throw an exception");
+            } catch (PhoneManagerException ignored) {
+
+            }
+
+            try {
+                pm.addContact(contact);
+            } catch (PhoneManagerException e) {
+                Assert.fail("Exception thrown when correctly adding a contact");
+            }
+
+            try {
+                pm.addContact(null);
+                Assert.fail("Adding a null contact should throw an exception");
+            } catch (PhoneManagerException ignored) {
+
+            }
+
+            try {
+                pm.getContact("984736437");
+            } catch (PhoneManagerException e) {
+                Assert.fail("Exception thrown when correctly searching a contact");
+            }
+
+            try {
+                pm.getContact(null);
+                Assert.fail("Searching a null contact should throw an exception");
+            } catch (PhoneManagerException ignored) {
+
+            }
+
+            try {
+                pm.getContact("");
+                Assert.fail("Searching an empty contact should throw an exception");
+            } catch (PhoneManagerException ignored) {
+
+            }
+
+            try {
+                IContact c = pm.removeContact("984736437");
+                Assert.assertEquals("Removing a contact is not working properly", contact, c);
+            } catch (PhoneManagerException e) {
+                Assert.fail("Exception thrown when correctly removing a contact");
+            }
+        }
+
+        @Test
+        public void addContactDuplicated() {
+            //create and instantiate a contact
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly instantiating a contact");
+            }
+
+            //create and add some contacts to manager
+            IPhoneManager pm = new PhoneManager();
+            try {
+                pm.addContact(contact);
+            } catch (PhoneManagerException e) {
+                Assert.fail("Exception thrown when correctly adding a contact");
+            }
+
+            try {
+                pm.addContact(contact);
+                Assert.fail("Duplicated contact should be allowed");
+            } catch (PhoneManagerException ignored) {
+
+            }
+        }
+
+        @Test
+        public void addInternationalContact() {
+            //create and instantiate a contact
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly instantiating a contact");
+            }
+
+            //create and instantiate a international contact
+            IInternationalContact ic = null;
+            try {
+                ic = new InternationalContact("John", "Doe", "987634756", "0034", "Somecountry");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException | InvalidCountryCodeException e) {
+                Assert.fail("Exception thrown when correctly instantiating an international contact");
+            }
+
+            //create and instantiate a international contact
+            IInternationalContact ic2 = null;
+            try {
+                ic2 = new InternationalContact("John", "Doee", "987634757", "0034", "Somecountryy");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException | InvalidCountryCodeException e) {
+                Assert.fail("Exception thrown when correctly instantiating an international contact");
+            }
+
+            //create and instantiate a international contact
+            IInternationalContact ic3 = null;
+            try {
+                ic3 = new InternationalContact("John", "Doeee", "987134757", "0034", "Somecountryyy");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException | InvalidCountryCodeException e) {
+                Assert.fail("Exception thrown when correctly instantiating an international contact");
+            }
+
+            //create and instantiate a international contact
+            IInternationalContact ic4 = null;
+            try {
+                ic4 = new InternationalContact("Johnn", "Doeee", "987134711", "0034", "Somecountryyy");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException | InvalidCountryCodeException e) {
+                Assert.fail("Exception thrown when correctly instantiating an international contact");
+            }
+
+            //create and add some contacts to manager
+            IPhoneManager pm = new PhoneManager();
+
+            try {
+                pm.addContact(contact);
+            } catch (PhoneManagerException e) {
+                Assert.fail("Exception thrown when correctly adding a contact");
+            }
+
+            try {
+                pm.addContact(ic);
+                pm.addContact(ic2);
+                pm.addContact(ic3);
+                pm.addContact(ic4);
+            } catch (PhoneManagerException e) {
+                Assert.fail("Exception thrown when correctly adding a contact");
+            }
+
+            try {
+                String icString = pm.getForeignContactAsText("John");
+
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic.getPhoneNumber()));
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic.getCountryName()));
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic.getLastName()));
+
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic2.getPhoneNumber()));
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic2.getCountryName()));
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic2.getLastName()));
+
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic3.getPhoneNumber()));
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic3.getCountryName()));
+                Assert.assertTrue("Not all international contacts are being considered when executing the method getForeignContactAsText", icString.contains(ic3.getLastName()));
+
+                Assert.assertFalse("Some international contacts are incorrectly being considered when executing the method getForeignContactAsText", icString.contains(ic4.getPhoneNumber()));
+                Assert.assertFalse("Some international contacts are incorrectly being considered when executing the method getForeignContactAsText", icString.contains(ic4.getFirstName()));
+
+                Assert.assertFalse("Some national contacts are incorrectly being considered when executing the method getForeignContactAsText", icString.contains(contact.getPhoneNumber()));
+
+
+            } catch (PhoneManagerException e) {
+                Assert.fail("Exception thrown when correctly getting international contacts");
+            }
+
+
+        }
+
+    }
+  learner_created: false
+- name: src/phoneBook/IPhoneManager.java
+  visible: true
+  text: |
+    package phoneBook;
+
+    import exceptions.PhoneManagerException;
+
+    public interface IPhoneManager {
+
+        /**
+         * Add a {@link IContact contact} to the {@link IPhoneManager manager} <code>contactList</code>
+         *
+         * @param contact the {@link IContact contact} to add
+         * @throws PhoneManagerException thrown when contact is invalid
+         */
+        void addContact(IContact contact) throws PhoneManagerException;
+
+        /**
+         * Remove a {@link IContact contact} from the {@link IPhoneManager manager} <code>contactList</code>
+         *
+         * @param phoneNumber the phone number of the {@link IContact contact} to remove
+         * @return the removed {@link IContact contact}
+         * @throws PhoneManagerException thrown when phone number is invalid or is not found or contact list is empty
+         */
+        IContact removeContact(String phoneNumber) throws PhoneManagerException;
+
+        /**
+         * Get a {@link IContact contact} from the {@link IPhoneManager manager}
+         *
+         * @param phoneNumber the phone number of the {@link IContact contact} to search for
+         * @return {@link IContact contact}
+         * @throws PhoneManagerException thrown when phone number is invalid or is not found or contact list is empty
+         */
+        IContact getContact(String phoneNumber) throws PhoneManagerException;
+
+        /**
+         * Get a textual representation of all {@link IInternationalContact internationalContact} considering a given {@link IContact contact} <code>firstName</code>
+         *
+         * @param name the {@link IContact contact} <code>firstName</code>
+         * @return textual representation of all {@link IInternationalContact internationalContact} that respects the search criteria
+         * @throws PhoneManagerException thrown when name is invalid or contact list is empty
+         */
+        String getForeignContactAsText(String name) throws PhoneManagerException;
+
+        ;
+
+    }
+  learner_created: false
+- name: src/exceptions/PhoneManagerException.java
+  visible: true
+  text: |
+    package exceptions;
+
+    public class PhoneManagerException extends Exception {
+
+        public PhoneManagerException(String message) {
+            super("Phone Manager error: " + message);
+        }
+
+    }
+  learner_created: false
+- name: src/phoneBook/PhoneManager.java
+  visible: true
+  placeholders:
+  - offset: 116
+    length: 36
+    placeholder_text: |-
+      //ToDo
+      //Add variables
+      //Add methods
+    initial_state:
+      length: 36
+      offset: 116
+    initialized_from_dependency: false
+    possible_answer: |2-
+          private final int DEFAULT_SIZE = 10;
+          private IContact[] contacts;
+          private int nContacts;
+
+          public PhoneManager() {
+              contacts = new IContact[DEFAULT_SIZE];
+              nContacts = 0;
+          }
+
+          private void expandCapacity() {
+              IContact[] temp = new IContact[contacts.length * 2];
+              for (int i = 0; i < nContacts; i++) {
+                  temp[i] = contacts[i];
+              }
+              contacts = temp;
+          }
+
+          @Override
+          public void addContact(IContact contact) throws PhoneManagerException {
+              if (this.contacts == null) throw new PhoneManagerException("list not created");
+
+              if (contact == null) throw new PhoneManagerException("cannot add null contact");
+
+              boolean hasEqual = false;
+              int i = 0;
+              while (i < nContacts && !hasEqual) {
+                  if (contacts[i].getPhoneNumber().equals(contact.getPhoneNumber())) {
+                      hasEqual = true;
+                  }
+                  i++;
+              }
+
+              if (hasEqual) throw new PhoneManagerException("duplicated contact");
+
+              if (nContacts == contacts.length) {
+                  expandCapacity();
+              }
+
+              contacts[nContacts++] = contact;
+          }
+
+          private int getPosition(String phoneNumber) throws PhoneManagerException {
+              for (int i = 0; i < nContacts; i++) {
+                  if (contacts[i].getPhoneNumber().equals(phoneNumber)) {
+                      return i;
+                  }
+              }
+              throw new PhoneManagerException("phone number not found");
+          }
+
+          @Override
+          public IContact removeContact(String phoneNumber) throws PhoneManagerException {
+              if (phoneNumber == null || phoneNumber.isEmpty())
+                  throw new PhoneManagerException("phone number must contain any value");
+
+              if (nContacts == 0 || contacts == null) throw new PhoneManagerException("cannot remove from empty list");
+
+              int pos = getPosition(phoneNumber);
+
+              IContact temp = contacts[pos];
+              for (int i = pos; i < nContacts - 1; i++) {
+                  contacts[i] = contacts[i + 1];
+              }
+              contacts[--nContacts] = null;
+
+              return temp;
+          }
+
+          @Override
+          public IContact getContact(String phoneNumber) throws PhoneManagerException {
+              if (phoneNumber == null || phoneNumber.isEmpty())
+                  throw new PhoneManagerException("phone number must contain any value");
+
+              if (nContacts == 0 || contacts == null) throw new PhoneManagerException("cannot search an empty list");
+
+              int pos = getPosition(phoneNumber);
+
+              return contacts[pos];
+          }
+
+          @Override
+          public String getForeignContactAsText(String name) throws PhoneManagerException {
+              if (name == null || name.isEmpty()) throw new PhoneManagerException("name must contain any value");
+
+              if (nContacts == 0 || contacts == null) throw new PhoneManagerException("cannot search an empty list");
+
+              String s = "";
+
+              for (int i = 0; i < nContacts; i++) {
+                  if (contacts[i] instanceof IInternationalContact) {
+                      if (contacts[i].getFirstName().equals(name)) {
+                          s += contacts[i].toString();
+                      }
+                  }
+              }
+
+              return s;
+          }
+    selected: false
+    status: Unchecked
+  text: |
+    package phoneBook;
+
+    import exceptions.PhoneManagerException;
+
+    public class PhoneManager implements IPhoneManager {
+
+    //ToDo
+    //Add variables
+    //Add methods
+
+
+    }
+  learner_created: false
+status: Unchecked
+record: -1

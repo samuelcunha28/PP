@@ -1,0 +1,17 @@
+{
+  "nContacts": 2,
+  "contacts": [
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNumber": "984736437"
+    },
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNumber": "987634756",
+      "countryCode": "0034",
+      "countryName": "Somecountry"
+    }
+  ]
+}

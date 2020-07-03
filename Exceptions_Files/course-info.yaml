@@ -1,0 +1,9 @@
+title: Exceptions_Files
+language: English
+summary: Java exceptions and input/output.
+programming_language: Java
+content:
+- Exceptions
+- Input_Output
+mode: Study
+solutions_hidden: true

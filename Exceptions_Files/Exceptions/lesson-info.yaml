@@ -1,0 +1,6 @@
+type: framework
+content:
+- Contact
+- InternationalContact
+- ContactsManager
+current_task: 0

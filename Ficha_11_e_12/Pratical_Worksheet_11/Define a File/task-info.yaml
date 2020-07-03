@@ -1,0 +1,241 @@
+type: edu
+files:
+- name: src/Main.java
+  visible: true
+  placeholders:
+  - offset: 690
+    length: 55
+    placeholder_text: //Add Custom tests to the application
+    initial_state:
+      length: 55
+      offset: 690
+    initialized_from_dependency: false
+    possible_answer: '     //Add Custom tests to the application'
+    selected: false
+    status: Solved
+  - offset: 690
+    length: 55
+    placeholder_text: '// ToDo: (Optional) Add Custom tests to the application'
+    initial_state:
+      length: 55
+      offset: 690
+    initialized_from_dependency: false
+    possible_answer: //Add Custom tests to the application
+    selected: false
+    status: Solved
+  text: |-
+    import player.File;
+
+    /**
+     * <h2>
+     * Escola Superior de Tecnologia e Gestão (ESTG)<br>
+     * Politécnico do Porto (PP)<br>
+     * Licenciatura em Engenharia Informática (LEI)<br>
+     * Licenciatura em Segurança Informática em Redes de Computadores (LSIRC)<br>
+     * Paradigmas de Programação (PP)<br>
+     * 2019 / 2020<br>
+     * </h2>
+     * <p>
+     * Main file to solve ficha 11
+     * </p>
+     */
+    public class Main {
+
+        public static void main(String[] args) {
+            File f1 = new File("Legendary Tiger Man - Big Black Boat", "mp3", 3400, 5);
+            File f2 = new File("Legendary Tiger Man - Big Black Boat", "mp4", 5000, 15);
+            System.out.println(f1.toString());
+            System.out.println(f2.toString());
+
+       // ToDo: (Optional) Add Custom tests to the application
+
+        }
+    }
+  learner_created: false
+- name: src/player/File.java
+  visible: true
+  placeholders:
+  - offset: 478
+    length: 94
+    placeholder_text: "ToDo: \n- Add Instance variables\n- Add default constructor\n\
+      - Implement interface methods"
+    initial_state:
+      length: 87
+      offset: 471
+    initialized_from_dependency: false
+    possible_answer: |-
+      //Instance Variables
+          private String name;
+          private String extension;
+          private int sizeKB;
+          private int durationSecs;
+
+          /**
+           * Creates an instance of <code>File</code>
+           *
+           * @param name         The {@link File#name file name}
+           * @param extension    The {@link File#extension file extension}
+           * @param sizeKB       The {@link File#sizeKB file size} (in KB)
+           * @param durationSecs The {@link File#durationSecs file duration} (in seconds)
+           */
+          public File(String name, String extension, int sizeKB, int durationSecs) {
+              this.name = name;
+              this.extension = extension;
+              this.sizeKB = sizeKB;
+              this.durationSecs = durationSecs;
+          }
+
+          /**
+           * {@inheritDoc}
+           */
+          public String getName() {
+              return name;
+          }
+
+          /**
+           * {@inheritDoc}
+           */
+          public String getExtension() {
+              return extension;
+          }
+
+          /**
+           * {@inheritDoc}
+           */
+          public int getSizeKB() {
+              return sizeKB;
+          }
+
+          /**
+           * {@inheritDoc}
+           */
+          public int getDurationSecs() {
+              return durationSecs;
+          }
+
+          /**
+           * {@inheritDoc}
+           */
+          @Override
+          public String toString() {
+              String s = "== File ==\nName: " + name + "\n";
+              s += "Extension: " + extension + "\n";
+              s += "Duration: " + durationSecs + "\n";
+              s += "Size: " + sizeKB;
+              return s;
+          }
+    selected: true
+    status: Solved
+  text: "package player;\n\n/**\n * <h1> Classe utilizada para armazenar a informaç\
+    ão relativa a um ficheiro {@link File} </h1>\n *\n * <h2>\n * ESTG - Escola Superior\
+    \ de Tecnologia e Gestão <br>\n * IPP - Instituto Politécnico do Porto <br>\n\
+    \ * PP - Paradigmas da Programação <br>\n * </h2>\n *\n * <h3>\n * LEI - Licenciatura\
+    \ em Engenharia Informática <br>\n * LSIRC - Licenciatura em Segurança Informá\
+    tica e Redes de Computadores <br>\n * </h3>\n */\npublic class File implements\
+    \ IFile {\n\n    ToDo: \n- Add Instance variables\n- Add default constructor\n\
+    - Implement interface methods\n\n}\n"
+  learner_created: false
+- name: src/player/IFile.java
+  visible: true
+  text: |
+    package player;
+
+    /**
+     * <h2>
+     * Escola Superior de Tecnologia e Gestão (ESTG)<br>
+     * Politécnico do Porto (PP)<br>
+     * Licenciatura em Engenharia Informática (LEI)<br>
+     * Licenciatura em Segurança Informática em Redes de Computadores (LSIRC)<br>
+     * Paradigmas de Programação (PP)<br>
+     * 2019 / 2020<br>
+     * </h2>
+     * <p>
+     * Main file to solve ficha 11
+     * </p>
+     */
+    public interface IFile {
+
+        /**
+         * Gets the attribute name
+         *
+         * @return The file name
+         */
+        public String getName();
+
+        /**
+         * Gets the attribute  extension
+         *
+         * @return The file extension
+         */
+        public String getExtension();
+
+        /**
+         * Gets the attribute sizeKB
+         *
+         * @return The size in KB
+         */
+        public int getSizeKB();
+
+        /**
+         * Gets the attribute  durationSecs
+         *
+         * @return The file duration in seconds
+         */
+        public int getDurationSecs();
+
+        /**
+         * Returns a string representation of the object. In general, the toString
+         * method returns a string that "textually represents" this object. The
+         * result should be a concise but informative representation that is easy
+         * for a person to read
+         *
+         * @return A string representation of the object
+         */
+        @Override
+        public String toString();
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import org.junit.Assert;
+    import org.junit.Test;
+    import player.File;
+
+    public class Tests {
+        @Test
+        public void testSolutionFile1() {
+            File f1 = new File("Legendary Tiger Man - Big Black Boat", "mp3", 3072, 5);
+
+            Assert.assertEquals("Name is not set properly", "Legendary Tiger Man - Big Black Boat", f1.getName());
+            Assert.assertEquals("Extension is not set properly", "mp3", f1.getExtension());
+            Assert.assertEquals("Duration is not set properly", 5, f1.getDurationSecs());
+            Assert.assertEquals("Size is not set properly", 3072, f1.getSizeKB());
+            Assert.assertTrue("toString is not including file name", f1.toString().contains(f1.getName()));
+            Assert.assertTrue("toString is not including file extension", f1.toString().contains(f1.getExtension()));
+            Assert.assertTrue("toString is not including file duration", f1.toString().contains(String.valueOf(f1.getDurationSecs())));
+            Assert.assertTrue("toString is not including file size", f1.toString().contains(String.valueOf(f1.getSizeKB())));
+
+
+        }
+
+        @Test
+        public void testSolutionFile2() {
+            File f1 = new File("Legendary Tiger Man - Big Black Boat", "mp4", 5120, 15);
+
+            Assert.assertEquals("Name is not set properly", "Legendary Tiger Man - Big Black Boat", f1.getName());
+            Assert.assertEquals("Extension is not set properly", "mp4", f1.getExtension());
+            Assert.assertEquals("Duration is not set properly", 15, f1.getDurationSecs());
+            Assert.assertEquals("Size is not set properly", 5120, f1.getSizeKB());
+            Assert.assertTrue("toString is not including file name", f1.toString().contains(f1.getName()));
+            Assert.assertTrue("toString is not including file extension", f1.toString().contains(f1.getExtension()));
+            Assert.assertTrue("toString is not including file duration", f1.toString().contains(String.valueOf(f1.getDurationSecs())));
+            Assert.assertTrue("toString is not including file size", f1.toString().contains(String.valueOf(f1.getSizeKB())));
+
+        }
+
+
+    }
+  learner_created: false
+status: Solved
+record: -1

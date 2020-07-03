@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Pratical_Worksheet_11-Additional_Player_Functionalities_main" target="1.8" />
+      <module name="Pratical_Worksheet_11-Additional_Player_Functionalities_test" target="1.8" />
+      <module name="Pratical_Worksheet_11-Define_a_File_main" target="1.8" />
+      <module name="Pratical_Worksheet_11-Define_a_File_test" target="1.8" />
+      <module name="Pratical_Worksheet_11-Define_a_Player_and_implement_PPod_interface_main" target="1.8" />
+      <module name="Pratical_Worksheet_11-Define_a_Player_and_implement_PPod_interface_test" target="1.8" />
+      <module name="Pratical_Worksheet_11-Implement_Equals_main" target="1.8" />
+      <module name="Pratical_Worksheet_11-Implement_Equals_test" target="1.8" />
+      <module name="Pratical_Worksheet_12-Export_Import_JSON_main" target="1.8" />
+      <module name="Pratical_Worksheet_12-Export_Import_JSON_test" target="1.8" />
+      <module name="Pratical_Worksheet_12-Export_Import_Serializable_main" target="1.8" />
+      <module name="Pratical_Worksheet_12-Export_Import_Serializable_test" target="1.8" />
+      <module name="util_main" target="1.8" />
+      <module name="util_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

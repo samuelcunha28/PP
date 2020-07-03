@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Pratical_Worksheet_11/Additional Player Functionalities" />
+            <option value="$PROJECT_DIR$/Pratical_Worksheet_11/Define a File" />
+            <option value="$PROJECT_DIR$/Pratical_Worksheet_11/Define a Player and implement PPod interface" />
+            <option value="$PROJECT_DIR$/Pratical_Worksheet_11/Implement Equals" />
+            <option value="$PROJECT_DIR$/Pratical_Worksheet_12/Export_Import_JSON" />
+            <option value="$PROJECT_DIR$/Pratical_Worksheet_12/Export_Import_Serializable" />
+            <option value="$PROJECT_DIR$/util" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

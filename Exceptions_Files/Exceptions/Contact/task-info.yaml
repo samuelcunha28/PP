@@ -1,0 +1,725 @@
+type: edu
+files:
+- name: src/Task.java
+  visible: true
+  placeholders:
+  - offset: 216
+    length: 108
+    placeholder_text: '//ToDo: Create and print a contact'
+    initial_state:
+      length: 34
+      offset: 215
+    initialized_from_dependency: false
+    possible_answer: |2-
+              //create and instantiate a contact
+              try {
+                  IContact contact = new Contact("John", "Doe", "984736437");
+              } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                  System.out.println(e.getMessage());
+              }
+    selected: true
+    status: Failed
+  text: |-
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidPhoneNumberException;
+    import phoneBook.Contact;
+    import phoneBook.IContact;
+
+    public class Task {
+
+        public static void main(String[] args) {
+
+    //ToDo: Create and print a contact
+
+        }
+
+    }
+  learner_created: false
+- name: test/Tests.java
+  visible: false
+  text: |-
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidPhoneNumberException;
+    import org.junit.Assert;
+    import org.junit.Test;
+    import phoneBook.Contact;
+    import phoneBook.IContact;
+
+    public class Tests {
+
+        @Test
+        public void createValidContact() {
+            try {
+                IContact c = new Contact("John", "Doe", "984736437");
+                Assert.assertEquals("First name is not set properly", "John", c.getFirstName());
+                Assert.assertEquals("Last name is not set properly", "Doe", c.getLastName());
+                Assert.assertEquals("Phone number is not set properly", "984736437", c.getPhoneNumber());
+
+                String ts = c.toString();
+                Assert.assertTrue("toString is not including first name", ts.contains(c.getFirstName()));
+                Assert.assertTrue("toString is not including last name", ts.contains(c.getLastName()));
+                Assert.assertTrue("toString is not including phone number", ts.contains(c.getPhoneNumber()));
+
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Creating a valid contact should not throw an exception");
+            }
+        }
+
+        //----- TESTS FOR CONSTRUCTOR-------
+        @Test
+        public void createContactInvalidFirstNameNull() {
+            try {
+                new Contact(null, "Doe", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with null first name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidFirstNameEmpty() {
+            try {
+                new Contact("", "Doe", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with empty first name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidFirstNameFirstChar() {
+            try {
+                new Contact("john", "Doe", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with invalid first char of first name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidFirstNameMiddleChar() {
+            try {
+                new Contact("JOhn", "Doe", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with invalid middle char of first name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidFirstNameTwoWords() {
+            try {
+                new Contact("John ", "Doe", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with two words for first name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidLastNameNull() {
+            try {
+                new Contact("John", null, "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with null last name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidLastNameEmpty() {
+            try {
+                new Contact("John", "", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with empty last name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidLastNameFirstChar() {
+            try {
+                new Contact("John", "doe", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with invalid first char of last name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidLastNameMiddleChar() {
+            try {
+                new Contact("John", "DOe", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with invalid middle char of last name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidLastNameTwoWords() {
+            try {
+                new Contact("John", "Doe ", "984736437");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException ignored) {
+
+            } catch (InvalidPhoneNumberException e) {
+                Assert.fail("Creating a contact with two words for last name should throw an InvalidContactNameException");
+            }
+        }
+
+        @Test
+        public void createContactInvalidPhoneDigits() {
+            try {
+                new Contact("John", "Doe", "98473643");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException invalidContactNameExcpetion) {
+                Assert.fail("Creating a contact with less than 9 digits should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+        @Test
+        public void createContactInvalidPhoneDigits2() {
+            try {
+                new Contact("John", "Doe", "9847364333");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException invalidContactNameExcpetion) {
+                Assert.fail("Creating a contact with more than 9 digits should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+        @Test
+        public void createContactInvalidPhoneDigitsEmpty() {
+            try {
+                new Contact("John", "Doe", "");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException invalidContactNameExcpetion) {
+                Assert.fail("Creating a contact with empty phone number should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+        @Test
+        public void createContactInvalidPhoneDigitsNull() {
+            try {
+                new Contact("John", "Doe", "");
+                Assert.fail("An exception should be thrown when creating a contact with invalid parameters");
+            } catch (InvalidContactNameException invalidContactNameExcpetion) {
+                Assert.fail("Creating a contact with null phone number should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+        //----TEST FOR SETTERS----
+
+        @Test
+        public void setContactInvalidFirstNameNull() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setFirstName(null);
+                Assert.fail("Setting a contact with null first name should throw an InvalidContactNameException");
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidFirstNameEmpty() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setFirstName("");
+                Assert.fail("Setting a contact with empty first name should throw an InvalidContactNameException");
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidFirstNameFirstChar() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setFirstName("john");
+                Assert.fail("Setting a contact with invalid first char of first name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidFirstNameMiddleChar() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setFirstName("JOhn");
+                Assert.fail("Setting a contact with invalid middle char of first name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidFirstNameTwoWords() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setFirstName("John ");
+                Assert.fail("Setting a contact with two words for first name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidLastNameNull() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setLastName(null);
+                Assert.fail("Setting a contact with null last name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidLastNameEmpty() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setLastName("");
+                Assert.fail("Setting a contact with empty last name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidLastNameFirstChar() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setLastName("doe");
+                Assert.fail("Setting a contact with invalid first char of last name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidLastNameMiddleChar() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setLastName("DOe");
+                Assert.fail("Setting a contact with invalid middle char of last name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidLastNameTwoWords() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setLastName("Doe ");
+                Assert.fail("Setting a contact with two words for last name should throw an InvalidContactNameException");
+
+            } catch (InvalidContactNameException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidPhoneDigits() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setPhoneNumber("123");
+                Assert.fail("Setting a contact with less than 9 digits should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidPhoneDigits2() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setPhoneNumber("8347683463674");
+                Assert.fail("Setting a contact with more than 9 digits should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidPhoneDigitsEmpty() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setPhoneNumber("");
+                Assert.fail("Setting a contact with empty phone number should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+        @Test
+        public void setContactInvalidPhoneDigitsNull() {
+            IContact contact = null;
+            try {
+                contact = new Contact("John", "Doe", "984736437");
+            } catch (InvalidContactNameException | InvalidPhoneNumberException e) {
+                Assert.fail("Exception thrown when correctly creating a contact");
+            }
+
+            try {
+                contact.setPhoneNumber(null);
+                Assert.fail("Setting a contact with null phone number should throw an InvalidContactNameException");
+            } catch (InvalidPhoneNumberException ignored) {
+
+            }
+        }
+
+
+    }
+  learner_created: false
+- name: src/phoneBook/IContact.java
+  visible: true
+  text: |
+    package phoneBook;
+
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidPhoneNumberException;
+
+    public interface IContact {
+
+        /**
+         * Getter for the {@link IContact contact} <code>firstName</code>
+         *
+         * @return {@link IContact contact} <code>firstName</code>
+         */
+        String getFirstName();
+
+        /**
+         * Setter for the {@link IContact contact} <code>firstName</code>
+         *
+         * @param firstName the first name of the {@link IContact contact}
+         * @throws InvalidContactNameException thrown when first name is not valid
+         */
+        void setFirstName(String firstName) throws InvalidContactNameException;
+
+        /**
+         * Getter for the {@link IContact contact} <code>lastName</code>
+         *
+         * @return {@link IContact contact} <code>lastName</code>
+         */
+        String getLastName();
+
+        /**
+         * Setter for the {@link IContact contact} <code>lastName</code>
+         *
+         * @param lastName the last name of the {@link IContact contact}
+         * @throws InvalidContactNameException thrown when last name is not valid
+         */
+        void setLastName(String lastName) throws InvalidContactNameException;
+
+        /**
+         * Getter for the {@link IContact contact} <code>phoneNumber</code>
+         *
+         * @return {@link IContact contact} <code>phoneNumber</code>
+         */
+        String getPhoneNumber();
+
+        /**
+         * Setter for the {@link IContact contact} <code>phoneNumber</code>
+         *
+         * @param phoneNumber the phone number of the {@link IContact contact}
+         * @throws InvalidPhoneNumberException thrown when phone number is not valid
+         */
+        void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException;
+
+        /**
+         * Returns a string representation of the object. In general, the toString
+         * method returns a string that "textually represents" this object. The
+         * result should be a concise but informative representation that is easy
+         * for a person to read
+         *
+         * @return A string representation of the object
+         */
+        @Override
+        String toString();
+
+    }
+  learner_created: false
+- name: src/exceptions/InvalidPhoneNumberException.java
+  visible: true
+  placeholders:
+  - offset: 83
+    length: 37
+    placeholder_text: '//ToDo: Add exception construtor here'
+    initial_state:
+      length: 37
+      offset: 83
+    initialized_from_dependency: false
+    possible_answer: |2-
+          public InvalidPhoneNumberException(String message) {
+              super("Invalid Phone number: " + message);
+          }
+    selected: true
+    status: Failed
+  text: |
+    package exceptions;
+
+    public class InvalidPhoneNumberException extends Exception {
+
+    //ToDo: Add exception construtor here
+
+    }
+  learner_created: false
+- name: src/phoneBook/Contact.java
+  visible: true
+  placeholders:
+  - offset: 159
+    length: 37
+    placeholder_text: |-
+      //ToDo:
+      //Add variables
+      //Add methods
+    initial_state:
+      length: 37
+      offset: 159
+    initialized_from_dependency: false
+    possible_answer: |2-
+          private String firstName;
+          private String lastName;
+          private String phoneNumber;
+
+          public Contact(String firstName, String lastName, String phoneNumber) throws InvalidContactNameException, InvalidPhoneNumberException {
+              this.setFirstName(firstName);
+              this.setLastName(lastName);
+              this.setPhoneNumber(phoneNumber);
+          }
+
+          private boolean isName(String exe) {
+              if (exe == null || exe.equals(""))
+                  return false;
+
+              if (exe.charAt(0) < 'A' || exe.charAt(0) > 'Z')
+                  return false;
+
+              for (char a : exe.substring(1).toCharArray()) {
+                  if (a < 'a' || a > 'z')
+                      return false;
+              }
+
+              return true;
+          }
+
+          private boolean isNineDigits(String num) {
+              if (num == null || num.equals("") || num.length() != 9)
+                  return false;
+
+              for (char a : num.toCharArray()) {
+                  if (a < '0' || a > '9')
+                      return false;
+              }
+
+              return true;
+          }
+
+          @Override
+          public String getFirstName() {
+              return firstName;
+          }
+
+          @Override
+          public void setFirstName(String firstName) throws InvalidContactNameException {
+              if (isName(firstName)) {
+                  this.firstName = firstName;
+              } else {
+                  throw new InvalidContactNameException("Invalid first name");
+              }
+          }
+
+          @Override
+          public String getLastName() {
+              return lastName;
+          }
+
+          @Override
+          public void setLastName(String lastName) throws InvalidContactNameException {
+              if (isName(lastName)) {
+                  this.lastName = lastName;
+              } else {
+                  throw new InvalidContactNameException("Invalid last name");
+              }
+          }
+
+          @Override
+          public String getPhoneNumber() {
+              return phoneNumber;
+          }
+
+          @Override
+          public void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
+              if (isNineDigits(phoneNumber)) {
+                  this.phoneNumber = phoneNumber;
+              } else {
+                  throw new InvalidPhoneNumberException("invalid phone number");
+              }
+          }
+
+          @Override
+          public String toString() {
+              return "Contact{" +
+                      "firstName='" + firstName + '\'' +
+                      ", lastName='" + lastName + '\'' +
+                      ", phoneNumber='" + phoneNumber + '\'' +
+                      '}';
+          }
+    selected: false
+    status: Failed
+  text: |
+    package phoneBook;
+
+    import exceptions.InvalidContactNameException;
+    import exceptions.InvalidPhoneNumberException;
+
+    public class Contact implements IContact {
+
+    //ToDo:
+    //Add variables
+    //Add methods
+
+
+    }
+  learner_created: false
+- name: src/exceptions/InvalidContactNameException.java
+  visible: true
+  placeholders:
+  - offset: 84
+    length: 73
+    placeholder_text: '//ToDo: Add exception construtor here'
+    initial_state:
+      length: 37
+      offset: 83
+    initialized_from_dependency: false
+    possible_answer: |2-
+          public InvalidContactNameException(String message) {
+              super("Invalid Contact Format: " + message);
+          }
+    selected: true
+    status: Failed
+  text: |
+    package exceptions;
+
+    public class InvalidContactNameException extends Exception {
+
+    //ToDo: Add exception construtor here
+
+    }
+  learner_created: false
+status: Failed
+record: -1
