@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Person;
 
 import order.base.IAddress;
@@ -46,7 +41,7 @@ public class Customer extends Person implements ICustomer {
      */
     @Override
     public int getCustomerId() {
-        return id;
+        return this.id;
     }
     
     /**
@@ -63,7 +58,7 @@ public class Customer extends Person implements ICustomer {
      */
     @Override
     public String getVat() {
-        return vat;
+        return this.vat;
     }
 
     /**
@@ -81,7 +76,7 @@ public class Customer extends Person implements ICustomer {
      */
     @Override
     public IAddress getBillingAddress() {
-        return billingAddress;
+        return this.billingAddress;
     }
 
     /**

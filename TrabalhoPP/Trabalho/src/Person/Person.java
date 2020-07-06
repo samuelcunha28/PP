@@ -32,7 +32,7 @@ public class Person implements IPerson{
      */
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
     
     /**
@@ -49,7 +49,7 @@ public class Person implements IPerson{
      */
     @Override
     public IAddress getAddress() {
-        return address;
+        return this.address;
     }
 
     /**

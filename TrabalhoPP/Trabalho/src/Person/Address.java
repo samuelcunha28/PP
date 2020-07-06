@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Person;
 
 import order.base.IAddress;
@@ -45,7 +40,7 @@ public class Address implements IAddress {
      */
     @Override
     public String getCity() {
-        return city;
+        return this.city;
     }
 
     /**
@@ -63,7 +58,7 @@ public class Address implements IAddress {
      */
     @Override
     public String getCountry() {
-        return country;
+        return this.country;
     }
     
     /**
@@ -81,7 +76,7 @@ public class Address implements IAddress {
      */
     @Override
     public int getNumber() {
-        return number;
+        return this.number;
     }
     
     /**
@@ -99,7 +94,7 @@ public class Address implements IAddress {
      */
     @Override
     public String getState() {
-        return state;
+        return this.state;
     }
 
     /**
