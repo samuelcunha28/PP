@@ -38,19 +38,28 @@ public class ItemPacked extends Colored implements IItemPacked {
         this.position = position;
     }
     
-    
-    
-    
+    /**
+     * Metodo para obter o item
+     * @return item do tipo IItem
+     */
     @Override
     public IItem getItem() {
         return this.item;
     }
 
+    /**
+     * Metodo para obter a posicao
+     * @return posicao do tipo IPosition
+     */
     @Override
     public IPosition getPosition() {
         return this.position;
     }
 
+    /**
+     * Metodo para atribuir a posicao
+     * @param position posicao a atribuir do tipo IPosition
+     */
     @Override
     public void setPosition(IPosition position) {
         this.position = position;
