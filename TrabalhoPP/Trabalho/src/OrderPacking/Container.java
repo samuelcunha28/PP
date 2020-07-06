@@ -3,6 +3,8 @@ package OrderPacking;
 import Exceptions.*;
 import order.packing.*;
 
+import java.util.Arrays;
+
 /**
  *
  * @author samue
@@ -73,8 +75,10 @@ public class Container extends Box implements IContainer {
     }
 
     /**
+     * Metodo que remove um item, verificando atraves da sua referencia Depois
+     * de removido, a posicao fica a null e é movido para o ultimo lugar
      *
-     * @param item
+     * @param item item a remover
      * @return
      * @throws ContainerExceptionImpl
      */
@@ -92,7 +96,7 @@ public class Container extends Box implements IContainer {
             }
         }
         if (test) {
-            for (j = index; j < items.length - 1 && items [i] != null; j++) {
+            for (j = index; j < items.length - 1 && items[j] != null; j++) {
                 items[j] = items[j + 1];
             }
             items[j] = null;
@@ -102,89 +106,204 @@ public class Container extends Box implements IContainer {
         return test;
     }
 
+    /**
+     *
+     * @throws ContainerExceptionImpl
+     * @throws PositionExceptionImpl
+     */
     @Override
-    public void validate() throws ContainerException, PositionException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void validate() throws ContainerExceptionImpl, PositionExceptionImpl {
+
     }
 
+    /**
+     *
+     * @throws ContainerExceptionImpl
+     * @throws PositionExceptionImpl
+     */
     @Override
-    public void close() throws ContainerException, PositionException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void close() throws ContainerExceptionImpl, PositionExceptionImpl {
+        validate();
+        isClosed = true;
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
-    public IItem getItem(String arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItem getItem(String item) {
+        IItem aux = null;
+        for (int i = 0; i < item.length(); i++) {
+            if (items[i] != null && items[i].getItem().getReference().equals(item)) {
+                aux = items[i].getItem();
+            }
+        }
+        return aux;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getOccupiedVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int aux = 0;
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                aux += items[i].getItem().getVolume();
+            }
+        }
+        this.occupiedVolume = aux;
+        return this.occupiedVolume;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public IItemPacked[] getPackedItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int count = 0;
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                count++;
+            }
+        }
+        IItemPacked[] itemPacked = new IItemPacked[count];
+        for (int i = 0; i < itemPacked.length; i++) {
+            itemPacked[i] = items[i];
+        }
+        return itemPacked;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getReference() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.reference;
     }
 
     @Override
     public int getNumberOfItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int count = 0;
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getRemainingVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.getVolume() - getOccupiedVolume();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isClosed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return isClosed;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getDepth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.getDepth();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getHeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.getHeight();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getLenght() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.getLenght();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.getVolume();
     }
 
+    /**
+     * Metodo para obter a cor
+     *
+     * @return cor do tipo Color
+     */
     @Override
     public Color getColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.color;
     }
 
+    /**
+     * Metodo para atribuir a cor
+     *
+     * @param color cor a atribuir
+     */
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    /**
+     * Metodo para obter a cor das bordas
+     *
+     * @return cor das bordas do tipo ColorEdge
+     */
     @Override
     public Color getColorEdge() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.colorEdge;
     }
 
+    /**
+     * Metodo para atribuit a cor das bordas
+     *
+     * @param colorEdge cor das bordas a atribuir
+     */
     @Override
-    public void setColor(Color arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setColorEdge(Color colorEdge) {
+        this.color = colorEdge;
     }
 
+    /**
+     * Metodo toString para imprimir os atributos da classe
+     *
+     * @return text a imprimir
+     */
     @Override
-    public void setColorEdge(Color arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String toString() {
+        System.out.println("Container: ");
+        String text = "Packed Items : " + Arrays.toString(items) + "\n"
+                + "Reference : " + reference + "\n"
+                + "Container Closed? " + isClosed + "\n";
+        System.out.println(super.toString());
+        return text;
     }
-
 }

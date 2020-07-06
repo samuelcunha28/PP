@@ -68,6 +68,4 @@ public class Item extends Box implements IItem {
                 + "Description : " + description + "\n";
         return text;
     }
-    
-    
 }
