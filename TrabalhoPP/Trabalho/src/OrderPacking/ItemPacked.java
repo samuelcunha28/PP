@@ -9,34 +9,33 @@ import order.packing.IPosition;
  *
  * @author samue
  */
-public class ItemPacked extends Colored implements IItemPacked {
+public class ItemPacked extends Box implements IItemPacked {
 
     // variaveis de instancia
     private String reference;
-    private int depth;
-    private int length;
-    private int height;
+    private String description;
     private int x;
     private int y;
     private int z;
+    private Color color;
+    private Color colorEdge;
     private IItem item;
     private IPosition position;
 
     public ItemPacked() {
     }
 
-    public ItemPacked(String reference, int depth, int length, int height, int x, int y, int z, IItem item, IPosition position, Color color, Color colorEdge) {
-        super(color, colorEdge);
-        this.reference = item.getReference();
-        this.depth = item.getDepth();
-        this.length = item.getLenght();
-        this.height = item.getHeight();
+    public ItemPacked(Color color, IItem item, IPosition position) {
+        this.color = color;
+        this.item = item;
+        this.position = position;
         this.x = position.getX();
         this.y = position.getY();
         this.z = position.getZ();
-        this.item = item;
-        this.position = position;
+        this.description = item.getDescription();
     }
+    
+    
     
     /**
      * Metodo para obter o item
@@ -79,5 +78,25 @@ public class ItemPacked extends Colored implements IItemPacked {
         String text = "Item : " + item + "\n"
                 + "Position : " + position + "\n";
         return text;
+    }
+
+    @Override
+    public Color getColor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setColor(Color arg0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Color getColorEdge() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setColorEdge(Color arg0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
