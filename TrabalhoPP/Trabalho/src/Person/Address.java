@@ -40,8 +40,8 @@ public class Address implements IAddress {
     }
     
     /**
-     * 
-     * @return 
+     * Metodo para obter uma cidade
+     * @return cidade (String)
      */
     @Override
     public String getCity() {
@@ -49,53 +49,26 @@ public class Address implements IAddress {
     }
 
     /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getCountry() {
-        return country;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public int getNumber() {
-        return number;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getState() {
-        return state;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String getStreet() {
-        return street;
-    }
-
-    /**
-     * 
-     * @param city 
+     * Metodo para atribuir uma cidade
+     * @param city cidade a atribuir (String)
      */
     @Override
     public void setCity(String city) {
         this.city = city;
     }
-
+    
     /**
-     * 
-     * @param country 
+     * Metodo para obter o pais
+     * @return pais (String)
+     */
+    @Override
+    public String getCountry() {
+        return country;
+    }
+    
+    /**
+     * Metodo para atribuir o pais
+     * @param country pais a atribuir (String)
      */
     @Override
     public void setCountry(String country) {
@@ -103,8 +76,17 @@ public class Address implements IAddress {
     }
 
     /**
-     * 
-     * @param number 
+     * Metodo para obter o numero
+     * @return numero (inteiro)
+     */
+    @Override
+    public int getNumber() {
+        return number;
+    }
+    
+    /**
+     * Metodo para atribuir o numero
+     * @param number numero a atribuir (inteiro)
      */
     @Override
     public void setNumber(int number) {
@@ -112,17 +94,35 @@ public class Address implements IAddress {
     }
 
     /**
-     * 
-     * @param state 
+     * Metodo para obter o estado (provincia)
+     * @return estado (provincia) (String)
+     */
+    @Override
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * Metodo para atribuir o estado (provincia)
+     * @param state estado (provincia) a atribuir (String)
      */
     @Override
     public void setState(String state) {
         this.state = state;
     }
+    
+    /**
+     * Metodo para obter a rua
+     * @return rua (String)
+     */
+    @Override
+    public String getStreet() {
+        return street;
+    }
 
     /**
-     * 
-     * @param street 
+     * Metodo para atribuir a rua
+     * @param street rua a atribuir (String)
      */
     @Override
     public void setStreet(String street) {
@@ -130,8 +130,8 @@ public class Address implements IAddress {
     }
     
     /**
-     * 
-     * @return 
+     * Metodo toString para imprimir os atributos da classe
+     * @return text a imprimir
      */
      @Override
     public String toString() {

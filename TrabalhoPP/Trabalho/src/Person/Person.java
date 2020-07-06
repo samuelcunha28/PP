@@ -36,16 +36,16 @@ public class Person implements IPerson{
     }
     
     /**
-     * Metodo para atribuir
-     * @param name 
+     * Metodo para atribuir o nome
+     * @param name nome a atribuir (String)
      */
     @Override
     public void setName(String name) {
         this.name = name;
     }
     /**
-     * 
-     * @return 
+     * Metodo para obter a morada
+     * @return morada do tipo IAddress
      */
     @Override
     public IAddress getAddress() {
@@ -53,8 +53,8 @@ public class Person implements IPerson{
     }
 
     /**
-     * 
-     * @param address 
+     * Método para atribuir a morada
+     * @param address morada do tipo IAddress
      */
     @Override
     public void setAddress(IAddress address) {
@@ -62,8 +62,8 @@ public class Person implements IPerson{
     } 
     
     /**
-     * 
-     * @return 
+     * Metodo toString para imprimir os atributos da classe
+     * @return text a imprimir
      */
      @Override
     public String toString() {

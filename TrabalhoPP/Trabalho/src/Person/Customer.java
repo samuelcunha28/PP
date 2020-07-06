@@ -16,41 +16,50 @@ public class Customer extends Person implements ICustomer {
     
     // variaveis de instancia
     private static int id = 1;
-    private int costumerId;
+    private int customerId;
     private String vat;
     private IAddress billingAddress;
 
-    public Customer() {
+    public Customer(int customerId){
+        this.customerId = customerId;
     }
 
     /**
      * Construtor de Customer 
-     * @param costumerId id do cliente (String)
+     * @param customerId id do cliente (String)
      * @param vat contribuinte (String)
      * @param billingAddress morada de faturacao (String)
      * @param name nome (String)
      * @param address morada (String)
      */
-    public Customer(int costumerId, String vat, IAddress billingAddress, String name, Address address) {
+    public Customer(int customerId, String vat, IAddress billingAddress, String name, Address address) {
         super(name, address);
-        this.costumerId = costumerId;
+        this.customerId = customerId;
         this.vat = vat;
         this.billingAddress = billingAddress;
         id++; // contador de customers
     }
 
     /**
-     * 
-     * @return 
+     * Metodo para obter o id
+     * @return id (inteiro)
      */
     @Override
     public int getCustomerId() {
         return id;
     }
+    
+    /**
+     * Metodo para atribuir o id
+     * @param customerId id a atribuir (inteiro)
+     */
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
     /**
-     * 
-     * @return 
+     * Metodo para obter o contribuinte
+     * @return contibuinte (String)
      */
     @Override
     public String getVat() {
@@ -58,8 +67,8 @@ public class Customer extends Person implements ICustomer {
     }
 
     /**
-     * 
-     * @param vat 
+     * Metodo para atribuir o contribuinte
+     * @param vat contribuinte a atribuir (String)
      */
     @Override
     public void setVat(String vat) {
@@ -67,8 +76,8 @@ public class Customer extends Person implements ICustomer {
     }
 
     /**
-     * 
-     * @return 
+     * Metodo para obter a morada de faturacao
+     * @return morada de faturacao do tipo IAddress
      */
     @Override
     public IAddress getBillingAddress() {
@@ -76,14 +85,24 @@ public class Customer extends Person implements ICustomer {
     }
 
     /**
-     * 
-     * @param billingAddress 
+     * Metodo para atribuir a morada de faturacao
+     * @param billingAddress morada de faturacao do tipo IAddress
      */
     @Override
     public void setBillingAddress(IAddress billingAddress) {
         this.billingAddress = billingAddress;
     }
     
-    
-    
+    /**
+     * Metodo toString para imprimir os atributos da classe
+     * @return text a imprimir
+     */
+     @Override
+    public String toString() {
+        System.out.print(super.toString());
+        String text = "CustomerID : " + customerId + "\n"
+                + "VAT : " + vat + "\n"
+                + "Billing Address : " + billingAddress + "\n";
+        return text;
+    }
 }
