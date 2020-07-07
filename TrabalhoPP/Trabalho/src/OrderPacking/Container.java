@@ -52,7 +52,7 @@ public class Container extends Box implements IContainer {
      */
     @Override
     public boolean addItem(IItem item, IPosition pos, Color color) throws ContainerExceptionImpl {
-        boolean test = false;
+        boolean aux = false;
 
         if (item == null || pos == null || color == null) {
             throw new ContainerExceptionImpl("Nao e possivel adicionar items porque um ou mais parametros esta nulo");
@@ -64,14 +64,14 @@ public class Container extends Box implements IContainer {
                 items[i] = new ItemPacked(color, item, pos);
                 break;
             } else if (items[items.length - 1] != null || isClosed == true || items[i] == pos) {
-                test = true;
+                aux = true;
             }
         }
-        if (test) {
+        if (aux) {
             isClosed();
             throw new ContainerExceptionImpl("O container ou não tem posicoes disponiveis ou esta fechado");
         }
-        return test;
+        return aux;
     }
 
     /**
@@ -86,16 +86,16 @@ public class Container extends Box implements IContainer {
     public boolean removeItem(IItem item) throws ContainerExceptionImpl {
         int index = 0;
         int j = 0;
-        boolean test = false;
+        boolean aux = false;
         if (item instanceof IItem) {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null && items[i].getItem().getReference().equals(item.getReference())) {
                     index = i;
-                    test = true;
+                    aux = true;
                 }
             }
         }
-        if (test) {
+        if (aux) {
             for (j = index; j < items.length - 1 && items[j] != null; j++) {
                 items[j] = items[j + 1];
             }
@@ -103,7 +103,7 @@ public class Container extends Box implements IContainer {
         } else {
             throw new ContainerExceptionImpl("O item a remover nao foi encontrado");
         }
-        return test;
+        return aux;
     }
 
     /**
@@ -113,7 +113,63 @@ public class Container extends Box implements IContainer {
      */
     @Override
     public void validate() throws ContainerExceptionImpl, PositionExceptionImpl {
+        boolean aux = false;
+        this.items = getPackedItems();
 
+        if (super.getVolume() < getOccupiedVolume()) {
+            throw new ContainerExceptionImpl("O volume ultrapassa o maximo permitido");
+        } else if (this.items.length < 1) {
+            throw new ContainerExceptionImpl("Nao existem items disponiveis no contentor");
+        } else {
+            for (int i = 0; i < items.length; i++) {
+                if (items[i] != null) {
+                    // Testar se os items que estao contido nos pacotes se encontam no contentor
+                    if (items[i].getItem().getDepth() > super.getDepth()
+                            || items[i].getItem().getHeight() > super.getHeight()
+                            || items[i].getItem().getLenght() > super.getLenght()) {
+                        throw new PositionExceptionImpl("O item " + items[i].getItem().getReference() + " nao se encontra no container");
+                    }
+                }
+            }
+            if (this.items.length == 1) {
+                System.out.println("Item validos");
+            } else {
+                // Testar se os items sobrepõem
+                for (int i = 0; i < items.length - 1; i++) {
+                    for (int j = 1; j < items.length; j++) {
+                        if (i != j) {
+                            //X axis test
+                            int iMaxX = (items[i].getPosition().getX() + items[i].getItem().getLenght());
+                            int iMinX = items[i].getPosition().getX();
+                            int jMaxX = (items[j].getPosition().getX() + items[j].getItem().getLenght());
+                            int jMinX = items[j].getPosition().getX();
+                            //YY variables
+                            int iMaxY = items[i].getPosition().getY() + items[i].getItem().getDepth();
+                            int iMinY = items[i].getPosition().getY();
+                            int jMaxY = items[j].getPosition().getY() + items[j].getItem().getDepth();
+                            int jMinY = items[j].getPosition().getY();
+                            //ZZ variables
+                            int iMaxZ = items[i].getPosition().getZ() + items[i].getItem().getHeight();
+                            int iMinZ = items[i].getPosition().getZ();
+                            int jMaxZ = items[j].getPosition().getZ() + items[j].getItem().getHeight();
+                            int jMinZ = items[j].getPosition().getZ();
+
+                            if (iMaxX > jMinX && jMaxX > iMinX
+                                    && iMaxY > jMinY && jMaxY > iMinY
+                                    && iMaxZ > jMinZ && jMaxZ > iMinZ) {
+
+                                throw new PositionExceptionImpl("Item: " + items[i].getItem().getReference() + " E Item " + items[j].getItem().getReference() + "Items :" + i + " e " + j + " sobreoem se ");
+                            } else {
+                                aux = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (aux) {
+            System.out.println("Parabens nao existe OverLap");
+        }
     }
 
     /**
