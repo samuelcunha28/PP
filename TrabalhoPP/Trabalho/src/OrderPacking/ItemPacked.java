@@ -9,7 +9,7 @@ import order.packing.IPosition;
  *
  * @author samue
  */
-public class ItemPacked extends Box implements IItemPacked {
+public class ItemPacked implements IItemPacked {
 
     // variaveis de instancia
     private String reference;
@@ -24,8 +24,8 @@ public class ItemPacked extends Box implements IItemPacked {
 
     public ItemPacked() {
     }
-
-    public ItemPacked(Color color, IItem item, IPosition position) {
+    
+    public ItemPacked(IItem item, IPosition position, Color color) {
         this.color = color;
         this.item = item;
         this.position = position;

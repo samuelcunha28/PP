@@ -12,11 +12,13 @@ public class Item extends Box implements IItem {
     private String reference;
     private String description;
 
-    public Item() {
+    public Item(int depth, int height, int lenght, int volume) {
+        super(depth, height, lenght, volume);
     }
 
     /**
      * Construtor de Item
+     *
      * @param reference referencia do item (String)
      * @param description descricao do item (String)
      * @param depth profundidade do item (inteiro)
@@ -29,9 +31,10 @@ public class Item extends Box implements IItem {
         this.reference = reference;
         this.description = description;
     }
-    
+
     /**
      * Metodo para obter a referencia
+     *
      * @return referencia (String)
      */
     @Override
@@ -40,7 +43,8 @@ public class Item extends Box implements IItem {
     }
 
     /**
-     * Metodo para obter a descricao 
+     * Metodo para obter a descricao
+     *
      * @return descricao (String)
      */
     @Override
@@ -50,7 +54,8 @@ public class Item extends Box implements IItem {
 
     /**
      * Metodo para atribuir a descricao
-     * @param description descricao a atribuir (String) 
+     *
+     * @param description descricao a atribuir (String)
      */
     @Override
     public void setDescription(String description) {
@@ -59,9 +64,10 @@ public class Item extends Box implements IItem {
 
     /**
      * Metodo toString para imprimir os atributos da classe
+     *
      * @return text a imprimir
      */
-     @Override
+    @Override
     public String toString() {
         System.out.print(super.toString());
         String text = "Reference : " + reference + "\n"

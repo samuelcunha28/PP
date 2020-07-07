@@ -27,6 +27,7 @@ public abstract class Box implements IBox {
         this.lenght = lenght;
         this.volume = depth*height*lenght;   
     }
+    
 
     /**
      * Método para obter a profundidade

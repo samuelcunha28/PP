@@ -19,7 +19,8 @@ public class Container extends Box implements IContainer {
     private boolean isClosed = false;
     private IItemPacked[] items = new IItemPacked[10];
 
-    public Container() {
+    public Container(int depth, int height, int lenght, int volume) {
+        super(depth, height, lenght, volume);
     }
 
     /**
@@ -61,7 +62,7 @@ public class Container extends Box implements IContainer {
         }
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null && isClosed == false && items[i] != pos) {
-                items[i] = new ItemPacked(color, item, pos);
+                items[i] = new ItemPacked(item, pos, color);
                 break;
             } else if (items[items.length - 1] != null || isClosed == true || items[i] == pos) {
                 aux = true;

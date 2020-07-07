@@ -24,8 +24,14 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws Exceptions.PositionExceptionImpl
+     * @throws Exceptions.ContainerExceptionImpl
+     * @throws java.io.IOException
+     * @throws java.text.ParseException
+     * @throws Exceptions.OrderExceptionImpl
+     * @throws org.json.simple.parser.ParseException
      */
-    public static void main(String[] args) throws PositionExceptionImpl, ContainerExceptionImpl, IOException, ParseException, OrderExceptionImpl, org.json.simple.parser.ParseException {
+    public static void main(String[] args) throws PositionExceptionImpl, ContainerExceptionImpl, IOException, ParseException, OrderExceptionImpl, org.json.simple.parser.ParseException, ContainerException, PositionException {
         //------------------------Package Base-----------------------//
         //-----------------Classe Address-----------------//
         System.out.println("Address INFO");
@@ -92,7 +98,7 @@ public class Main {
         //-----------------Classe Position-----------------//
         //-----------------Classe PackedItem---------------//
         System.out.println("PackedItem INFO");
-        ItemPacked packedItem = new ItemPacked(Color.fuchsia, item1, position1);
+        ItemPacked packedItem = new ItemPacked(item1, position1, Color.fuchsia);
         System.out.println("PackedItem INFO, Color: " + packedItem.getColor());
         System.out.println("PackedItem INFO, Item: " + packedItem.getItem());
         System.out.println("PackedItem INFO, Position: " + packedItem.getPosition().toString());
@@ -144,7 +150,7 @@ public class Main {
         IContainer[] containers;
         containers = shippingOrder1.getContainers();
         System.out.println("Conteiners length: " + containers.length);
-        //shippingOrder1.validate();
+        shippingOrder1.validate();
         System.out.println(shippingOrder1.summary());
 
         //-----------------Classe ShippingOrder----------------//
