@@ -16,100 +16,105 @@ import java.util.Arrays;
  */
 public class Shipping implements IShipping {
 
-    private int orderID;
+    private int orderId;
     private IPerson destination;
     private IContainer[] containers = new IContainer[10];
+    private ShipmentStatus status = ShipmentStatus.AWAITS_TREATMENT;
     private ICustomer customer;
-    private ShipmentStatus status;
     private int count = 0;
 
     /**
+     * Construtor de Shipping
      *
-     * @param orderID
+     * @param orderId
      * @param customer
      */
-    public Shipping(int orderID, ICustomer customer) {
-        this.orderID = orderID;
+    public Shipping(int orderId, ICustomer customer) {
+        this.orderId = orderId;
         this.customer = customer;
     }
 
     /**
+     * Verifica se o estado da order esta em tratamento. Se o mesmo nao estiver
+     * em tratamento, nao esta pronto para ser adicionado Verifica se existe
+     * espaço para adicionar o container ao array de containers
      *
-     * @param container
-     * @return
+     * @param con container a adicionar
+     * @return boolean variavel auxiliar
      * @throws OrderExceptionImpl
      * @throws ContainerExceptionImpl
      */
     @Override
-    public boolean addContainer(IContainer container) throws OrderExceptionImpl, ContainerExceptionImpl {
+    public boolean addContainer(IContainer con) throws OrderExceptionImpl, ContainerExceptionImpl {
         boolean aux = false;
         if (status != ShipmentStatus.IN_TREATMENT) {
-            throw new OrderExceptionImpl("Estado invalido");
+            throw new OrderExceptionImpl("Estado invalido! Nao se encontra em tratamento");
         } else {
-            if (container.isClosed()) {
-                throw new ContainerExceptionImpl("O contentor " + container.getReference() + " ja existe/nao se encontra fechado");
-            } else {
-                for (int i = 0; i < containers.length; i++) {
-                    if (containers[i] == null) {
-                        containers[i] = container;
-                        break;
-                    } else if (containers[containers.length - 1] != null) {
-                        aux = true;
-                    }
+            for (int i = 0; i < containers.length; i++) {
+                if (containers[i] == null) {
+                    containers[i] = con;
+                    break;
+                } else if (containers[containers.length - 1] != null) {
+                    aux = true;
                 }
-                if (aux) {
-                    throw new ContainerExceptionImpl("O container nao tem posicoes disponiveis");
-                }
+            }
+            if (aux == true) {
+                throw new ContainerExceptionImpl("Container sem posicoes disponiveis");
             }
         }
         return aux;
     }
 
     /**
+     * Metodo que remove um container do array colocando a posicao eliminada a
+     * null no final do array
      *
-     * @param container
-     * @return
+     * @param con container a remover
+     * @return boolean variavel auxilar
      * @throws OrderExceptionImpl
      * @throws ContainerExceptionImpl
      */
     @Override
-    public boolean removeContainer(IContainer container) throws OrderExceptionImpl, ContainerExceptionImpl {
-        int j, index = 0;
+    public boolean removeContainer(IContainer con) throws OrderExceptionImpl, ContainerExceptionImpl {
+        int index = 0;
+        int j = 0;
         boolean aux = false;
-        if (status != status.IN_TREATMENT) {
-            throw new OrderExceptionImpl("Estado invalido");
+        if (status != ShipmentStatus.IN_TREATMENT) {
+            throw new OrderExceptionImpl("Order Status invalido");
         } else {
-            if (container instanceof IContainer) {
+            if (con instanceof IContainer) {
                 for (int i = 0; i < containers.length; i++) {
-                    if (containers[i] != null && containers[i].getReference().equals(container.getReference())) {
+                    if (containers[i] != null && containers[i].getReference().equals(con.getReference())) {
                         index = i;
                         aux = true;
                     }
                 }
             }
-            if (aux) {
+            if (aux == true) {
                 for (j = index; j < containers.length - 1 && containers[j] != null; j++) {
                     containers[j] = containers[j + 1];
                 }
                 containers[j] = null;
+
             } else {
-                throw new ContainerExceptionImpl("O container nao foi encontrado");
+                throw new ContainerExceptionImpl("Item nao encontrado");
             }
         }
         return aux;
     }
 
     /**
+     * Metodo que verifica se o container existe atraves da sua referencia
      *
-     * @param container
-     * @return
+     * @param con
+     * @return boolean variavel auxiliar
      */
     @Override
-    public boolean existsContainer(IContainer container) {
+    public boolean existsContainer(IContainer con) {
         boolean aux = false;
-        if (container instanceof IContainer) {
+        if (con instanceof IContainer) {
             for (int i = 0; i < containers.length; i++) {
-                if (containers[i] != null && containers[i].getReference().equals(container.getReference())) {
+                if (containers[i] != null && containers[i].getReference().equals(con.getReference())) {
                     aux = true;
                 }
             }
@@ -118,15 +123,17 @@ public class Shipping implements IShipping {
     }
 
     /**
+     * Metodo que encontra um container atraves da sua referencia e retorna a
+     * sua posicao do array de containers
      *
-     * @param container
+     * @param con
      * @return
      */
     @Override
-    public IContainer findContainer(String container) {
+    public IContainer findContainer(String con) {
         IContainer aux = null;
         for (int i = 0; i < this.count; i++) {
-            if (container.equals(this.containers[i].getReference())) {
+            if (con.equals(this.containers[i].getReference())) {
                 aux = this.containers[i];
             }
         }
@@ -134,8 +141,36 @@ public class Shipping implements IShipping {
     }
 
     /**
+     * Metodo que retorna a informacao sobre o destino
      *
-     * @return
+     * @return destination
+     */
+    public IPerson getDestination() {
+        return this.destination;
+    }
+
+    /**
+     * Metodo que atribui/define o destino
+     *
+     * @param person
+     */
+    public void setDestination(IPerson person) {
+        this.destination = person;
+    }
+
+    /**
+     * Metodo que retorna o cliente
+     *
+     * @return customer
+     */
+    public ICustomer getCustomer() {
+        return this.customer;
+    }
+
+    /**
+     * Metodo que retorna o estado do envio
+     *
+     * @return status
      */
     @Override
     public ShipmentStatus getShipmentStatus() {
@@ -143,10 +178,29 @@ public class Shipping implements IShipping {
     }
 
     /**
+     * Metodo que retorna o ID da order
+     *
+     * @return orderId
+     */
+    public int getId() {
+        return this.orderId;
+    }
+
+    /**
+     * Metodo que define o estado do pedido: 
+     * - Caso o estado do pedido seja "AWAITS_TREATMENT", o mesmo so pode ser 
+     * alterado para "IN_TREATMENT" visto que nao faz sentido saltar estados 
+     * - Caso o estado do pedido esteja "IN_TREATMENT", so pode ser alterado para 
+     * "CLOSED" pelas mesmas razoes acima ditas. Caso seja encontrado o container, 
+     * é corrido o metodo "validate()"
+     * - Caso o estado do pedido seja "SHIPPED", so pode ser alterado para "CLOSED"
+     * 
      *
      * @param status
-     * @throws OrderExceptionImpl
-     * @throws ContainerExceptionImpl
+     * @throws OrderExceptionImpl caso haja um erro na order ou nao seja 
+     * compativel para mudanca de estado
+     * @throws ContainerExceptionImpl caso nao seja encontrado nenhum container
+     * no array
      * @throws PositionExceptionImpl
      */
     @Override
@@ -164,20 +218,23 @@ public class Shipping implements IShipping {
                 if (counter > 0) {
                     validate();
                 } else if (counter == 0) {
-                    throw new ContainerExceptionImpl("Nao foram encontrados containers");
+
+                    throw new ContainerExceptionImpl("Nao foram encontrados containers no array");
                 }
                 this.status = ShipmentStatus.CLOSED;
             } else if (status == ShipmentStatus.SHIPPED && this.status == ShipmentStatus.CLOSED) {
                 this.status = ShipmentStatus.SHIPPED;
             } else {
-                throw new OrderExceptionImpl("Erro no pedido. Pedido atual: " + this.status);
+                throw new OrderExceptionImpl("Order Status ERROR, current OrderStatus: " + this.status);
             }
+
         }
     }
 
     /**
-     * 
-     * @return 
+     * Metodo que cria um novo array de containers sem posicoes nulas
+     *
+     * @return con containers
      */
     @Override
     public IContainer[] getContainers() {
@@ -187,20 +244,22 @@ public class Shipping implements IShipping {
                 counter++;
             }
         }
-        IContainer[] container = new IContainer[counter];
-        for (int i = 0; i < containers.length; i++) {
-            container[i] = containers[i];
+        IContainer[] con = new IContainer[counter];
+        for (int i = 0; i < con.length; i++) {
+            con[i] = containers[i];
         }
-        return container;
+        return con;
     }
 
     /**
-     * 
-     * @throws ContainerExceptionImpl
-     * @throws PositionExceptionImpl 
+     * Metodo que valida todas as posicoes do array que nao estejam nulas
+     *
+     * @throws ContainerException
+     * @throws PositionException
      */
     @Override
-    public void validate() throws ContainerException, PositionException{
+    public void validate() throws ContainerException, PositionException {
+
         for (int i = 0; i < containers.length; i++) {
             if (containers[i] != null) {
                 containers[i].validate();
@@ -210,24 +269,26 @@ public class Shipping implements IShipping {
     }
 
     /**
-     * 
-     * @return 
+     * Metodo que obtem o custo do container
+     * @return
      */
-    @Override
-    public String summary() {
-        System.out.println("SHIPPING");
-        
-        String text = "ID: " + orderID + "\n"
-                + "Customer: " + customer + "\n"
-                + "Destination: " + destination + "\n"
-                + "Containers: " + Arrays.toString(containers) + "\n"
-                + "Order Status: " + status + "\n";
-        return text;
-    }
-
     @Override
     public double getCost() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+     /**
+     * Pequeno sumario do interior da ShippingOrder
+     * @return String
+     */
+    @Override
+    public String summary() {
+        return "ShippingOrder{" +
+                "id=" + orderId +
+                ", customer=" + customer +
+                ", destination=" + destination +
+                ", containers=" + Arrays.toString(containers) +
+                ", orderStatus=" + status +
+                '}';
+    }
 }

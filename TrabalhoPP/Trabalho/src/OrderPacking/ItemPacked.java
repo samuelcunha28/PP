@@ -11,92 +11,92 @@ import order.packing.IPosition;
  */
 public class ItemPacked implements IItemPacked {
 
-    // variaveis de instancia
     private String reference;
-    private String description;
-    private int x;
-    private int y;
-    private int z;
+    private int depth;
     private Color color;
+    private int x;
+    private int length;
+    private int y;
+    private String description;
+    private int z;
     private Color colorEdge;
-    private IItem item;
-    private IPosition position;
+    private int height;
+    private transient IItem iItem;
+    private transient IPosition position;
 
     public ItemPacked() {
     }
-    
-    public ItemPacked(IItem item, IPosition position, Color color) {
+
+    public ItemPacked(Color color, IItem iItem, IPosition position) {
+        this.reference = iItem.getReference();
+        this.depth = iItem.getDepth();
         this.color = color;
-        this.item = item;
-        this.position = position;
         this.x = position.getX();
+        this.length = iItem.getLenght();
         this.y = position.getY();
+        this.description = iItem.getDescription();
         this.z = position.getZ();
-        this.description = item.getDescription();
-    }
-    
-    
-    
-    /**
-     * Metodo para obter o item
-     * @return item do tipo IItem
-     */
-    @Override
-    public IItem getItem() {
-        return this.item;
+        this.colorEdge = color;
+        this.height = iItem.getHeight();
+
+        this.iItem = iItem;
+        this.position = position;
     }
 
-    /**
-     * Metodo para obter a posicao
-     * @return posicao do tipo IPosition
-     */
+    @Override
+    public Color getColor() {
+        return this.color;
+    }
+
+    @Override
+    public IItem getItem() {
+        return this.iItem;
+    }
+
     @Override
     public IPosition getPosition() {
         return this.position;
     }
 
-    /**
-     * Metodo para atribuir a posicao
-     * @param position posicao a atribuir do tipo IPosition
-     */
     @Override
-    public void setPosition(IPosition position) {
-        this.position = position;
-        
+    public void setColor(Color color) {
+
+        this.color = color;
+    }
+
+    @Override
+    public void setPosition(IPosition iPosition) {
+
+        this.position = iPosition;
         this.x = position.getX();
         this.y = position.getY();
         this.z = position.getZ();
     }
     
     /**
-     * Metodo toString para imprimir os atributos da classe
-     * @return text a imprimir
+     * Metodo para obter a cor das bordas
+     * @return cor das bordas do tipo ColorEdge
      */
-     @Override
-    public String toString() {
-        System.out.print(super.toString());
-        String text = "Item : " + item + "\n"
-                + "Position : " + position + "\n";
-        return text;
-    }
-
-    @Override
-    public Color getColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setColor(Color arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public Color getColorEdge() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.colorEdge;
+    }
+
+    /**
+     * Metodo para atribuit a cor das bordas
+     * @param colorEdge cor das bordas a atribuir
+     */
+    @Override
+    public void setColorEdge(Color colorEdge) {
+        this.color = colorEdge;
     }
 
     @Override
-    public void setColorEdge(Color arg0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String toString() {
+        return "PackedItem{"
+                + "color=" + color
+                + ", iItem=" + iItem
+                + ", position=" + position
+                + '}';
     }
 }
