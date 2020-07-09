@@ -114,7 +114,7 @@ public class Main {
         System.out.println("Referencia do container: " + container1.getReference());
         System.out.println("Numero de itens no container: " + container1.getNumberOfItems());
         System.out.println("Volume restante do container: " + container1.getRemainingVolume());
-        //container1.validate();
+        container1.validate();
         container1.close();
         System.out.println("O container esta fechado? " + container1.isClosed());
         System.out.println("");
@@ -130,8 +130,6 @@ public class Main {
         shippingOrder1.removeContainer(container1);
         shippingOrder1.getContainers();
         boolean existCont = shippingOrder1.existsContainer(container2);
-        //int findCont =shippingOrder1.findContainer("ContainerREF2");
-        //System.out.println("Find Container REF: ItemRef2 na posicao: "+findCont);
         System.out.println("Container 2 existe? " + existCont);
         shippingOrder1.setDestination(destination1);
         System.out.println("Cidade de destino: " + shippingOrder1.getDestination().getAddress().getCity());
@@ -149,10 +147,10 @@ public class Main {
         //-----------------Classe ShippingOrder----------------//
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
-        // exporter.export(shippingOrder1);
+        // exporter.export();
 
         //-----------------Classe Exporter---------------------//
         //-----------------------Package ShippingOrder--------------//
-        PackingGUI.render("exampleWrite.json");
+        PackingGUI.render("example.json");
     }
 }

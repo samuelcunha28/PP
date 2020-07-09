@@ -12,7 +12,7 @@ import order.management.IShipping;
  */
 public class Exporter implements IExporter {
 
-    private String filePath = "example.json";
+    private String filePath = "example2.json";
     IShipping shipping;
     
     @Override
