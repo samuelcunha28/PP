@@ -147,7 +147,7 @@ public class Main {
         //-----------------Classe ShippingOrder----------------//
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
-        // exporter.export();
+        exporter.export(shippingOrder1);
 
         //-----------------Classe Exporter---------------------//
         //-----------------------Package ShippingOrder--------------//
