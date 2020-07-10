@@ -151,6 +151,6 @@ public class Main {
 
         //-----------------Classe Exporter---------------------//
         //-----------------------Package ShippingOrder--------------//
-        // PackingGUI.render("example2.json");
+        // PackingGUI.render("example.json");
     }
 }
