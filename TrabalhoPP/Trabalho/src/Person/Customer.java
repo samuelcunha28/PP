@@ -11,7 +11,7 @@ import order.base.ICustomer;
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
 * Turma: <T3>
-*/
+ */
 public class Customer implements ICustomer {
 
     private IAddress address;
@@ -22,14 +22,16 @@ public class Customer implements ICustomer {
 
     /**
      * Construtor de Customer
+     *
      * @param customerId id do cliente (inteiro)
      */
     public Customer(int customerId) {
         this.customerId = customerId;
     }
-    
+
     /**
      * Construtor de Customer
+     *
      * @param name nome (String)
      * @param address morada (String)
      */
@@ -37,9 +39,10 @@ public class Customer implements ICustomer {
         this.name = name;
         this.address = address;
     }
-    
+
     /**
      * Construtor de Customer
+     *
      * @param address morada do cliente (Tipo IAddress)
      * @param name nome do cliente (String)
      * @param vat contribuinte do cliente (String)
@@ -63,7 +66,7 @@ public class Customer implements ICustomer {
     public IAddress getBillingAddress() {
         return this.billingAddress;
     }
-    
+
     /**
      * Metodo para atribuir a morada de faturacao da encomenda
      *
@@ -87,6 +90,7 @@ public class Customer implements ICustomer {
 
     /**
      * Metodo para atribuir o id do cliente
+     *
      * @param customerId id do cliente a atribuir (inteiro)
      */
     public void setCustomerId(int customerId) {
@@ -102,7 +106,7 @@ public class Customer implements ICustomer {
     public IAddress getAddress() {
         return this.address;
     }
-    
+
     /**
      * Metodo para atribuir a morada do cliente
      *
@@ -137,7 +141,7 @@ public class Customer implements ICustomer {
 
     /**
      * Metodo para obter o contribuinte do cliente
-     * 
+     *
      * @return contribuite do cliente (String)
      */
     @Override
@@ -147,7 +151,7 @@ public class Customer implements ICustomer {
 
     /**
      * Metodo para atribuir o contribuinte do cliente
-     * 
+     *
      * @param vat contribuinte do cliente (String)
      */
     @Override

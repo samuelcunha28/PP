@@ -10,10 +10,15 @@ import order.management.ShipmentStatus;
 import Exceptions.*;
 import java.util.Arrays;
 
-/**
- *
- * @author samue
- */
+/*
+* Nome: <Samuel Luciano Correia da Cunha>
+* Número: <8160526>
+* Turma: <T3>
+*
+* Nome: <João Emanuel Carvalho Leocádio>
+* Número: <8160523>
+* Turma: <T3>
+*/
 public class Shipping implements IShipping {
 
     private int orderId;

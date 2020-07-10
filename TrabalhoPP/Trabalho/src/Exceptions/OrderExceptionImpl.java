@@ -10,19 +10,18 @@ import order.exceptions.OrderException;
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
 * Turma: <T3>
-*/
-public class OrderExceptionImpl extends OrderException{
+ */
+public class OrderExceptionImpl extends OrderException {
 
     public OrderExceptionImpl() {
     }
 
     /**
      * Metodo para envio da mensagem de excecao
+     *
      * @param msg mensagem a ser enviada
      */
     public OrderExceptionImpl(String msg) {
         super(msg);
     }
-    
-    
 }

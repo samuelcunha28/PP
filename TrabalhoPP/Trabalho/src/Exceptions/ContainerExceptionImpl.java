@@ -10,7 +10,7 @@ import order.exceptions.ContainerException;
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
 * Turma: <T3>
-*/
+ */
 public class ContainerExceptionImpl extends ContainerException {
 
     public ContainerExceptionImpl() {
@@ -18,10 +18,10 @@ public class ContainerExceptionImpl extends ContainerException {
 
     /**
      * Metodo para envio da mensagem de excecao
+     *
      * @param msg mensagem a ser enviada
      */
     public ContainerExceptionImpl(String msg) {
         super(msg);
     }
-    
 }

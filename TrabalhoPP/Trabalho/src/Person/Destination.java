@@ -11,7 +11,7 @@ import order.base.ICustomer;
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
 * Turma: <T3>
-*/
+ */
 public class Destination implements ICustomer {
 
     private IAddress address;
@@ -31,7 +31,7 @@ public class Destination implements ICustomer {
         this.name = name;
     }
 
-     /**
+    /**
      * Metodo para obter a morada de faturacao da encomenda
      *
      * @return billingAddress (Tipo IAddress)
@@ -40,7 +40,7 @@ public class Destination implements ICustomer {
     public IAddress getBillingAddress() {
         return this.billingAddress;
     }
-    
+
     /**
      * Metodo para atribuir a morada de faturacao da encomenda
      *
@@ -64,17 +64,17 @@ public class Destination implements ICustomer {
 
     /**
      * Metodo para obter a morada de destino
-     * 
+     *
      * @return address morada do tipo IAddress
      */
     @Override
     public IAddress getAddress() {
         return this.address;
     }
-    
+
     /**
      * Metodo para atribuir a morada de destino
-     * 
+     *
      * @param iaddress morada do tipo IAddress
      */
     @Override
@@ -84,7 +84,7 @@ public class Destination implements ICustomer {
 
     /**
      * Metodo para obter o nome da pessoa de destino
-     * 
+     *
      * @return nome da pessoa de destino (String)
      */
     @Override
@@ -94,7 +94,7 @@ public class Destination implements ICustomer {
 
     /**
      * Metodo para atribuir o nome da pessoa de destino
-     * 
+     *
      * @param name nome da pessoa de destino (String)
      */
     @Override
@@ -104,7 +104,7 @@ public class Destination implements ICustomer {
 
     /**
      * Metodo para obter o contribuinte de destino
-     * 
+     *
      * @return contribuinte (String)
      */
     @Override
@@ -114,7 +114,7 @@ public class Destination implements ICustomer {
 
     /**
      * Metodo para atribuir o contribuinte de destino
-     * 
+     *
      * @param vat contribuinte (String)
      */
     @Override

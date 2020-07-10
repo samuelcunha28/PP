@@ -10,10 +10,9 @@ import order.base.IAddress;
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
 * Turma: <T3>
-*/
-
+ */
 public class Address implements IAddress {
-    
+
     // variaveis de instancia
     private String city;
     private String country;
@@ -26,6 +25,7 @@ public class Address implements IAddress {
 
     /**
      * Construtor para Address
+     *
      * @param city cidade (String)
      * @param country pais (String)
      * @param number numero (String)
@@ -39,9 +39,10 @@ public class Address implements IAddress {
         this.state = state;
         this.street = street;
     }
-    
+
     /**
      * Metodo para obter uma cidade
+     *
      * @return cidade (String)
      */
     @Override
@@ -51,24 +52,27 @@ public class Address implements IAddress {
 
     /**
      * Metodo para atribuir uma cidade
+     *
      * @param city cidade a atribuir (String)
      */
     @Override
     public void setCity(String city) {
         this.city = city;
     }
-    
+
     /**
      * Metodo para obter o pais
+     *
      * @return pais (String)
      */
     @Override
     public String getCountry() {
         return this.country;
     }
-    
+
     /**
      * Metodo para atribuir o pais
+     *
      * @param country pais a atribuir (String)
      */
     @Override
@@ -78,15 +82,17 @@ public class Address implements IAddress {
 
     /**
      * Metodo para obter o numero
+     *
      * @return numero (inteiro)
      */
     @Override
     public int getNumber() {
         return this.number;
     }
-    
+
     /**
      * Metodo para atribuir o numero
+     *
      * @param number numero a atribuir (inteiro)
      */
     @Override
@@ -96,6 +102,7 @@ public class Address implements IAddress {
 
     /**
      * Metodo para obter o estado (provincia)
+     *
      * @return estado (provincia) (String)
      */
     @Override
@@ -105,15 +112,17 @@ public class Address implements IAddress {
 
     /**
      * Metodo para atribuir o estado (provincia)
+     *
      * @param state estado (provincia) a atribuir (String)
      */
     @Override
     public void setState(String state) {
         this.state = state;
     }
-    
+
     /**
      * Metodo para obter a rua
+     *
      * @return rua (String)
      */
     @Override
@@ -123,18 +132,20 @@ public class Address implements IAddress {
 
     /**
      * Metodo para atribuir a rua
+     *
      * @param street rua a atribuir (String)
      */
     @Override
     public void setStreet(String street) {
         this.street = street;
     }
-    
+
     /**
      * Metodo toString para imprimir os atributos da classe
+     *
      * @return text a imprimir
      */
-     @Override
+    @Override
     public String toString() {
         String text = "City : " + city + "\n"
                 + "Country : " + country + "\n"

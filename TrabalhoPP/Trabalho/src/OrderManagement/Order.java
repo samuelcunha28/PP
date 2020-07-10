@@ -15,10 +15,15 @@ import order.management.IOrder;
 import order.management.IShipping;
 import order.packing.IItem;
 
-/**
- *
- * @author samue
- */
+/*
+* Nome: <Samuel Luciano Correia da Cunha>
+* Número: <8160526>
+* Turma: <T3>
+*
+* Nome: <João Emanuel Carvalho Leocádio>
+* Número: <8160523>
+* Turma: <T3>
+*/
 public class Order implements IOrder {
     
     @Override

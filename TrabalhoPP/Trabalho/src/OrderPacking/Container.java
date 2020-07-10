@@ -5,9 +5,14 @@ import order.packing.*;
 
 import java.util.Arrays;
 
-/**
- *
- * @author samue
+/*
+* Nome: <Samuel Luciano Correia da Cunha>
+* Número: <8160526>
+* Turma: <T3>
+*
+* Nome: <João Emanuel Carvalho Leocádio>
+* Número: <8160523>
+* Turma: <T3>
  */
 public class Container implements IContainer {
 
@@ -23,13 +28,15 @@ public class Container implements IContainer {
     transient boolean isClosed = false;
 
     /**
-     * Constructor de container para definir os parametros da classe
+     * Construtor de Container
      *
-     * @param volume
-     * @param reference
-     * @param depth
-     * @param height
-     * @param length
+     * @param volume volume do container (inteiro)
+     * @param reference referencia do container (String)
+     * @param depth profundidade do container (inteiro)
+     * @param color cor do container (tipo Color)
+     * @param length comprimento do container (inteiro)
+     * @param colorEdge cor das bordas do container (colorEdge do tipo Color)
+     * @param height altura do container (inteiro)
      */
     public Container(int volume, String reference, int depth, Color color, int length, Color colorEdge, int height) {
         this.volume = volume;
@@ -42,57 +49,57 @@ public class Container implements IContainer {
     }
 
     /**
-     * Adiciona um item caso exista uma posicao disponivel Falta: Verificar a
-     * posicao
+     * Metodo para adicionar um item caso: - Exista uma posicao disponivel; - O
+     * container nao esteja fechado; - Nao estejamos a adicionar um item a uma
+     * posicao ja ocupada
      *
-     * @param iItem
-     * @param iPosition
-     * @param color
+     * @param item item a adicionar
+     * @param pos posicao a ser adicionada
+     * @param color cor do item
      * @return
      * @throws ContainerExceptionImpl
      */
     @Override
-    public boolean addItem(IItem iItem, IPosition iPosition, Color color) throws ContainerExceptionImpl {
-        boolean test = false;
+    public boolean addItem(IItem item, IPosition pos, Color color) throws ContainerExceptionImpl {
+        boolean aux = false;
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null && isClosed == false) {
-                items[i] = new ItemPacked(color, iItem, iPosition);
+                items[i] = new ItemPacked(color, item, pos);
                 break;
             } else if (items[items.length - 1] != null || isClosed == true) {
-                test = true;
+                aux = true;
             }
         }
-        if (test) {
+        if (aux == true) {
             isClosed();
             throw new ContainerExceptionImpl("Container sem posicoes disponiveis ou Fechado");
         }
-        return test;
+        return aux;
     }
 
     /**
-     * Remove um item verificando a sua referencia, depois move a posicao null
-     * para ultimo
+     * Metodo que remove um item, verificando atraves da sua referencia Depois
+     * de removido, a posicao fica a null e é movido para o ultimo lugar
      *
-     * @param iItem
+     * @param item item a remover
      * @return
      * @throws ContainerExceptionImpl
      */
     @Override
-    public boolean removeItem(IItem iItem) throws ContainerExceptionImpl {
-        int rmIndex = 0;
-        boolean test = false;
-        if (iItem instanceof IItem) {
+    public boolean removeItem(IItem item) throws ContainerExceptionImpl {
+        int index = 0;
+        int j = 0;
+        boolean aux = false;
+        if (item instanceof IItem) {
             for (int i = 0; i < items.length; i++) {
-                if (items[i] != null && items[i].getItem().getReference().equals(iItem.getReference())) {
-                    rmIndex = i;
-                    test = true;
+                if (items[i] != null && items[i].getItem().getReference().equals(item.getReference())) {
+                    index = i;
+                    aux = true;
                 }
             }
         }
-
-        int j;
-        if (test) {
-            for (j = rmIndex; j < items.length - 1 && items[j] != null; j++) {
+        if (aux == true) {
+            for (j = index; j < items.length - 1 && items[j] != null; j++) {
                 items[j] = items[j + 1];
             }
             items[j] = null;
@@ -100,67 +107,70 @@ public class Container implements IContainer {
         } else {
             throw new ContainerExceptionImpl("Item nao encontrado");
         }
-        return test;
+        return aux;
     }
 
     /**
-     * Valida Se todos os Items no array "iItemPackeds" estao dentro do contetor
-     * Se nao excedem os limites do mesmo e se nao se sobrepoem
+     * Metodo que valida se todos os items que estao no array dos itens
+     * embalados estao dentro do container. Verifica tambem se nao excede os
+     * limites do array e se encontram sobrepostos
      *
      * @throws ContainerExceptionImpl
      * @throws PositionExceptionImpl
      */
     @Override
     public void validate() throws ContainerExceptionImpl, PositionExceptionImpl {
-
         boolean validated = false;
         this.items = getPackedItems();
 
         if (this.volume < getOccupiedVolume()) {
-
-            throw new ContainerExceptionImpl("Volume superior ao maximo permitido");
+            throw new ContainerExceptionImpl("O volume supera o maximo que e permitido");
         } else if (this.items.length < 1) {
-            throw new ContainerExceptionImpl("Nao Existem Items no Contentor");
+            throw new ContainerExceptionImpl("Nao foram encontrados itens no contentor");
         } else {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null) {
-                    //Testa se os Items dentro dos Packed Items se encontram dentro do container
+                    // Esta condicao testa se os itens que estao contidos nas embalagens
+                    // Ou seja dentro dos "Item Packed" se encontram dentro do container
                     if (items[i].getItem().getDepth() > this.depth
                             || items[i].getItem().getHeight() > this.height
                             || items[i].getItem().getLenght() > this.length) {
-                        throw new PositionExceptionImpl("Item: " + items[i].getItem().getReference() + "Encontra-se fora do container");
+                        throw new PositionExceptionImpl("O item: " + items[i].getItem().getReference() + "nao se encontra no container");
                     }
                 }
             }
-
+            // As seguintes condicoes testam se os itens se sobrepoem no container
             if (this.items.length == 1) {
-                System.out.println("Valido");
+                System.out.println("Itens validos");
             } else {
-                //Testar se os itens se sopreoeem
                 for (int i = 0; i < items.length - 1; i++) {
                     for (int j = 1; j < items.length; j++) {
+
                         if (i != j) {
-                            //X axis test
+                            // Teste as coordenadas X
                             int iMaxX = (items[i].getPosition().getX() + items[i].getItem().getLenght());
                             int iMinX = items[i].getPosition().getX();
                             int jMaxX = (items[j].getPosition().getX() + items[j].getItem().getLenght());
                             int jMinX = items[j].getPosition().getX();
-                            //YY variables
+                            // Teste as coordenadas Y
                             int iMaxY = items[i].getPosition().getY() + items[i].getItem().getDepth();
                             int iMinY = items[i].getPosition().getY();
                             int jMaxY = items[j].getPosition().getY() + items[j].getItem().getDepth();
                             int jMinY = items[j].getPosition().getY();
-                            //ZZ variables
+                            // Teste as coordenadas Z
                             int iMaxZ = items[i].getPosition().getZ() + items[i].getItem().getHeight();
                             int iMinZ = items[i].getPosition().getZ();
                             int jMaxZ = items[j].getPosition().getZ() + items[j].getItem().getHeight();
                             int jMinZ = items[j].getPosition().getZ();
 
+                            // Se os itens se sobrepoem
                             if (iMaxX > jMinX && jMaxX > iMinX
                                     && iMaxY > jMinY && jMaxY > iMinY
                                     && iMaxZ > jMinZ && jMaxZ > iMinZ) {
+                                items[i].getItem().getReference();
+                                items[j].getItem().getReference();
 
-                                throw new PositionExceptionImpl("Item: " + items[i].getItem().getReference() + " E Item " + items[j].getItem().getReference() + "Items :" + i + " e " + j + " sobreoem se ");
+                                throw new PositionExceptionImpl("Os items :" + i + " e " + j + " sobrepoem-se");
                             } else {
                                 validated = true;
                             }
@@ -170,13 +180,14 @@ public class Container implements IContainer {
             }
         }
         if (validated) {
-            System.out.println("Parabens nao existe OverLap");
+            System.out.println("Nao existem itens sobrepostos e os mesmos sao validos");
         }
     }
 
     /**
-     * Corre a funcao validate() verificando se todos os itens se encontram
-     * devidamente acomodados
+     * Metodo que corre a funcao validate() para verificar se todos os itens se
+     * encontram devidamente acomodados, ou seja, se nao existem sobreposicoes e
+     * se os mesmos estao embalados
      *
      * @throws ContainerExceptionImpl
      * @throws PositionExceptionImpl
@@ -188,56 +199,56 @@ public class Container implements IContainer {
     }
 
     /**
-     * Retorna um item pesquisado pela sua referencia
+     * Metodo que obtem um item pesquisado pela sua referencia
      *
-     * @param s
-     * @return IItem
+     * @param reference referencia a pesquisar (String)
+     * @return IItem item pesquisado
      */
     @Override
-    public IItem getItem(String s) {
-        IItem tmp = null;
+    public IItem getItem(String reference) {
+        IItem item = null;
         for (int i = 0; i < items.length; i++) {
-            if (items[i] != null && items[i].getItem().getReference().equals(s)) {
-                tmp = items[i].getItem();
+            if (items[i] != null && items[i].getItem().getReference().equals(reference)) {
+                item = items[i].getItem();
             }
         }
-        return tmp;
+        return item;
     }
 
     /**
-     * Retorna o sumatorio do volume de todos os items presentes no array de
-     * Packed Items
+     * Metodo que obtem o volume ocupado pelos itens presentes no array de itens
+     * embalados
      *
-     * @return occupiedVolume
+     * @return occupiedVolume volume total ocupado (inteiro)
      */
     @Override
     public int getOccupiedVolume() {
-        int tmp = 0;
+        int vol = 0;
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
-                tmp += items[i].getItem().getVolume();
+                vol += items[i].getItem().getVolume();
             }
         }
-        this.occupiedVolume = tmp;
+        this.occupiedVolume = vol;
         return this.occupiedVolume;
     }
 
     /**
-     * Retorna um array novo baseado no array inical de Items mas apenas com as
-     * posicoes iguais aonumro de items
+     * Metodo que retorna um array novo que e baseado no array inicial items mas
+     * apenas com as posicoes dos itens embalados com o numero de itens
      *
      * @return Array de IItemPacked
      */
     @Override
     public IItemPacked[] getPackedItems() {
-        int tmp = 0;
+        int count = 0;
 
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
-                tmp++;
+                count++;
             }
         }
-        IItemPacked[] iItemPackeds1 = new IItemPacked[tmp];
+        IItemPacked[] iItemPackeds1 = new IItemPacked[count];
         for (int i = 0; i < iItemPackeds1.length; i++) {
             iItemPackeds1[i] = items[i];
         }
@@ -245,36 +256,35 @@ public class Container implements IContainer {
     }
 
     /**
-     * Retorna a referencia do Container
+     * Metodo que obtem a referencia do container
      *
-     * @return Reference
+     * @return referencia (String)
      */
     @Override
     public String getReference() {
-
         return this.reference;
     }
 
     /**
-     * Contador do numero de items adicionados
+     * Metodo que conta o numero de itens adicionados
      *
-     * @return int
+     * @return numero de itens (inteiro)
      */
     @Override
     public int getNumberOfItems() {
-        int tmp = 0;
+        int count = 0;
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
-                tmp++;
+                count++;
             }
         }
-        return tmp;
+        return count;
     }
 
     /**
-     * Calcula o volume libre restante no container
+     * Metodo que obtem volume restante do container
      *
-     * @return getOccupiedVolume
+     * @return volume restante (inteiro)
      */
     @Override
     public int getRemainingVolume() {
@@ -282,9 +292,10 @@ public class Container implements IContainer {
     }
 
     /**
-     * Retorna um boleano que e alterado na funcao validate()
+     * Metodo que retorna "true" ou "false" para o caso do container esteja
+     * fechado ou nao
      *
-     * @return boolean isClosed
+     * @return boolean 
      */
     @Override
     public boolean isClosed() {
@@ -292,9 +303,9 @@ public class Container implements IContainer {
     }
 
     /**
-     * profundidade do Container
+     * Método para obter a profundidade
      *
-     * @return depth
+     * @return profundidade (inteiro)
      */
     @Override
     public int getDepth() {
@@ -302,9 +313,9 @@ public class Container implements IContainer {
     }
 
     /**
-     * Altura do Container
+     * Método para obter a altura
      *
-     * @return height
+     * @return altura (inteiro)
      */
     @Override
     public int getHeight() {
@@ -312,9 +323,9 @@ public class Container implements IContainer {
     }
 
     /**
-     * Cumprimento do Container
+     * Método para obter o comprimento
      *
-     * @return length
+     * @return comprimento (inteiro)
      */
     @Override
     public int getLenght() {
@@ -322,9 +333,9 @@ public class Container implements IContainer {
     }
 
     /**
-     * Volume Ttal do Container
+     * Método para obter o volume
      *
-     * @return volume
+     * @return volume (inteiro)
      */
     @Override
     public int getVolume() {
@@ -332,36 +343,16 @@ public class Container implements IContainer {
     }
 
     /**
-     * Metodo toString
-     *
-     * @return String
-     */
-    @Override
-    public String toString() {
-        return "Container{"
-                + "iItemPackeds=" + Arrays.toString(items)
-                + ", volume=" + volume
-                + ", reference='" + reference + '\''
-                + ", depth=" + depth
-                + ", height=" + height
-                + ", lenght=" + length
-                + ", isClosed=" + isClosed
-                + '}';
-    }
-
-    /**
      * Metodo para obter a cor
-     *
      * @return cor do tipo Color
      */
     @Override
     public Color getColor() {
         return this.color;
     }
-
+    
     /**
      * Metodo para atribuir a cor
-     *
      * @param color cor a atribuir
      */
     @Override
@@ -371,7 +362,6 @@ public class Container implements IContainer {
 
     /**
      * Metodo para obter a cor das bordas
-     *
      * @return cor das bordas do tipo ColorEdge
      */
     @Override
@@ -381,11 +371,28 @@ public class Container implements IContainer {
 
     /**
      * Metodo para atribuit a cor das bordas
-     *
      * @param colorEdge cor das bordas a atribuir
      */
     @Override
     public void setColorEdge(Color colorEdge) {
-
+        this.color = colorEdge;
+    }
+    
+    /**
+     * Metodo toString para imprimir os atributos da classe
+     *
+     * @return text a imprimir
+     */
+    @Override
+    public String toString() {
+        String text = "CONTAINER "
+                + "Packed Items : " + Arrays.toString(items) + "\n"
+                + "Volume : " + volume + "\n"
+                + "Reference : " + reference + "\n"
+                + "Depth : " + depth + "\n"
+                + "Heigth : " + height + "\n"
+                + "Length : " + length + "\n"
+                + "Is closed ? " + isClosed + "\n";
+        return text;
     }
 }

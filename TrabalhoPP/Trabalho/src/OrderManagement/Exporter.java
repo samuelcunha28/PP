@@ -6,10 +6,15 @@ import com.google.gson.Gson;
 import order.management.IExporter;
 import order.management.IShipping;
 
-/**
- *
- * @author samue
- */
+/*
+* Nome: <Samuel Luciano Correia da Cunha>
+* Número: <8160526>
+* Turma: <T3>
+*
+* Nome: <João Emanuel Carvalho Leocádio>
+* Número: <8160523>
+* Turma: <T3>
+*/
 public class Exporter implements IExporter {
 
     private String filePath = "example2.json";
@@ -25,7 +30,7 @@ public class Exporter implements IExporter {
             FileWriter fileWriter = new FileWriter(filePath);
             gson.toJson(shipping, fileWriter);
             fileWriter.close();
-            System.out.println("JSON string write to a file successfully");
+            System.out.println("Formato JSON escrito com sucesso para o ficheiro: " + filePath);
         } catch (IOException e) {
             System.out.println(e.toString());
         }

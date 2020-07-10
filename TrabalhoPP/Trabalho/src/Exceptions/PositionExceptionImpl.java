@@ -10,7 +10,7 @@ import order.exceptions.*;
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
 * Turma: <T3>
-*/
+ */
 public class PositionExceptionImpl extends PositionException {
 
     public PositionExceptionImpl() {
@@ -18,6 +18,7 @@ public class PositionExceptionImpl extends PositionException {
 
     /**
      * Metodo para envio da mensagem de excecao
+     *
      * @param msg mensagem a ser enviada
      */
     public PositionExceptionImpl(String msg) {

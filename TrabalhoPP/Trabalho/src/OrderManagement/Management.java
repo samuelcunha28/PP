@@ -10,10 +10,15 @@ import order.exceptions.OrderException;
 import order.management.IManagement;
 import order.management.IOrder;
 
-/**
- *
- * @author samue
- */
+/*
+* Nome: <Samuel Luciano Correia da Cunha>
+* Número: <8160526>
+* Turma: <T3>
+*
+* Nome: <João Emanuel Carvalho Leocádio>
+* Número: <8160523>
+* Turma: <T3>
+*/
 public class Management implements IManagement {
 
     @Override
