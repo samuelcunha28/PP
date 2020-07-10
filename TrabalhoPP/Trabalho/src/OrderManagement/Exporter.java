@@ -13,18 +13,17 @@ import order.management.IShipping;
 public class Exporter implements IExporter {
 
     private String filePath = "example2.json";
-    IShipping shipping;
     
     @Override
     public void export() throws IOException {
     }
     
-    public void export(IShipping iShippingOrder) throws IOException {
+    public void export(IShipping shipping) throws IOException {
 
         try {
             Gson gson = new Gson();
             FileWriter fileWriter = new FileWriter(filePath);
-            gson.toJson(iShippingOrder, fileWriter);
+            gson.toJson(shipping, fileWriter);
             fileWriter.close();
             System.out.println("JSON string write to a file successfully");
         } catch (IOException e) {
