@@ -17,15 +17,6 @@ public class Exporter implements IExporter {
     
     @Override
     public void export() throws IOException {
-        try {
-            Gson gson = new Gson();
-            FileWriter fileWriter = new FileWriter(filePath);
-            gson.toJson(shipping, fileWriter);
-            fileWriter.close();
-            System.out.println("JSON string write to a file successfully");
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
     }
     
     public void export(IShipping iShippingOrder) throws IOException {

@@ -20,7 +20,7 @@ import order.packing.IItem;
  * @author samue
  */
 public class Order implements IOrder {
-
+    
     @Override
     public IPerson getDestination() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -57,7 +57,7 @@ public class Order implements IOrder {
     }
 
     @Override
-    public void setDate(int arg0, int arg1, int arg2) {
+    public void setDate(int ano, int arg1, int arg2) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
