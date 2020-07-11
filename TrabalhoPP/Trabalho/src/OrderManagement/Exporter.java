@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import com.google.gson.Gson;
 import order.management.IExporter;
 import order.management.IShipping;
+import order.management.IOrder;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -29,11 +30,11 @@ public class Exporter implements IExporter {
      * @param shipping shipping a ser exportado
      * @throws IOException 
      */
-    public void export(IShipping shipping) throws IOException {
+    public void export(IOrder order) throws IOException {
         try {
             Gson gson = new Gson();
             FileWriter fileWriter = new FileWriter(filePath);
-            gson.toJson(shipping, fileWriter);
+            gson.toJson(order, fileWriter);
             fileWriter.close();
             System.out.println("Formato JSON escrito com sucesso para o ficheiro: " + filePath);
         } catch (IOException e) {

@@ -27,6 +27,14 @@ public class Shipping implements IShipping {
     private ShipmentStatus status = ShipmentStatus.AWAITS_TREATMENT;
     private ICustomer customer;
     private int count = 0;
+    
+    /**
+     * Construtor de Shipping
+     * @param orderId id da order a inserir (inteiro)
+     */
+    public Shipping(int orderId) {
+        this.orderId = orderId;
+    }
 
     /**
      * Construtor de Shipping

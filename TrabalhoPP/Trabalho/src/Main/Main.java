@@ -127,7 +127,7 @@ public class Main {
         shippingOrder1.setShipmentStatus(ShipmentStatus.IN_TREATMENT);
         shippingOrder1.addContainer(container1);
         shippingOrder1.addContainer(container2);
-        shippingOrder1.removeContainer(container1);
+        // shippingOrder1.removeContainer(container1);
         shippingOrder1.getContainers();
         boolean existCont = shippingOrder1.existsContainer(container2);
         System.out.println("Container 2 existe? " + existCont);
@@ -143,14 +143,25 @@ public class Main {
         shippingOrder1.validate();
         System.out.println("Sumario do pedido: ");
         System.out.println(shippingOrder1.summary());
-
+        
+        
+        
+        System.out.println("awsdasdasdasdasd");
+        System.out.println("");
+        System.out.println("");
+        Order order1 = new Order(destination1, customer1, 1, 12, 11, 1998);
+        
+        order1.addShipping(shippingOrder1);
+        
+        System.out.println(shippingOrder1);
+        System.out.println(order1);
         //-----------------Classe ShippingOrder----------------//
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
-        exporter.export(shippingOrder1);
+        exporter.export(order1);
 
         //-----------------Classe Exporter---------------------//
         //-----------------------Package ShippingOrder--------------//
-        // PackingGUI.render("example.json");
+        // PackingGUI.render("example2.json");
     }
 }
