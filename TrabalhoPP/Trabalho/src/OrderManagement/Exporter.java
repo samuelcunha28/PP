@@ -23,8 +23,13 @@ public class Exporter implements IExporter {
     public void export() throws IOException {
     }
     
+    /**
+     * Metodo que ira fazer export da order/shipping para json
+     * 
+     * @param shipping shipping a ser exportado
+     * @throws IOException 
+     */
     public void export(IShipping shipping) throws IOException {
-
         try {
             Gson gson = new Gson();
             FileWriter fileWriter = new FileWriter(filePath);
