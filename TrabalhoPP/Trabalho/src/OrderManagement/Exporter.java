@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.FileWriter;
 import com.google.gson.Gson;
 import order.management.IExporter;
-import order.management.IShipping;
 import order.management.IOrder;
 
 /*
@@ -27,7 +26,7 @@ public class Exporter implements IExporter {
     /**
      * Metodo que ira fazer export da order/shipping para json
      * 
-     * @param shipping shipping a ser exportado
+     * @param order order a ser exportada
      * @throws IOException 
      */
     public void export(IOrder order) throws IOException {

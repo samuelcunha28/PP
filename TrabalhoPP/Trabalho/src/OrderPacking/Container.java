@@ -25,7 +25,7 @@ public class Container implements IContainer {
     private IItemPacked[] items = new IItemPacked[10];
     private int height;
     private int occupiedVolume;
-    transient boolean isClosed = false;
+    boolean isClosed = false;
 
     /**
      * Construtor de Container

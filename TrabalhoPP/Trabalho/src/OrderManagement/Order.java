@@ -8,8 +8,10 @@ import order.management.IOrder;
 import order.management.IShipping;
 import order.packing.IItem;
 import OrderManagement.Shipping;
-import OrderPacking.Container;
-import order.packing.Color;
+import order.exceptions.ContainerException;
+import order.exceptions.PositionException;
+import order.management.ShipmentStatus;
+import order.packing.IContainer;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -31,6 +33,10 @@ public class Order implements IOrder {
     private int day;
     private IItem[] items = new IItem[10];
     private IShipping[] shippings = new IShipping[10];
+    private ShipmentStatus status = ShipmentStatus.AWAITS_TREATMENT;
+    private boolean isClosed = false;
+    private int cost;
+    private Date date;
 
     /**
      *
@@ -49,6 +55,18 @@ public class Order implements IOrder {
         this.month = month;
         this.day = day;
     }
+
+    public Order(IPerson destination, ICustomer customer, int id, Date date) {
+        this.destination = destination;
+        this.customer = customer;
+        this.id = id;
+        this.date = date;
+    }
+
+    
+    
+    
+    
 
     @Override
     public IPerson getDestination() {
@@ -182,34 +200,18 @@ public class Order implements IOrder {
         return newItem;
     }
 
-    /*
-    @Override
-    public boolean addContainer(IContainer con) throws OrderExceptionImpl, ContainerExceptionImpl {
-        boolean aux = false;
-        if (status != ShipmentStatus.IN_TREATMENT) {
-            throw new OrderExceptionImpl("Estado invalido! Nao se encontra em tratamento");
-        } else {
-            for (int i = 0; i < containers.length; i++) {
-                if (containers[i] == null) {
-                    containers[i] = con;
-                    break;
-                } else if (containers[containers.length - 1] != null) {
-                    aux = true;
-                }
-            }
-            if (aux == true) {
-                throw new ContainerExceptionImpl("Container sem posicoes disponiveis");
-            }
-        }
-        return aux;
-    }
+    /**
+     *
+     * @param ship
+     * @return
+     * @throws OrderExceptionImpl
      */
     @Override
-    public boolean addShipping(IShipping shipping) throws OrderExceptionImpl {
+    public boolean addShipping(IShipping ship) throws OrderExceptionImpl {
         boolean aux = false;
         for (int i = 0; i < shippings.length; i++) {
             if (shippings[i] == null) {
-                shippings[i] = shipping;
+                shippings[i] = ship;
                 break;
             } else if (shippings[shippings.length - 1] != null) {
                 aux = true;
@@ -221,71 +223,115 @@ public class Order implements IOrder {
         return aux;
     }
 
-    /*
+    /**
+     *
+     * @param ship
+     * @return
+     * @throws OrderExceptionImpl
+     */
     @Override
-    public boolean removeItem(IItem item) throws ContainerExceptionImpl {
+    public boolean removeShipping(IShipping ship) throws OrderExceptionImpl {
         int index = 0;
         int j = 0;
         boolean aux = false;
-        if (item instanceof IItem) {
-            for (int i = 0; i < items.length; i++) {
-                if (items[i] != null && items[i].getItem().getReference().equals(item.getReference())) {
+        if (ship instanceof IShipping) {
+            for (int i = 0; i < shippings.length; i++) {
+                if (shippings[i] != null) {
                     index = i;
                     aux = true;
                 }
             }
         }
         if (aux == true) {
-            for (j = index; j < items.length - 1 && items[j] != null; j++) {
-                items[j] = items[j + 1];
+            for (j = index; j < shippings.length - 1 && shippings[j] != null; j++) {
+                shippings[j] = shippings[j + 1];
             }
-            items[j] = null;
+            shippings[j] = null;
 
         } else {
-            throw new ContainerExceptionImpl("Item nao encontrado");
+            throw new OrderExceptionImpl("Shipping nao encontrado");
         }
         return aux;
     }
+
+    /**
+     *
+     * @return
      */
     @Override
-    public boolean removeShipping(IShipping arg0) throws OrderExceptionImpl {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public int clean() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int count = 0;
+        if (status != ShipmentStatus.CANCELLED) {
+           return 0;
+        } else if (status == ShipmentStatus.CANCELLED) {
+            for (int i = 0; i < shippings.length; i++) {
+                if (shippings[i] != null) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
+    /**
+     * 
+     * @throws OrderExceptionImpl
+     * @throws ContainerExceptionImpl
+     * @throws PositionExceptionImpl
+     * @throws ContainerException
+     * @throws PositionException 
+     */
     @Override
-    public void validate() throws OrderExceptionImpl, ContainerExceptionImpl, PositionExceptionImpl {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void validate() throws OrderExceptionImpl, ContainerExceptionImpl, PositionExceptionImpl, ContainerException, PositionException {
+        for (int i = 0; i < shippings.length; i++) {
+            if (shippings[i] != null) {
+                shippings[i].validate();
+            }
+        }
+        this.shippings = getShippings();
     }
 
+    /**
+     * 
+     * @throws OrderExceptionImpl
+     * @throws ContainerExceptionImpl
+     * @throws PositionExceptionImpl 
+     */
     @Override
     public void close() throws OrderExceptionImpl, ContainerExceptionImpl, PositionExceptionImpl {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que retorna "true" ou "false" para o caso da order esteja
+     * fechada ou nao
+     *
+     * @return boolean 
+     */
     @Override
     public boolean isClosed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return isClosed;
     }
 
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+    
     @Override
     public double getCost() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.cost;
     }
 
     @Override
     public String summary() {
-        String text = "ORDER" 
+        String text = "ORDER"
                 + "Destination : " + destination + "\n"
                 + "Customer : " + customer + "\n"
                 + "ID : " + id + "\n"
                 + "Year : " + year + "\n"
                 + "Month : " + month + "\n"
-                + "Day : " + day + "\n";
+                + "Day : " + day + "\n"
+                + "Cost : " + cost + "\n";
         return text;
     }
 
@@ -318,5 +364,4 @@ public class Order implements IOrder {
     public IItem[] getRemainingItemsToSend() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

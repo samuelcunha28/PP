@@ -89,8 +89,7 @@ public class Main {
         System.out.println("PackedItem, Item: " + packedItem.getItem());
         System.out.println("PackedItem, Posicao: " + packedItem.getPosition().toString());
         System.out.println("");
-       
-        
+
         //-----------------Classe Container----------------//
         System.out.println("INFORMACOES DO CONTAINER");
         Container container1 = new Container(500, "REF1", 50, Color.black, 50, Color.white, 50);
@@ -118,15 +117,14 @@ public class Main {
         container1.close();
         System.out.println("O container esta fechado? " + container1.isClosed());
         System.out.println("");
-        
-        
+
         //-----------------------Package OrderManagement--------------//
         //-----------------Classe Shipping----------------//
         System.out.println("INFORMACOES DE ENVIO");
         Shipping shippingOrder1 = new Shipping(001, customer1);
+        Shipping shippingOrder2 = new Shipping(002, customer1);
         shippingOrder1.setShipmentStatus(ShipmentStatus.IN_TREATMENT);
         shippingOrder1.addContainer(container1);
-        shippingOrder1.addContainer(container2);
         // shippingOrder1.removeContainer(container1);
         shippingOrder1.getContainers();
         boolean existCont = shippingOrder1.existsContainer(container2);
@@ -143,19 +141,21 @@ public class Main {
         shippingOrder1.validate();
         System.out.println("Sumario do pedido: ");
         System.out.println(shippingOrder1.summary());
-        
-        
-        
-        System.out.println("awsdasdasdasdasd");
+
+        //--------------- Classe Order ----------------//
         System.out.println("");
         System.out.println("");
-        Order order1 = new Order(destination1, customer1, 1, 12, 11, 1998);
-        
+
+        Date date = new Date(12, 11, 1998);
+        Order order1 = new Order(destination1, customer1, 1, date);
+        //Order order1 = new Order(29);
+
         order1.addShipping(shippingOrder1);
-        
-        System.out.println(shippingOrder1);
-        System.out.println(order1);
-        //-----------------Classe ShippingOrder----------------//
+        order1.setCost(29);
+        Management man1 = new Management(order1);
+        // order1.addShipping(shippingOrder2);
+        // order1.removeShipping(shippingOrder2);
+
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
         exporter.export(order1);
