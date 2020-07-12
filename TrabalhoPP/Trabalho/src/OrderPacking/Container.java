@@ -179,7 +179,7 @@ public class Container implements IContainer {
                 }
             }
         }
-        if (validated) {
+        if (validated == true) {
             System.out.println("Nao existem itens sobrepostos e os mesmos sao validos");
         }
     }

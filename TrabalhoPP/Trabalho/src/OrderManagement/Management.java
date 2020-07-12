@@ -23,16 +23,19 @@ public class Management implements IManagement {
     public Management() {
     }
     
+    /**
+     * Construtor de Management
+     * @param order order do tipo IOrder
+     */
     public Management(IOrder order) {
         this.order = order;
     }
-
     
     /**
-     * 
-     * @param order
-     * @return
-     * @throws OrderExceptionImpl 
+     * Metodo para adicionar uma order 
+     * @param order order a ser adicionada do tipo IOrder
+     * @return boolean test 
+     * @throws OrderExceptionImpl e lancada a excecao caso a order nao exista  
      */
     @Override
     public boolean add(IOrder order) throws OrderExceptionImpl {
@@ -46,22 +49,36 @@ public class Management implements IManagement {
             }
         }
         if (test) {
-            throw new OrderExceptionImpl("Array sem posicoes disponiveis");
+            throw new OrderExceptionImpl("A order nao existe");
         }
         return test;
     }
     
-    
+    /**
+     * Metodo que remove uma order
+     * @param order order a ser removida do tipo IOrder
+     * @return boolean test
+     * @throws OrderException e lancada uma excecao caso a order nao exista
+     */
     @Override
-    public boolean remove(IOrder arg0) throws OrderException {
+    public boolean remove(IOrder order) throws OrderException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @param cust
+     * @return 
+     */
     @Override
-    public IOrder[] getOrders(ICustomer arg0) {
+    public IOrder[] getOrders(ICustomer cust) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     * @return 
+     */
     @Override
     public IOrder[] getOrders() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
