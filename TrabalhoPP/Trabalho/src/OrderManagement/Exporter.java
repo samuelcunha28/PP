@@ -17,14 +17,14 @@ import order.management.IOrder;
  */
 public class Exporter implements IExporter {
 
-    private String filePath = "example2.json";
+    private String filePath = "export.json";
     
     @Override
     public void export() throws IOException {
     }
     
     /**
-     * Metodo que ira fazer export da order/shipping para json
+     * Metodo que ira fazer export da order para json
      * 
      * @param order order a ser exportada
      * @throws IOException 

@@ -1,5 +1,7 @@
 package OrderManagement;
 
+import com.google.gson.Gson;
+import java.io.FileReader;
 import java.io.IOException;
 import order.exceptions.ContainerException;
 import order.exceptions.OrderException;
@@ -19,9 +21,30 @@ import org.json.simple.parser.ParseException;
  */
 public class Import implements IOrderImporter {
 
-    @Override
-    public void importData(IOrder arg0, String arg1) throws IOException, ParseException, ContainerException, OrderException, PositionException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String filePath = "import.json";
+
+    public Import() {
     }
     
+    /**
+     * Metodo que ira importar um ficheiro json para uma determinada order
+     * @param order order a ser importada
+     * @param filePath caminho do ficheiro importado
+     * @throws IOException
+     * @throws ParseException
+     * @throws ContainerException
+     * @throws OrderException
+     * @throws PositionException 
+     */
+    @Override
+    public void importData(IOrder order, String filePath) throws IOException, ParseException, ContainerException, OrderException, PositionException {
+
+        FileReader fr = new FileReader(filePath);
+        int i;
+        System.out.println("Formato JSON importado com sucesso para o ficheiro: " + filePath);
+        while ((i = fr.read()) != -1) {
+            System.out.print((char) i);
+        }
+        fr.close();
+    }
 }

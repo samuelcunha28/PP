@@ -10,6 +10,7 @@ import order.exceptions.ContainerException;
 import order.exceptions.OrderException;
 import order.exceptions.PositionException;
 import order.packing.*;
+import order.management.IOrderImporter;
 import packing_gui.PackingGUI;
 
 import java.io.IOException;
@@ -155,10 +156,12 @@ public class Main {
 
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
+        Import importer = new Import();
         exporter.export(order1);
+        importer.importData(order1, "import.json");
 
         //-----------------Classe Exporter---------------------//
         //-----------------------Package ShippingOrder--------------//
-        // PackingGUI.render("example2.json");
+        PackingGUI.render("import.json");
     }
 }
