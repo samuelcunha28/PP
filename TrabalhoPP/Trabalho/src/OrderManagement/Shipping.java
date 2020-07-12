@@ -25,7 +25,6 @@ public class Shipping implements IShipping {
     private IPerson destination;
     private IContainer[] containers = new IContainer[10];
     private ShipmentStatus status = ShipmentStatus.AWAITS_TREATMENT;
-    private ICustomer customer;
     private int count = 0;
 
     /**
@@ -37,16 +36,7 @@ public class Shipping implements IShipping {
         this.orderId = orderId;
     }
 
-    /**
-     * Construtor de Shipping
-     *
-     * @param orderId
-     * @param customer
-     */
-    public Shipping(int orderId, ICustomer customer) {
-        this.orderId = orderId;
-        this.customer = customer;
-    }
+    
 
     /**
      * Verifica se o estado da order esta em tratamento. Se o mesmo nao estiver
@@ -152,33 +142,6 @@ public class Shipping implements IShipping {
             }
         }
         return aux;
-    }
-
-    /**
-     * Metodo que retorna a informacao sobre o destino
-     *
-     * @return destination
-     */
-    public IPerson getDestination() {
-        return this.destination;
-    }
-
-    /**
-     * Metodo que atribui/define o destino
-     *
-     * @param person
-     */
-    public void setDestination(IPerson person) {
-        this.destination = person;
-    }
-
-    /**
-     * Metodo que retorna o cliente
-     *
-     * @return customer
-     */
-    public ICustomer getCustomer() {
-        return this.customer;
     }
 
     /**
@@ -303,10 +266,23 @@ public class Shipping implements IShipping {
     public String summary() {
         return "ShippingOrder{"
                 + "id=" + orderId
-                + ", customer=" + customer
                 + ", destination=" + destination
                 + ", containers=" + Arrays.toString(containers)
                 + ", orderStatus=" + status
                 + '}';
     }
+
+    /*
+    public IPerson getDestination() {
+        return this.destination;
+    }
+
+    public void setDestination(IPerson person) {
+        this.destination = person;
+    }
+
+    public ICustomer getCustomer() {
+        return this.customer;
+    }
+     */
 }

@@ -32,7 +32,7 @@ public class Order implements IOrder {
     private int month;
     private int day;
     private IItem[] items = new IItem[10];
-    private IShipping[] shippings = new IShipping[10];
+    private IShipping[] shipping = new IShipping[10];
     private ShipmentStatus status = ShipmentStatus.AWAITS_TREATMENT;
     private boolean isClosed = false;
     private int cost;
@@ -188,14 +188,14 @@ public class Order implements IOrder {
     public IShipping[] getShippings() {
         int tmp = 0;
 
-        for (int i = 0; i < shippings.length; i++) {
-            if (shippings[i] != null) {
+        for (int i = 0; i < shipping.length; i++) {
+            if (shipping[i] != null) {
                 tmp++;
             }
         }
         IShipping[] newItem = new IShipping[tmp];
         for (int i = 0; i < newItem.length; i++) {
-            newItem[i] = shippings[i];
+            newItem[i] = shipping[i];
         }
         return newItem;
     }
@@ -209,11 +209,11 @@ public class Order implements IOrder {
     @Override
     public boolean addShipping(IShipping ship) throws OrderExceptionImpl {
         boolean aux = false;
-        for (int i = 0; i < shippings.length; i++) {
-            if (shippings[i] == null) {
-                shippings[i] = ship;
+        for (int i = 0; i < shipping.length; i++) {
+            if (shipping[i] == null) {
+                shipping[i] = ship;
                 break;
-            } else if (shippings[shippings.length - 1] != null) {
+            } else if (shipping[shipping.length - 1] != null) {
                 aux = true;
             }
         }
@@ -235,18 +235,18 @@ public class Order implements IOrder {
         int j = 0;
         boolean aux = false;
         if (ship instanceof IShipping) {
-            for (int i = 0; i < shippings.length; i++) {
-                if (shippings[i] != null) {
+            for (int i = 0; i < shipping.length; i++) {
+                if (shipping[i] != null) {
                     index = i;
                     aux = true;
                 }
             }
         }
         if (aux == true) {
-            for (j = index; j < shippings.length - 1 && shippings[j] != null; j++) {
-                shippings[j] = shippings[j + 1];
+            for (j = index; j < shipping.length - 1 && shipping[j] != null; j++) {
+                shipping[j] = shipping[j + 1];
             }
-            shippings[j] = null;
+            shipping[j] = null;
 
         } else {
             throw new OrderExceptionImpl("Shipping nao encontrado");
@@ -264,8 +264,8 @@ public class Order implements IOrder {
         if (status != ShipmentStatus.CANCELLED) {
            return 0;
         } else if (status == ShipmentStatus.CANCELLED) {
-            for (int i = 0; i < shippings.length; i++) {
-                if (shippings[i] != null) {
+            for (int i = 0; i < shipping.length; i++) {
+                if (shipping[i] != null) {
                     count++;
                 }
             }
@@ -283,12 +283,12 @@ public class Order implements IOrder {
      */
     @Override
     public void validate() throws OrderExceptionImpl, ContainerExceptionImpl, PositionExceptionImpl, ContainerException, PositionException {
-        for (int i = 0; i < shippings.length; i++) {
-            if (shippings[i] != null) {
-                shippings[i].validate();
+        for (int i = 0; i < shipping.length; i++) {
+            if (shipping[i] != null) {
+                shipping[i].validate();
             }
         }
-        this.shippings = getShippings();
+        this.shipping = getShippings();
     }
 
     /**

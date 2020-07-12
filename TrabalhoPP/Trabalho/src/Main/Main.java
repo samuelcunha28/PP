@@ -24,7 +24,7 @@ import java.util.Arrays;
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
 * Turma: <T2>
- */
+ */ 
 public class Main {
 
     public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException, org.json.simple.parser.ParseException {
@@ -72,19 +72,8 @@ public class Main {
         //-----------------Classe Position-----------------//
         System.out.println("INFORMACOES DE POSICAO");
         Position position1 = new Position(3, 0, 0);
-        //position1.setX(3);
-        //position1.setY(0);
-        //position1.setZ(0);
-
         Position position2 = new Position(4, 4, 0);
-        //position1.setX(4);
-        //position1.setY(4);
-        //position1.setZ(0);
-
         Position position3 = new Position(8, 0, 0);
-        //position1.setX(8);
-        //position1.setY(0);
-        //position1.setZ(0);
 
         System.out.println("Posicao1 , X: " + position1.getX() + ", Y: " + position1.getY() + ", Z: " + position1.getZ());
         System.out.println("Posicao2 , X: " + position2.getX() + ", Y: " + position2.getY() + ", Z: " + position2.getZ());
@@ -130,17 +119,17 @@ public class Main {
         //-----------------------Package OrderManagement--------------//
         //-----------------Classe Shipping----------------//
         System.out.println("INFORMACOES DE ENVIO");
-        Shipping shippingOrder1 = new Shipping(001, customer1);
-        Shipping shippingOrder2 = new Shipping(002, customer1);
+        Shipping shippingOrder1 = new Shipping(001);
+        Shipping shippingOrder2 = new Shipping(002);
         shippingOrder1.setShipmentStatus(ShipmentStatus.IN_TREATMENT);
         shippingOrder1.addContainer(container1);
         // shippingOrder1.removeContainer(container1);
         shippingOrder1.getContainers();
         boolean existCont = shippingOrder1.existsContainer(container2);
         System.out.println("Container 2 existe? " + existCont);
-        shippingOrder1.setDestination(destination1);
-        System.out.println("Cidade de destino: " + shippingOrder1.getDestination().getAddress().getCity());
-        System.out.println("Cliente: " + shippingOrder1.getCustomer().getName());
+        // shippingOrder1.setDestination(destination1);
+        // System.out.println("Cidade de destino: " + shippingOrder1.getDestination().getAddress().getCity());
+        // System.out.println("Cliente: " + shippingOrder1.getCustomer().getName());
         ShipmentStatus status = shippingOrder1.getShipmentStatus();
         System.out.println("Estado do pedido: " + status);
         System.out.println("ID de envio: " + shippingOrder1.getId());
@@ -157,11 +146,10 @@ public class Main {
 
         Date date = new Date(12, 11, 1998);
         Order order1 = new Order(destination1, customer1, 1, date);
-        //Order order1 = new Order(29);
 
         order1.addShipping(shippingOrder1);
         order1.setCost(29);
-        Management man1 = new Management(order1);
+        Management man1 = new Management();
         // order1.addShipping(shippingOrder2);
         // order1.removeShipping(shippingOrder2);
 

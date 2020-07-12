@@ -17,9 +17,12 @@ import Exceptions.*;
  */
 public class Management implements IManagement {
 
-    private IOrder[] orders= new IOrder[10];
+    private IOrder[] shippings= new IOrder[10];
     private IOrder order;
 
+    public Management() {
+    }
+    
     public Management(IOrder order) {
         this.order = order;
     }
@@ -34,11 +37,11 @@ public class Management implements IManagement {
     @Override
     public boolean add(IOrder order) throws OrderExceptionImpl {
         boolean test = false;
-        for (int i = 0; i < orders.length; i++) {
-            if (orders[i] == null) {
-                order = orders[i];
+        for (int i = 0; i < shippings.length; i++) {
+            if (shippings[i] == null) {
+                order = shippings[i];
                 break;
-            } else if (orders[orders.length - 1] != null) {
+            } else if (shippings[shippings.length - 1] != null) {
                 test = true;
             }
         }

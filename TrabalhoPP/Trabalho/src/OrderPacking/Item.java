@@ -17,8 +17,8 @@ public class Item implements IItem {
     private int depth;
     private String description;
     private int height;
-    private int length;
-
+    private int length;    
+    
     /**
      * Construtor de Item
      *
