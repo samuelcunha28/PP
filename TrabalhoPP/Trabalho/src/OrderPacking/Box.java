@@ -9,7 +9,7 @@ import order.packing.IBox;
 *
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
-* Turma: <T3>
+* Turma: <T2>
  */
 public abstract class Box implements IBox {
 

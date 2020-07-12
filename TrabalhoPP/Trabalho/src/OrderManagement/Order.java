@@ -20,7 +20,7 @@ import order.packing.IContainer;
 *
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
-* Turma: <T3>
+* Turma: <T2>
  */
 public class Order implements IOrder {
 

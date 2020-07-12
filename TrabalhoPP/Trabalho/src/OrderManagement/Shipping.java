@@ -17,7 +17,7 @@ import java.util.Arrays;
 *
 * Nome: <João Emanuel Carvalho Leocádio>
 * Número: <8160523>
-* Turma: <T3>
+* Turma: <T2>
  */
 public class Shipping implements IShipping {
 
