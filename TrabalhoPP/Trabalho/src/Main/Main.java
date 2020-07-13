@@ -5,6 +5,7 @@ import OrderPacking.*;
 import Person.*;
 import Exceptions.*;
 import order.base.ICustomer;
+import order.management.IOrder;
 import order.management.ShipmentStatus;
 import order.exceptions.ContainerException;
 import order.exceptions.OrderException;
@@ -151,20 +152,22 @@ public class Main {
         
         // Manipulacao de metodos de Order
         // order1.removeShipping(shippingOrder2);
-        Management man1 = new Management();
         // order1.addShipping(shippingOrder2);
         // order1.add(item3);
+        
+        //--------------- Classe Management ----------------//
+        // Management man1 = new Management();
+        // man1.add(order1);
 
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
         exporter.export(order1);
-        
         
         //-----------------Classe Import---------------------//
         Import importer = new Import();
         importer.importData(order1, "import.json");
 
         //-----------------RENDER---------------------//
-        // PackingGUI.render("import.json");
+        PackingGUI.render("import.json");
     }
 }

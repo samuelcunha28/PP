@@ -17,8 +17,24 @@ import order.management.IOrder;
  */
 public class Exporter implements IExporter {
 
-    private String filePath = "export.json";
+    private final String filePath = "export.json";
+    private IOrder order;
+
+    public Exporter() {
+    }
     
+    public Exporter(IOrder order) {
+        this.order = order;
+    }
+
+    public IOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(IOrder order) {
+        this.order = order;
+    }
+       
     @Override
     public void export() throws IOException {
     }
@@ -39,6 +55,5 @@ public class Exporter implements IExporter {
         } catch (IOException e) {
             System.out.println(e.toString());
         }
-
     }
 }
