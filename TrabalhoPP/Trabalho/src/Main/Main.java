@@ -28,8 +28,24 @@ import java.util.Arrays;
 * Número: <8160523>
 * Turma: <T2>
  */
+
+/**
+ *
+ * @author samue
+ */
+
 public class Main {
 
+    /**
+     *
+     * @param args
+     * @throws PositionException
+     * @throws ContainerException
+     * @throws IOException
+     * @throws ParseException
+     * @throws OrderException
+     * @throws org.json.simple.parser.ParseException
+     */
     public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException, org.json.simple.parser.ParseException {
         //-----------------Classe Address-----------------//
         System.out.println("INFORMACOES DE MORADA");
