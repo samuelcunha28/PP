@@ -7,11 +7,9 @@ import Exceptions.*;
 import order.management.IOrder;
 import order.management.IShipping;
 import order.packing.IItem;
-import OrderManagement.Shipping;
 import order.exceptions.ContainerException;
 import order.exceptions.PositionException;
 import order.management.ShipmentStatus;
-import order.packing.IContainer;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>

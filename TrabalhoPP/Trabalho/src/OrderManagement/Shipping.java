@@ -1,7 +1,6 @@
 package OrderManagement;
 
 import order.exceptions.ContainerException;
-import order.exceptions.OrderException;
 import order.exceptions.PositionException;
 import order.management.*;
 import order.packing.IContainer;

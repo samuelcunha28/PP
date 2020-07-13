@@ -3,21 +3,17 @@ package Main;
 import OrderManagement.*;
 import OrderPacking.*;
 import Person.*;
-import Exceptions.*;
-import order.base.ICustomer;
 import order.management.IOrder;
 import order.management.ShipmentStatus;
 import order.exceptions.ContainerException;
 import order.exceptions.OrderException;
 import order.exceptions.PositionException;
 import order.packing.*;
-import order.management.IExporter;
-import order.management.IOrderImporter;
 import packing_gui.PackingGUI;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Arrays;
+
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -35,17 +31,6 @@ import java.util.Arrays;
  */
 
 public class Main {
-
-    /**
-     *
-     * @param args
-     * @throws PositionException
-     * @throws ContainerException
-     * @throws IOException
-     * @throws ParseException
-     * @throws OrderException
-     * @throws org.json.simple.parser.ParseException
-     */
     public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException, org.json.simple.parser.ParseException {
         //-----------------Classe Address-----------------//
         System.out.println("INFORMACOES DE MORADA");
