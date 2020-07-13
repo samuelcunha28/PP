@@ -25,12 +25,7 @@ public class Exporter implements IExporter {
     private String file = "graphicBar.json";
     private IOrder[] totalOrders;
     private IOrder order;
-    private String GUIpath;
     private String GraphBarPath;
-    private String GraphPiePath;
-    private String OrderInfoPath;
-
-    
 
     public Exporter() {
     }
@@ -47,22 +42,6 @@ public class Exporter implements IExporter {
         this.totalOrders = totalOrders;
     }
 
-    public IOrder getOrder() {
-        return order;
-    }
-
-    public void setOrder(IOrder order) {
-        this.order = order;
-    }
-
-    public String getGUIpath() {
-        return GUIpath;
-    }
-
-    public void setGUIpath(String GUIpath) {
-        this.GUIpath = GUIpath;
-    }
-
     public String getGraphBarPath() {
         return GraphBarPath;
     }
@@ -70,25 +49,11 @@ public class Exporter implements IExporter {
     public void setGraphBarPath(String GraphBarPath) {
         this.GraphBarPath = GraphBarPath;
     }
-
-    public String getGraphPiePath() {
-        return GraphPiePath;
-    }
-
-    public void setGraphPiePath(String GraphPiePath) {
-        this.GraphPiePath = GraphPiePath;
-    }
-
-    public String getOrderInfoPath() {
-        return OrderInfoPath;
-    }
-
-    public void setOrderInfoPath(String OrderInfoPath) {
-        this.OrderInfoPath = OrderInfoPath;
-    }
-       
     
-    
+    /**
+     * 
+     * @throws IOException 
+     */
     @Override
     public void export() throws IOException {
         try (FileWriter file = new FileWriter(this.GraphBarPath)){
@@ -117,6 +82,10 @@ public class Exporter implements IExporter {
 
     }
     
+    /**
+     * 
+     * @return 
+     */
     private JSONObject WriteBarGraph() {
         JSONObject object = new JSONObject();
         JSONObject data = new JSONObject();
