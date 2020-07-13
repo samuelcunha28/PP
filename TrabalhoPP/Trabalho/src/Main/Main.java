@@ -107,8 +107,8 @@ public class Main {
         container1.removeItem(item3);
         Item itemPesquisado = (Item) container1.getItem("REF2");
         System.out.println("Item Encontrado: " + itemPesquisado.getReference());
-        IItemPacked[] itemsDentro = container1.getPackedItems();
-        System.out.println("Tamanho do Array Novo: " + itemsDentro.length);
+        IItemPacked[] itemsEmpacotados = container1.getPackedItems();
+        System.out.println("Tamanho do Array Novo: " + itemsEmpacotados.length);
         System.out.println("Volume ocupado: " + container1.getOccupiedVolume());
         System.out.println("Referencia do container: " + container1.getReference());
         System.out.println("Numero de itens no container: " + container1.getNumberOfItems());
@@ -140,19 +140,18 @@ public class Main {
         System.out.println(shippingOrder1.summary());
         System.out.println("");
 
-        //--------------- Classe Order ----------------//
+        //--------------- Classe Order e Date ----------------//
         System.out.println("");
         System.out.println("");
 
         Date date = new Date(12, 11, 1998);
-        Order order1 = new Order(destination1, customer1, 1, date);
+        Order order1 = new Order(destination1, customer1, 1, date, 20);
         order1.addShipping(shippingOrder1);
 
         IOrder[] orders = new IOrder[2];
-        orders[0] = new Order(destination1, customer1, 12, 1998, 8, 20, 5);
-        orders[1] = new Order(destination1, customer1, 15, 2000, 9, 14, 10);
-        //System.out.println("Order" + orders[0].toString());
-        //System.out.println("Order" + orders[1].toString());
+        orders[0] = new Order(destination1, customer1, 1, date, 10);
+        orders[1] = new Order(destination1, customer1, 2, date, 5);
+        
         orders[0].add(item1);
         orders[0].add(item2);
         orders[1].add(item1);
@@ -160,18 +159,25 @@ public class Main {
         orders[0].addShipping(shippingOrder1);
 
         System.out.println("Order" + orders[0].toString());
-        //order1.addShipping(shippingOrder1);
-        //order1.setCost(29);
-        Management man1 = new Management();
+        // order1.addShipping(shippingOrder1);
+        // order1.setCost(29);
         // order1.addShipping(shippingOrder2);
         // order1.removeShipping(shippingOrder2);
 
+        
+        //-----------------Classe Management---------------------//
+        Management man1 = new Management();
+        // man1.add(order1);
+        // man1.remove(order1);
+        
         //-----------------Classe Exporter---------------------//
+        // EXPORTAR GRAFICO DE BARRAS
         Exporter exportGraphicBar = new Exporter(orders[1]);
         exportGraphicBar.setTotalOrders(orders);
-        exportGraphicBar.setGraphBarPath("graphicBar.json");
+        exportGraphicBar.setBarGraphPath("barGraphic.json");
         exportGraphicBar.export();
         
+        // EXPORTAR A ORDER
         Exporter exporterOrder = new Exporter();
         exporterOrder.export(order1);
 

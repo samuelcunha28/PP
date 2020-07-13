@@ -56,8 +56,9 @@ public class Container implements IContainer {
      * @param item item a adicionar
      * @param pos posicao a ser adicionada
      * @param color cor do item
-     * @return
-     * @throws ContainerExceptionImpl
+     * @return variavel auxiliar
+     * @throws ContainerExceptionImpl caso nao hajam posicoes disponiveis ou o
+     * container esteja fechado, e lancada uma excecao
      */
     @Override
     public boolean addItem(IItem item, IPosition pos, Color color) throws ContainerExceptionImpl {
@@ -78,12 +79,13 @@ public class Container implements IContainer {
     }
 
     /**
-     * Metodo que remove um item, verificando atraves da sua referencia Depois
+     * Metodo que remove um item, verificando atraves da sua referencia. Depois
      * de removido, a posicao fica a null e é movido para o ultimo lugar
      *
      * @param item item a remover
-     * @return
-     * @throws ContainerExceptionImpl
+     * @return variavel auxiliar
+     * @throws ContainerExceptionImpl caso nao seja encontrado o item e lancada
+     * uma excecao
      */
     @Override
     public boolean removeItem(IItem item) throws ContainerExceptionImpl {
@@ -115,8 +117,10 @@ public class Container implements IContainer {
      * embalados estao dentro do container. Verifica tambem se nao excede os
      * limites do array e se encontram sobrepostos
      *
-     * @throws ContainerExceptionImpl
-     * @throws PositionExceptionImpl
+     * @throws ContainerExceptionImpl caso o volume superar o maximo permitido e
+     * lancada uma excecao
+     * @throws PositionExceptionImpl caso nao hajam itens no contentor e lancada
+     * uma excecao
      */
     @Override
     public void validate() throws ContainerExceptionImpl, PositionExceptionImpl {
@@ -130,8 +134,8 @@ public class Container implements IContainer {
         } else {
             for (int i = 0; i < items.length; i++) {
                 if (items[i] != null) {
-                    // Esta condicao testa se os itens que estao contidos nas embalagens
-                    // Ou seja dentro dos "Item Packed" se encontram dentro do container
+                    // Esta condicao testa se os itens estao contidos nas embalagens
+                    // Ou seja dentro dos "Item Packed". Se os itens embalados se encontram dentro do container
                     if (items[i].getItem().getDepth() > this.depth
                             || items[i].getItem().getHeight() > this.height
                             || items[i].getItem().getLenght() > this.length) {
@@ -187,7 +191,7 @@ public class Container implements IContainer {
     /**
      * Metodo que corre a funcao validate() para verificar se todos os itens se
      * encontram devidamente acomodados, ou seja, se nao existem sobreposicoes e
-     * se os mesmos estao embalados
+     * se os mesmos estao embalados e fecha o container
      *
      * @throws ContainerExceptionImpl
      * @throws PositionExceptionImpl
@@ -295,7 +299,7 @@ public class Container implements IContainer {
      * Metodo que retorna "true" ou "false" para o caso do container esteja
      * fechado ou nao
      *
-     * @return boolean 
+     * @return boolean
      */
     @Override
     public boolean isClosed() {
@@ -344,15 +348,17 @@ public class Container implements IContainer {
 
     /**
      * Metodo para obter a cor
+     *
      * @return cor do tipo Color
      */
     @Override
     public Color getColor() {
         return this.color;
     }
-    
+
     /**
      * Metodo para atribuir a cor
+     *
      * @param color cor a atribuir
      */
     @Override
@@ -362,6 +368,7 @@ public class Container implements IContainer {
 
     /**
      * Metodo para obter a cor das bordas
+     *
      * @return cor das bordas do tipo ColorEdge
      */
     @Override
@@ -371,13 +378,14 @@ public class Container implements IContainer {
 
     /**
      * Metodo para atribuit a cor das bordas
+     *
      * @param colorEdge cor das bordas a atribuir
      */
     @Override
     public void setColorEdge(Color colorEdge) {
         this.color = colorEdge;
     }
-    
+
     /**
      * Metodo toString para imprimir os atributos da classe
      *

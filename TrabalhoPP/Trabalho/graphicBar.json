@@ -1,1 +1,0 @@
-{"data":{"datasets":[{"data":[5.0,10.0],"label":"Order cost"},{"data":[1,1],"label":"Number of containers"}],"labels":["Order1","Order2"]},"type":"bar","title":"Order costs and number of containers"}

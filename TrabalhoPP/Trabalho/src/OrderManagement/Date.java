@@ -10,6 +10,7 @@ package OrderManagement;
 * Turma: <T2>
  */
 public class Date {
+    // variaveis de instancia
     private int day;
     private int month;
     private int year;
