@@ -157,12 +157,14 @@ public class Main {
 
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
-        Import importer = new Import();
         exporter.export(order1);
+        
+        
+        //-----------------Classe Import---------------------//
+        Import importer = new Import();
         importer.importData(order1, "import.json");
 
-        //-----------------Classe Exporter---------------------//
-        //-----------------------Package ShippingOrder--------------//
+        //-----------------RENDER---------------------//
         // PackingGUI.render("import.json");
     }
 }
