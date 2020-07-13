@@ -29,7 +29,6 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) throws PositionException, ContainerException, IOException, ParseException, OrderException, org.json.simple.parser.ParseException {
-        //----------------Package Person------------------//
         //-----------------Classe Address-----------------//
         System.out.println("INFORMACOES DE MORADA");
         Address address1 = new Address();
@@ -60,7 +59,8 @@ public class Main {
         System.out.println("Destination1 Morada" + destination1.getAddress().toString());
         System.out.println("");
 
-        //-----------------------Package OrderPacking--------------------//
+        
+        
         //-----------------Classe Item-----------------//
         System.out.println("INFORMACOES DO(S) ITEM(S)");
         Item item1 = new Item("REF1", "Item 1", 4, 4, 4);
@@ -94,15 +94,16 @@ public class Main {
         Container container1 = new Container(500, "REF1", 50, Color.black, 50, Color.white, 50);
         container1.addItem(item1, position1, Color.green);
         container1.addItem(item2, position2, Color.black);
-        container1.addItem(item3, position3, Color.black);
-        container1.addItem(item3, position3, Color.black);
-        //Container 2 criado para adicionar a Shipping Order
+        container1.addItem(item3, position3, Color.silver);
+        container1.addItem(item3, position3, Color.fuchsia);
+        
         Container container2 = new Container(500, "REF2", 50, Color.lime, 50, Color.maroon, 50);
         container2.addItem(item1, position1, Color.purple);
-        container2.addItem(item2, position2, Color.black);
-        container2.addItem(item3, position3, Color.black);
+        container2.addItem(item2, position2, Color.olive);
+        container2.addItem(item3, position3, Color.white);
         container2.close();
 
+        // Manipulacao de metodos de Container
         container1.removeItem(item3);
         Item itemPesquisado = (Item) container1.getItem("REF2");
         System.out.println("Item Encontrado: " + itemPesquisado.getReference());
@@ -117,20 +118,19 @@ public class Main {
         System.out.println("O container esta fechado? " + container1.isClosed());
         System.out.println("");
 
-        //-----------------------Package OrderManagement--------------//
+      
+        
         //-----------------Classe Shipping----------------//
         System.out.println("INFORMACOES DE ENVIO");
-        Shipping shippingOrder1 = new Shipping(001);
-        Shipping shippingOrder2 = new Shipping(002);
+        Shipping shippingOrder1 = new Shipping(001, 12);
+        Shipping shippingOrder2 = new Shipping(002, 14);
         shippingOrder1.setShipmentStatus(ShipmentStatus.IN_TREATMENT);
         shippingOrder1.addContainer(container1);
-        // shippingOrder1.removeContainer(container1);
         shippingOrder1.getContainers();
         boolean existCont = shippingOrder1.existsContainer(container2);
         System.out.println("Container 2 existe? " + existCont);
-        // shippingOrder1.setDestination(destination1);
-        // System.out.println("Cidade de destino: " + shippingOrder1.getDestination().getAddress().getCity());
-        // System.out.println("Cliente: " + shippingOrder1.getCustomer().getName());
+        
+        // Manipulacao de metodos de Shipping
         ShipmentStatus status = shippingOrder1.getShipmentStatus();
         System.out.println("Estado do pedido: " + status);
         System.out.println("ID de envio: " + shippingOrder1.getId());
@@ -140,19 +140,20 @@ public class Main {
         shippingOrder1.validate();
         System.out.println("Sumario do pedido: ");
         System.out.println(shippingOrder1.summary());
-
-        //--------------- Classe Order ----------------//
-        System.out.println("");
         System.out.println("");
 
+        
+        //--------------- Classe Order e Date ----------------//
         Date date = new Date(12, 11, 1998);
         Order order1 = new Order(destination1, customer1, 1, date);
-
         order1.addShipping(shippingOrder1);
-        order1.setCost(29);
+        
+        
+        // Manipulacao de metodos de Order
+        // order1.removeShipping(shippingOrder2);
         Management man1 = new Management();
         // order1.addShipping(shippingOrder2);
-        // order1.removeShipping(shippingOrder2);
+        // order1.add(item3);
 
         //-----------------Classe Exporter---------------------//
         Exporter exporter = new Exporter();
@@ -162,6 +163,6 @@ public class Main {
 
         //-----------------Classe Exporter---------------------//
         //-----------------------Package ShippingOrder--------------//
-        PackingGUI.render("import.json");
+        // PackingGUI.render("import.json");
     }
 }

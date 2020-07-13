@@ -22,6 +22,7 @@ import java.util.Arrays;
 public class Shipping implements IShipping {
 
     private int orderId;
+    private int cost;
     private IPerson destination;
     private IContainer[] containers = new IContainer[10];
     private ShipmentStatus status = ShipmentStatus.AWAITS_TREATMENT;
@@ -31,9 +32,11 @@ public class Shipping implements IShipping {
      * Construtor de Shipping
      *
      * @param orderId id da order a inserir (inteiro)
+     * @param cost custo do shipping (inteiro)
      */
-    public Shipping(int orderId) {
+    public Shipping(int orderId, int cost) {
         this.orderId = orderId;
+        this.cost = cost;
     }
 
     
@@ -248,13 +251,13 @@ public class Shipping implements IShipping {
     }
 
     /**
-     * Metodo que obtem o custo do container
+     * Metodo que obtem o custo do shipping
      *
      * @return
      */
     @Override
     public double getCost() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.cost;
     }
 
     /**
@@ -271,18 +274,4 @@ public class Shipping implements IShipping {
                 + ", orderStatus=" + status
                 + '}';
     }
-
-    /*
-    public IPerson getDestination() {
-        return this.destination;
-    }
-
-    public void setDestination(IPerson person) {
-        this.destination = person;
-    }
-
-    public ICustomer getCustomer() {
-        return this.customer;
-    }
-     */
 }

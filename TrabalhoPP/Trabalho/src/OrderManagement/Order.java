@@ -35,11 +35,11 @@ public class Order implements IOrder {
     private IShipping[] shipping = new IShipping[10];
     private ShipmentStatus status = ShipmentStatus.AWAITS_TREATMENT;
     private boolean isClosed = false;
-    private int cost;
     private Date date;
+    private int cost;
 
     /**
-     *
+     * Construtor de Order
      * @param destination
      * @param customer
      * @param id
@@ -47,26 +47,21 @@ public class Order implements IOrder {
      * @param month
      * @param day
      */
-    public Order(IPerson destination, ICustomer customer, int id, int year, int month, int day) {
-        this.destination = destination;
-        this.customer = customer;
-        this.id = id;
-        this.year = year;
-        this.month = month;
-        this.day = day;
-    }
+    
 
+    /**
+     * Construtor de Order
+     * @param destination destino da order do tipo IPerson
+     * @param customer cliente de destino do tipo ICustomer
+     * @param id id da order (inteiro)
+     * @param date data da order (Date)
+     */
     public Order(IPerson destination, ICustomer customer, int id, Date date) {
         this.destination = destination;
         this.customer = customer;
         this.id = id;
         this.date = date;
-    }
-
-    
-    
-    
-    
+    } 
 
     @Override
     public IPerson getDestination() {
@@ -311,10 +306,6 @@ public class Order implements IOrder {
     @Override
     public boolean isClosed() {
         return isClosed;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
     }
     
     @Override
