@@ -7,11 +7,9 @@ import Exceptions.*;
 import order.management.IOrder;
 import order.management.IShipping;
 import order.packing.IItem;
-import OrderManagement.Shipping;
 import order.exceptions.ContainerException;
 import order.exceptions.PositionException;
 import order.management.ShipmentStatus;
-import order.packing.IContainer;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -39,40 +37,37 @@ public class Order implements IOrder {
     private Date date;
 
     /**
+     * Construtor de Order
      *
-     * @param destination
-     * @param customer
-     * @param id
-     * @param year
-     * @param month
-     * @param day
+     * @param destination destino da order do tipo IPerson
+     * @param customer cliente da order do tipo ICustomer
+     * @param id id da order (inteiro)
+     * @param date data da order (tipo Date)
+     * @param cost custo da order (inteiro)
      */
-    public Order(IPerson destination, ICustomer customer, int id, int year, int month, int day) {
-        this.destination = destination;
-        this.customer = customer;
-        this.id = id;
-        this.year = year;
-        this.month = month;
-        this.day = day;
-    }
-
-    public Order(IPerson destination, ICustomer customer, int id, Date date) {
+    public Order(IPerson destination, ICustomer customer, int id, Date date, int cost) {
         this.destination = destination;
         this.customer = customer;
         this.id = id;
         this.date = date;
+        this.cost = cost;
     }
 
-    
-    
-    
-    
-
+    /**
+     * Metodo para obter o destino da order
+     *
+     * @return destino do tipo IPerson
+     */
     @Override
     public IPerson getDestination() {
         return this.destination;
     }
 
+    /**
+     * Metodo para atribuir o destino da order
+     *
+     * @param destination destino a atribuir do tipo IPerson
+     */
     @Override
     public void setDestination(IPerson destination) {
         this.destination = destination;
@@ -89,8 +84,9 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para atribuir o cliente
      *
-     * @param customer
+     * @param customer do tipo ICustomer
      */
     @Override
     public void setCustomer(ICustomer customer) {
@@ -98,28 +94,30 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para obter todos os itens da order
      *
-     * @return
+     * @return items
      */
     @Override
     public IItem[] getItems() {
-        int tmp = 0;
+        int aux = 0;
 
         for (int i = 0; i < items.length; i++) {
             if (items[i] != null) {
-                tmp++;
+                aux++;
             }
         }
-        IItem[] newItem = new IItem[tmp];
-        for (int i = 0; i < newItem.length; i++) {
-            newItem[i] = items[i];
+        IItem[] newItems = new IItem[aux];
+        for (int i = 0; i < newItems.length; i++) {
+            newItems[i] = items[i];
         }
-        return newItem;
+        return newItems;
     }
 
     /**
+     * Metodo que atribui o id da order
      *
-     * @param id
+     * @param id id a atribuir (inteiro)
      */
     @Override
     public void setId(int id) {
@@ -127,8 +125,9 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para retornar o id da order
      *
-     * @return
+     * @return id da order
      */
     @Override
     public int getId() {
@@ -136,10 +135,11 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para atribuir a data da order
      *
-     * @param year
-     * @param month
-     * @param day
+     * @param year ano da order
+     * @param month mes da order
+     * @param day dia da order
      */
     @Override
     public void setDate(int year, int month, int day) {
@@ -149,8 +149,9 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para obter a data
      *
-     * @return
+     * @return data atual
      */
     @Override
     public LocalDate getDate() {
@@ -158,10 +159,12 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para adicionar um item à order
      *
-     * @param item
-     * @return
-     * @throws OrderExceptionImpl
+     * @param item item a ser adicionado a order do tipo IItem
+     * @return variavel auxiliar
+     * @throws OrderExceptionImpl caso nao haja posicoes suficientes e lancada a
+     * excecao
      */
     @Override
     public boolean add(IItem item) throws OrderExceptionImpl {
@@ -181,30 +184,49 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para obter os envios da order
      *
-     * @return
+     * @return variavel auxiliar com os itens
      */
     @Override
     public IShipping[] getShippings() {
-        int tmp = 0;
+        int aux = 0;
 
         for (int i = 0; i < shipping.length; i++) {
             if (shipping[i] != null) {
-                tmp++;
+                aux++;
             }
         }
-        IShipping[] newItem = new IShipping[tmp];
-        for (int i = 0; i < newItem.length; i++) {
-            newItem[i] = shipping[i];
+        IShipping[] newItems = new IShipping[aux];
+        for (int i = 0; i < newItems.length; i++) {
+            newItems[i] = shipping[i];
         }
-        return newItem;
+        return newItems;
+    }
+    
+    /**
+     * Metodo que retorna o numero de itens da order
+     * @return variabel auxiliar com o numero de itens
+     */
+    @Override
+    public int getNumberOfItems() {
+        int aux = 0;
+
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                aux ++;
+            }
+        }
+        return aux ;
     }
 
     /**
+     * Metodo para adicionar um envio a order
      *
-     * @param ship
-     * @return
-     * @throws OrderExceptionImpl
+     * @param ship envio a ser enviado
+     * @return variavel auxiliar
+     * @throws OrderExceptionImpl caso nao haja posicoes livres para adicionar o
+     * envio, e lancada uma excecao
      */
     @Override
     public boolean addShipping(IShipping ship) throws OrderExceptionImpl {
@@ -224,10 +246,12 @@ public class Order implements IOrder {
     }
 
     /**
+     * Metodo para remover um envio da order
      *
-     * @param ship
-     * @return
-     * @throws OrderExceptionImpl
+     * @param ship envio a ser removido
+     * @return variavel auxiliar
+     * @throws OrderExceptionImpl caso nao seja encontrado o envio a ser
+     * excluido
      */
     @Override
     public boolean removeShipping(IShipping ship) throws OrderExceptionImpl {
@@ -247,7 +271,6 @@ public class Order implements IOrder {
                 shipping[j] = shipping[j + 1];
             }
             shipping[j] = null;
-
         } else {
             throw new OrderExceptionImpl("Shipping nao encontrado");
         }
@@ -255,14 +278,15 @@ public class Order implements IOrder {
     }
 
     /**
-     *
-     * @return
+     * Metodo que retorna o numero de envios que sejam cancelados
+     * 
+     * @return variavel auxiliar contador
      */
     @Override
     public int clean() {
         int count = 0;
         if (status != ShipmentStatus.CANCELLED) {
-           return 0;
+            return 0;
         } else if (status == ShipmentStatus.CANCELLED) {
             for (int i = 0; i < shipping.length; i++) {
                 if (shipping[i] != null) {
@@ -274,12 +298,12 @@ public class Order implements IOrder {
     }
 
     /**
-     * 
+     * Metodo que verifica se a order e valida para envio
      * @throws OrderExceptionImpl
      * @throws ContainerExceptionImpl
      * @throws PositionExceptionImpl
      * @throws ContainerException
-     * @throws PositionException 
+     * @throws PositionException
      */
     @Override
     public void validate() throws OrderExceptionImpl, ContainerExceptionImpl, PositionExceptionImpl, ContainerException, PositionException {
@@ -292,31 +316,40 @@ public class Order implements IOrder {
     }
 
     /**
-     * 
+     * Metodo que "fecha" a order
      * @throws OrderExceptionImpl
      * @throws ContainerExceptionImpl
-     * @throws PositionExceptionImpl 
+     * @throws PositionExceptionImpl
      */
     @Override
-    public void close() throws OrderExceptionImpl, ContainerExceptionImpl, PositionExceptionImpl {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void close() throws OrderExceptionImpl, ContainerExceptionImpl, PositionExceptionImpl, ContainerException, PositionException {
+        validate();
+        isClosed = true;
     }
 
     /**
-     * Metodo que retorna "true" ou "false" para o caso da order esteja
-     * fechada ou nao
+     * Metodo que retorna "true" ou "false" para o caso da order esteja fechada
+     * ou nao
      *
-     * @return boolean 
+     * @return boolean
      */
     @Override
     public boolean isClosed() {
         return isClosed;
     }
 
+    /**
+     * Metodo para atribuir o custo da order
+     * @param cost custo da order (inteiro)
+     */
     public void setCost(int cost) {
         this.cost = cost;
     }
-    
+
+    /**
+     * Metodo que retorna o custo da order
+     * @return custo da order (double)
+     */
     @Override
     public double getCost() {
         return this.cost;
@@ -335,20 +368,8 @@ public class Order implements IOrder {
         return text;
     }
 
-    @Override
-    public int getNumberOfItems() {
-        int tmp = 0;
-
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] != null) {
-                tmp++;
-            }
-        }
-        return tmp;
-    }
-
     /**
-     *
+     * 
      * @return
      */
     @Override
