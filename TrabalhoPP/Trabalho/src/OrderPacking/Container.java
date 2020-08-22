@@ -145,7 +145,7 @@ public class Container implements IContainer {
             }
             // As seguintes condicoes testam se os itens se sobrepoem no container
             if (this.items.length == 1) {
-                System.out.println("Itens validos");
+                System.out.println("Itens validos");            
             } else {
                 for (int i = 0; i < items.length - 1; i++) {
                     for (int j = 1; j < items.length; j++) {

@@ -238,7 +238,6 @@ public class Shipping implements IShipping {
      */
     @Override
     public void validate() throws ContainerException, PositionException {
-
         for (int i = 0; i < containers.length; i++) {
             if (containers[i] != null) {
                 containers[i].validate();

@@ -173,7 +173,7 @@ public class Main {
         
         //-----------------Classe Exporter---------------------//
         // EXPORTAR GRAFICO DE BARRAS
-        Exporter exportGraphicBar = new Exporter(orders[1]);
+        Exporter exportGraphicBar = new Exporter();
         exportGraphicBar.setTotalOrders(orders);
         exportGraphicBar.setBarGraphPath("barGraphic.json");
         exportGraphicBar.export();
