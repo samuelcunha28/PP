@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Main;
 
 import HumanResources.Address;
@@ -10,10 +5,10 @@ import HumanResources.Customer;
 import java.time.LocalDate;
 import java.time.Month;
 
-/**
- *
- * @author samue
- */
+/*
+* Nome: <Samuel Luciano Correia da Cunha>
+* Número: <8160526>
+*/
 public class Main {
 
     /**
