@@ -1,1 +1,0 @@
-data={ axes: true, raw: { length: 10, height: 6, depth: 10, color: 'white', color_edge: 'black' }, items: [ { length: 2, height: 2, depth: 2, color: 'gray', color_edge: 'gray', x: 4, y: 4, z: 4, }, ] }
