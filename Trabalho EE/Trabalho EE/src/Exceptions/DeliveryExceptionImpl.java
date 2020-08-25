@@ -4,7 +4,7 @@ package Exceptions;
 * Nome: <Samuel Luciano Correia da Cunha>
 * Número: <8160526>
 */
-public class DeliveryExceptionImpl extends DeliveryException {
+public class DeliveryExceptionImpl {
 
     private String msg;
 
