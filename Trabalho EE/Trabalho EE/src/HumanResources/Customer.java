@@ -44,6 +44,10 @@ public class Customer extends Person implements ICustomer {
         this.vat = vat;
     }
 
+    /**
+     * To String method representing the Customer.
+     * @return String with all the information about the customer.
+     */
     @Override
     public String toString() {
         return super.toString() + "\nVAT: " + this.vat;
