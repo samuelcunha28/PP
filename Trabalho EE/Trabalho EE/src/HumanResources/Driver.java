@@ -34,6 +34,15 @@ public class Driver extends Person implements IDriver {
      */
     private LicenseType[] licenses;
     
+    /**
+     * Constructor of Driver.
+     * @param id The driver id.
+     * @param address The driver address.
+     * @param name The driver name.
+     * @param birthDate The driver birthDate.
+     * @param startingPosition The driver startingPosition.
+     * @param status The driver status
+     */
     public Driver(String id, IAddress address, String name, LocalDate birthDate, LocalDate startingPosition, DriverStatus status) {
         super(id, address, name, birthDate);
         this.startingPosition = startingPosition;
