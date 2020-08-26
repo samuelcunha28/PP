@@ -29,6 +29,14 @@ public class Box implements IBox {
      */
     private int volume;
 
+    /**
+     * Constructor of Box
+     * @param depth The Box depth.
+     * @param height The Box height.
+     * @param length The Box length.
+     * @param volume The Box volume.
+     * @throws BoxException if any of the dimensions is invalid
+     */
     public Box(int depth, int height, int length, int volume) throws BoxException {
         if (depth >= 0) {
             this.depth = depth;
