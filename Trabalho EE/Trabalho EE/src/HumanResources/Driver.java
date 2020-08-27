@@ -157,17 +157,6 @@ public class Driver extends Person implements IDriver {
     }
 
     /**
-     * To String method representing the Driver.
-     * @return String with all the information about the driver.
-     */
-    @Override
-    public String toString() {
-        return super.toString() + "\nStartingPosition: " + startingPosition + 
-                "\nStatus: " + status + "\nNumber of Licenses: " + numberOfLicenses + 
-                "\nLicenses: " + Arrays.toString(licenses);
-    }
-
-    /**
      * Compares two Driving licenses.
      * @param obj object to be compared
      * @return true if obj is equal to the driver license type.
@@ -189,4 +178,15 @@ public class Driver extends Person implements IDriver {
         }
         return true;
     } 
+    
+    /**
+     * To String method representing the Driver.
+     * @return String with all the information about the driver.
+     */
+    @Override
+    public String toString() {
+        return super.toString() + "\nStartingPosition: " + startingPosition + 
+                "\nStatus: " + status + "\nNumber of Licenses: " + numberOfLicenses + 
+                "\nLicenses: " + Arrays.toString(licenses);
+    }
 }
