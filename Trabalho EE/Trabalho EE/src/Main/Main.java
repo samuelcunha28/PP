@@ -4,7 +4,10 @@ import HumanResources.Address;
 import HumanResources.Customer;
 import HumanResources.Destination;
 import HumanResources.Driver;
+import Transport.Box;
 import Transport.Item;
+import Transport.Truck;
+import Transport.Vehicle;
 import exceptions.HRException;
 import hr.LicenseType;
 import java.time.LocalDate;
@@ -13,11 +16,12 @@ import java.util.Arrays;
 import transport.DriverStatus;
 import transport.ItemStatus;
 import transport.TransportationTypes;
+import transport.VehicleStatus;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
 * Número: <8160526>
-*/
+ */
 public class Main {
 
     /**
@@ -28,8 +32,11 @@ public class Main {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Customer customer1 = new Customer("1234", "123", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
+        Box box1 = new Box(1, 1, 1, 1);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
-        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS},customer1, destination1, 10, ItemStatus.ASSIGNED);
+        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.ASSIGNED);
+        Vehicle vehicle1 = new Vehicle("AA-00-AA", 100000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
+        Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.FREE, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         
         
         // System.out.println(customer1.getVat());
@@ -43,10 +50,16 @@ public class Main {
         System.out.println("");
         // System.out.println(driver1.haveLicense(LicenseType.A2));
         System.out.println("");
-        
+
         // System.out.println(item1);
         System.out.println("TIPOS");
         System.out.println(Arrays.toString(item1.getTransportationTypes()));
+
+        System.out.println("VEICULO 1");
+        System.out.println(vehicle1);
         
+        truck1.swapCargoBox(box1);
+        System.out.println(truck1.swapCargoBox(box1));
+
     }
 }

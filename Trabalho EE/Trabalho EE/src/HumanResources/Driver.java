@@ -1,4 +1,5 @@
 package HumanResources;
+
 import exceptions.HRException;
 import hr.IAddress;
 import hr.IDriver;
@@ -11,31 +12,32 @@ import java.util.Arrays;
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
 * Número: <8160526>
-*/
+ */
 public class Driver extends Person implements IDriver {
 
     /**
      * The driver starting position date.
      */
     private LocalDate startingPosition;
-    
+
     /**
      * The driver status (default = free).
      */
     private DriverStatus status = DriverStatus.FREE;
-    
+
     /**
      * The number of licenses.
      */
     private int numberOfLicenses;
-    
+
     /**
      * The driver LicenseType.
      */
     private LicenseType[] licenses;
-    
+
     /**
      * Constructor of Driver.
+     *
      * @param id The driver id.
      * @param address The driver address.
      * @param name The driver name.
@@ -48,11 +50,12 @@ public class Driver extends Person implements IDriver {
         this.startingPosition = startingPosition;
         this.status = status;
         this.numberOfLicenses = 0;
-        this.licenses= new LicenseType[5];
+        this.licenses = new LicenseType[5];
     }
 
     /**
      * Getter for starting position date.
+     *
      * @return The starting position date.
      */
     @Override
@@ -62,9 +65,11 @@ public class Driver extends Person implements IDriver {
 
     /**
      * Adds a license to the driver.
+     *
      * @param lt The license type to be added.
      * @return True if inserted, false otherwise.
-     * @throws HRException if licenseType is null && DriverStatus is different from free.
+     * @throws HRException if licenseType is null && DriverStatus is different
+     * from free.
      */
     @Override
     public boolean addLicense(LicenseType lt) throws HRException {
@@ -91,9 +96,11 @@ public class Driver extends Person implements IDriver {
 
     /**
      * Removes a license from the driver.
+     *
      * @param lt The license type to be removed.
      * @return True if removed, false otherwise.
-     * @throws HRException if licenseType is null && DriverStatus is different from free.
+     * @throws HRException if licenseType is null && DriverStatus is different
+     * from free.
      */
     @Override
     public boolean removeLicense(LicenseType lt) throws HRException {
@@ -119,6 +126,7 @@ public class Driver extends Person implements IDriver {
 
     /**
      * Checks if the driver has a specific license type.
+     *
      * @param lt The license type to be checked.
      * @return True if exists, false otherwise.
      */
@@ -132,7 +140,7 @@ public class Driver extends Person implements IDriver {
         for (i = 0; i < this.numberOfLicenses; ++i) {
             if (lt.equals(this.licenses[i])) {
                 return true;
-                
+
             }
         }
         return false;
@@ -140,6 +148,7 @@ public class Driver extends Person implements IDriver {
 
     /**
      * Getter for driver status.
+     *
      * @return The driver status.
      */
     @Override
@@ -149,6 +158,7 @@ public class Driver extends Person implements IDriver {
 
     /**
      * Setter for driver status.
+     *
      * @param ds The driver status.
      */
     @Override
@@ -158,6 +168,7 @@ public class Driver extends Person implements IDriver {
 
     /**
      * Compares two Driving licenses.
+     *
      * @param obj object to be compared
      * @return true if obj is equal to the driver license type.
      */
@@ -177,16 +188,17 @@ public class Driver extends Person implements IDriver {
             return false;
         }
         return true;
-    } 
-    
+    }
+
     /**
      * To String method representing the Driver.
+     *
      * @return String with all the information about the driver.
      */
     @Override
     public String toString() {
-        return super.toString() + "\nStartingPosition: " + startingPosition + 
-                "\nStatus: " + status + "\nNumber of Licenses: " + numberOfLicenses + 
-                "\nLicenses: " + Arrays.toString(licenses);
+        return super.toString() + "\nStartingPosition: " + startingPosition
+                + "\nStatus: " + status + "\nNumber of Licenses: " + numberOfLicenses
+                + "\nLicenses: " + Arrays.toString(licenses);
     }
 }

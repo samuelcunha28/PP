@@ -1,4 +1,5 @@
 package Transport;
+
 import transport.IItem;
 import transport.IItemPacked;
 import transport.IPosition;
@@ -6,14 +7,14 @@ import transport.IPosition;
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
 * Número: <8160526>
-*/
+ */
 public class ItemPacked implements IItemPacked {
-    
+
     /**
      * The packed item.
      */
     private IItem item;
-    
+
     /**
      * The Item packed position.
      */
@@ -21,6 +22,7 @@ public class ItemPacked implements IItemPacked {
 
     /**
      * Constructor of Item Packed.
+     *
      * @param item The packed item.
      * @param position The packed item position.
      */
@@ -28,9 +30,10 @@ public class ItemPacked implements IItemPacked {
         this.item = item;
         this.position = position;
     }
-    
+
     /**
      * Getter for the packed IItem
+     *
      * @return The packed IItem
      */
     @Override
@@ -40,7 +43,8 @@ public class ItemPacked implements IItemPacked {
 
     /**
      * Getter for the IPosition in which the item must be packed
-     * @return The Item packed position. 
+     *
+     * @return The Item packed position.
      */
     @Override
     public IPosition getPosition() {
@@ -49,15 +53,17 @@ public class ItemPacked implements IItemPacked {
 
     /**
      * Setter for the IPosition in which the item must be packed
-     * @param position The Item packed position. 
+     *
+     * @param position The Item packed position.
      */
     @Override
     public void setPosition(IPosition position) {
         this.position = position;
     }
-    
+
     /**
      * To String method representing the Item Packed.
+     *
      * @return String with all the information about the item packed.
      */
     @Override
