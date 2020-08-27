@@ -49,6 +49,20 @@ public class Item extends Box implements IItem {
      */
     private ItemStatus status;
     
+    /**
+     * Constructor of Item.
+     * @param depth The item depth.
+     * @param height The item height.
+     * @param length The item length.
+     * @param volume The item volume.
+     * @param reference The item reference.
+     * @param description The item description.
+     * @param types The item Transportation Types.
+     * @param customer The item owner.
+     * @param destination The item destination.
+     * @param weight The item weight.
+     * @param status The item status.
+     */
     public Item(int depth, int height, int length, int volume, String reference, String description, TransportationTypes[] types, ICustomer customer, IDestination destination, double weight, ItemStatus status) {
         super(depth, height, length, volume);
         this.reference = reference;
