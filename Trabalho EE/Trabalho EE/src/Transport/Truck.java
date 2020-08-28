@@ -12,6 +12,17 @@ import transport.VehicleStatus;
  */
 public class Truck extends Vehicle implements ITruck {
 
+    /**
+     * ESTE METODO FAZ O SEGUINTE. TENHO UMA CAIXA NO PORTA MALAS DO CARRO.
+     * TUDO O QUE TENHO QUE FAZER E TROCAR ESSA CAIXA POR OUTRA CAIXA.
+     * CASO NAO HAJA NENHUMA CAIXA ADICIONAR A QUE ERA PARA TROCAR.
+     * IMPORTANTE ADICIONAR O METODO SET CARGO NO VEHICLE PORQUE ISSO VAI 
+     * AJUDAR A FAZER O METODO.
+     * 
+     * CASO SEJA FREE = SET DA BOX
+     * SE NAO RETORNA FALSO OU EXCECAO
+     */
+    
     private VehicleStatus status;
     
     private IBox cargo;

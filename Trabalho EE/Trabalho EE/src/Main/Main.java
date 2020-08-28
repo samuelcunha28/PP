@@ -60,6 +60,7 @@ public class Main {
         
         truck1.swapCargoBox(box1);
         System.out.println(truck1.swapCargoBox(box1));
-
+        
+        
     }
 }

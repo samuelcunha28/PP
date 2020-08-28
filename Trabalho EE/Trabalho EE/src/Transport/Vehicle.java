@@ -101,6 +101,12 @@ public class Vehicle implements IVehicle {
         return this.cargo;
     }
 
+    public void setCargo(IBox cargo) {
+        this.cargo = cargo;
+    }
+    
+    
+
     /**
      * Getter for the max weight the vehicle can transport.
      *
