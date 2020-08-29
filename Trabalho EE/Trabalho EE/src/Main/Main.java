@@ -6,9 +6,11 @@ import HumanResources.Destination;
 import HumanResources.Driver;
 import Transport.Box;
 import Transport.Item;
+import Transport.Management;
 import Transport.Truck;
 import Transport.Vehicle;
 import exceptions.HRException;
+import exceptions.ManagementException;
 import hr.LicenseType;
 import java.time.LocalDate;
 import java.time.Month;
@@ -27,8 +29,9 @@ public class Main {
     /**
      * @param args the command line arguments
      * @throws exceptions.HRException
+     * @throws exceptions.ManagementException
      */
-    public static void main(String[] args) throws HRException {
+    public static void main(String[] args) throws HRException, ManagementException {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Customer customer1 = new Customer("1234", "123", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
@@ -67,5 +70,7 @@ public class Main {
         System.out.println(truck1);
         
         
+        // Management management = new Management();
+        // management.addItem(item1);
     }
 }

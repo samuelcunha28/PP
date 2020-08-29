@@ -11,6 +11,7 @@ import transport.IVehicle;
 import transport.ItemStatus;
 import transport.TransportationTypes;
 import transport.VehicleStatus;
+import Exceptions.ManagementExceptionImpl;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -24,6 +25,16 @@ public class Management implements IManagement {
     private IItem[] items;
     
     /**
+     * The status of the item.
+     */
+    private ItemStatus status;
+    
+    /**
+     * The number of licenses.
+     */
+    private int numberOfitems;
+    
+    /**
      * Representes the management vehicles.
      */
     private IVehicle[] vehicles;
@@ -34,9 +45,46 @@ public class Management implements IManagement {
     private IDriver[] drivers;
     
     
+    public Management() {
+        this.numberOfitems = 0;
+        this.items = new IItem[5];
+    }
+    
+    /**
+     * Adds a new item to be delivered
+     * @param iitem item to be delivered
+     * @return true if the item is inserted, throws a exception if the item exists
+     * @throws ManagementException if item is not NON_DELIVERED or item is null or item has no transportation type
+     */
     @Override
     public boolean addItem(IItem iitem) throws ManagementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (this.status != ItemStatus.NON_DELIVERED) {
+            throw new ManagementExceptionImpl("The item is not delivered");
+        }
+        if (iitem == null) {
+            throw new ManagementExceptionImpl("The item is null");
+        }
+        
+        if (iitem.getTransportationTypes() == null) {
+            throw new ManagementExceptionImpl("The item has no transportation type");
+        }
+        
+        if (iitem == iitem) {
+            throw new ManagementExceptionImpl("The item already exists");
+        }
+
+        if (this.items.length == this.numberOfitems) {
+            IItem[] clone = this.items;
+            this.items = new IItem[this.items.length + 1];
+            for (int i = 0; i < clone.length; i++) {
+                this.items[i] = clone[i];
+            }
+        }
+
+        this.items[this.numberOfitems] = iitem;
+        this.numberOfitems++;
+
+        return true;
     }
 
     @Override
