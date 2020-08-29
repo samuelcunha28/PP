@@ -22,17 +22,37 @@ public class Truck extends Vehicle implements ITruck {
      * CASO SEJA FREE = SET DA BOX
      * SE NAO RETORNA FALSO OU EXCECAO
      */
-    
+
+    /**
+     * The Vehicle Status.
+     */
     private VehicleStatus status;
     
-    private IBox cargo;
-
+    /**
+     * Constructor of Truck
+     * @param licensePlate The vehicle license plate. 
+     * @param maxWeight The vehicle max weight.
+     * @param status The vehicle status
+     * @param cargo The box that defines the cargo space.
+     * @param types The vehicle transportation types.
+     * @param licenses The vehicle licenses types.
+     */
     public Truck(String licensePlate, double maxWeight, VehicleStatus status, IBox cargo, TransportationTypes[] types, LicenseType[] licenses) {
         super(licensePlate, maxWeight, status, cargo, types, licenses);
     }
 
+    /**
+     * Method that swaps the cargo box if the status is FREE.
+     * @param ibox The box to swap the other one.
+     * @return true if the cargo box was swapped, false otherwise.
+     */
     @Override
     public boolean swapCargoBox(IBox ibox) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (super.getStatus() == status.FREE) {
+            setCargo(ibox);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

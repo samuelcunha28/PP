@@ -33,6 +33,7 @@ public class Main {
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Customer customer1 = new Customer("1234", "123", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Box box1 = new Box(1, 1, 1, 1);
+        Box box2 = new Box(2, 2, 2, 2);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
         Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.ASSIGNED);
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 100000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
@@ -58,8 +59,12 @@ public class Main {
         System.out.println("VEICULO 1");
         System.out.println(vehicle1);
         
-        truck1.swapCargoBox(box1);
-        System.out.println(truck1.swapCargoBox(box1));
+        // truck1.swapCargoBox(box1);
+        // System.out.println(truck1.swapCargoBox(box2));
+        
+        System.out.println("");
+        System.out.println("TRUCK 1");
+        System.out.println(truck1);
         
         
     }

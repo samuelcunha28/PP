@@ -24,7 +24,7 @@ public class Vehicle implements IVehicle {
     private double maxWeight;
 
     /**
-     * The vehicle status
+     * The vehicle status.
      */
     private VehicleStatus status;
 
@@ -46,12 +46,12 @@ public class Vehicle implements IVehicle {
     /**
      * Constructor of Vehicle.
      *
-     * @param licensePlate
-     * @param maxWeight
-     * @param status
-     * @param cargo
-     * @param types
-     * @param licenses
+     * @param licensePlate The vehicle license plate. 
+     * @param maxWeight The vehicle max weight.
+     * @param status The vehicle status
+     * @param cargo The box that defines the cargo space.
+     * @param types The vehicle transportation types.
+     * @param licenses The vehicle licenses types.
      */
     public Vehicle(String licensePlate, double maxWeight, VehicleStatus status, IBox cargo, TransportationTypes[] types, LicenseType[] licenses) {
         this.licensePlate = licensePlate;
