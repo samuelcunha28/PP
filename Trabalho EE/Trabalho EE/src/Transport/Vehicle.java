@@ -101,11 +101,14 @@ public class Vehicle implements IVehicle {
         return this.cargo;
     }
 
+    /**
+     * Setter for the box that defines the cargo space.
+     * 
+     * @param cargo The box that defines the cargo space.
+     */
     public void setCargo(IBox cargo) {
         this.cargo = cargo;
     }
-    
-    
 
     /**
      * Getter for the max weight the vehicle can transport.
