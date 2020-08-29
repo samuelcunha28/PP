@@ -71,7 +71,10 @@ public class Main {
         
         
         Management management = new Management();
-        management.addItem(item1);
-        management.removeItem(item1);
+        // management.addItem(item1);
+        // management.removeItem(item1);
+        System.out.println("");
+        System.out.println("");
+        // System.out.println(Arrays.toString(management.getItems()));
     }
 }

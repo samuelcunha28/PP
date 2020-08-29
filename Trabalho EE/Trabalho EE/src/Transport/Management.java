@@ -115,10 +115,19 @@ public class Management implements IManagement {
         return false;
     }
 
+    /**
+     * Returns a copy of the collection of item.
+     * @return the items.
+     */
     @Override
     public IItem[] getItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IItem[] copyItems = new IItem[this.numberOfitems];
+        for (int i = 0; i < this.numberOfitems; i++) {
+            copyItems[i] = this.items[i];
+        }
+        return copyItems;
     }
+    
 
     @Override
     public IItem[] getItems(ICustomer ic) {
