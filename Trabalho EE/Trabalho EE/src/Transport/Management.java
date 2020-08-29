@@ -1,4 +1,5 @@
 package Transport;
+
 import exceptions.DeliveryException;
 import exceptions.ManagementException;
 import hr.ICustomer;
@@ -23,38 +24,40 @@ public class Management implements IManagement {
      * Represents the management items.
      */
     private IItem[] items;
-    
+
     /**
      * The status of the item.
      */
     private ItemStatus status;
-    
+
     /**
      * The number of licenses.
      */
     private int numberOfitems;
-    
+
     /**
      * Representes the management vehicles.
      */
     private IVehicle[] vehicles;
-    
+
     /**
      * Representes the management drivers.
      */
     private IDriver[] drivers;
-    
-    
+
     public Management() {
         this.numberOfitems = 0;
         this.items = new IItem[5];
     }
-    
+
     /**
      * Adds a new item to be delivered
+     *
      * @param iitem item to be delivered
-     * @return true if the item is inserted, throws a exception if the item exists
-     * @throws ManagementException if item is not NON_DELIVERED or item is null or item has no transportation type
+     * @return true if the item is inserted, throws a exception if the item
+     * exists
+     * @throws ManagementException if item is not NON_DELIVERED or item is null
+     * or item has no transportation type
      */
     @Override
     public boolean addItem(IItem iitem) throws ManagementException {
@@ -65,17 +68,15 @@ public class Management implements IManagement {
         if (iitem == null) {
             throw new ManagementExceptionImpl("The item is null");
         }
-        
+
         if (iitem.getTransportationTypes() == null) {
             throw new ManagementExceptionImpl("The item has no transportation type");
         }
-        
-        /**
-        if (iitem == iitem) {
-            throw new ManagementExceptionImpl("The item already exists");
-        }
-        */
 
+        /**
+         * if (iitem == iitem) { throw new ManagementExceptionImpl("The item
+         * already exists"); }
+         */
         if (this.items.length == this.numberOfitems) {
             IItem[] clone = this.items;
             this.items = new IItem[this.items.length + 1];
@@ -92,6 +93,7 @@ public class Management implements IManagement {
 
     /**
      * Removes an item
+     *
      * @param iitem item to be removed
      * @return true if the item is removed
      * @throws ManagementException if the item is null
@@ -117,6 +119,7 @@ public class Management implements IManagement {
 
     /**
      * Returns a copy of the collection of item.
+     *
      * @return the items.
      */
     @Override
@@ -127,11 +130,18 @@ public class Management implements IManagement {
         }
         return copyItems;
     }
-    
 
     @Override
-    public IItem[] getItems(ICustomer ic) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItem[] getItems(ICustomer customer) {
+        int count = 0;
+        IItem[] copyItems = new IItem[this.numberOfitems];
+        for (int i = 0; i < this.numberOfitems; i++) {
+            if (this.items[i].getCustomer().equals(customer)) {
+                copyItems[count] = this.items[i];
+                count++;
+            }
+        }
+        return copyItems;
     }
 
     @Override
@@ -218,5 +228,5 @@ public class Management implements IManagement {
     public void stopDelivery(String string) throws DeliveryException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

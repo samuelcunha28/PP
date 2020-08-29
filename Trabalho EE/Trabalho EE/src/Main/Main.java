@@ -35,6 +35,7 @@ public class Main {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Customer customer1 = new Customer("1234", "123", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
+        Customer customer2 = new Customer("2", "2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
         Box box1 = new Box(1, 1, 1, 1);
         Box box2 = new Box(2, 2, 2, 2);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
@@ -71,10 +72,12 @@ public class Main {
         
         
         Management management = new Management();
-        // management.addItem(item1);
+        management.addItem(item1);
         // management.removeItem(item1);
         System.out.println("");
         System.out.println("");
         // System.out.println(Arrays.toString(management.getItems()));
+        System.out.println("");
+        // System.out.println(Arrays.toString(management.getItems(customer2)));
     }
 }
