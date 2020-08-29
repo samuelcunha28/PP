@@ -150,9 +150,23 @@ public class Management implements IManagement {
         return copyItems;
     }
 
+    /**
+     * Returns a copy of the collection of item with a given destination.
+     * 
+     * @param destination the destination of the items.
+     * @return the items of the destination.
+     */
     @Override
-    public IItem[] getItems(IDestination id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItem[] getItems(IDestination destination) {
+        int count = 0;
+        IItem[] copyItems = new IItem[this.numberOfitems];
+        for (int i = 0; i < this.numberOfitems; i++) {
+            if (this.items[i].getDestination().equals(destination)) {
+                copyItems[count] = this.items[i];
+                count++;
+            }
+        }
+        return copyItems;
     }
 
     @Override

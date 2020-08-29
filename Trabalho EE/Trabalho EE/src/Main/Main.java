@@ -34,6 +34,7 @@ public class Main {
     public static void main(String[] args) throws HRException, ManagementException {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
+        Destination destination2 = new Destination("2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
         Customer customer1 = new Customer("1234", "123", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Customer customer2 = new Customer("2", "2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
         Box box1 = new Box(1, 1, 1, 1);
@@ -79,5 +80,7 @@ public class Main {
         // System.out.println(Arrays.toString(management.getItems()));
         System.out.println("");
         // System.out.println(Arrays.toString(management.getItems(customer2)));
+        System.out.println("");
+        System.out.println(Arrays.toString(management.getItems(destination1)));
     }
 }
