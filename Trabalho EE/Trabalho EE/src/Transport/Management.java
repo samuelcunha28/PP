@@ -58,9 +58,10 @@ public class Management implements IManagement {
      */
     @Override
     public boolean addItem(IItem iitem) throws ManagementException {
+        /*
         if (this.status != ItemStatus.NON_DELIVERED) {
             throw new ManagementExceptionImpl("The item is not delivered");
-        }
+        } */
         if (iitem == null) {
             throw new ManagementExceptionImpl("The item is null");
         }
@@ -69,9 +70,11 @@ public class Management implements IManagement {
             throw new ManagementExceptionImpl("The item has no transportation type");
         }
         
+        /**
         if (iitem == iitem) {
             throw new ManagementExceptionImpl("The item already exists");
         }
+        */
 
         if (this.items.length == this.numberOfitems) {
             IItem[] clone = this.items;
@@ -87,9 +90,29 @@ public class Management implements IManagement {
         return true;
     }
 
+    /**
+     * Removes an item
+     * @param iitem item to be removed
+     * @return true if the item is removed
+     * @throws ManagementException if the item is null
+     */
     @Override
     public boolean removeItem(IItem iitem) throws ManagementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (iitem == null) {
+            throw new ManagementExceptionImpl("The item is null");
+        }
+
+        for (int i = 0; i < this.numberOfitems; ++i) {
+            if (this.items[i].equals(iitem)) {
+                for (; i < this.numberOfitems - 1; i++) {
+                    this.items[i] = this.items[i + 1];
+                }
+                this.items[i] = null;
+                this.numberOfitems--;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

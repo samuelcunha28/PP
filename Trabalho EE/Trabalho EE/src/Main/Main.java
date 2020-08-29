@@ -70,7 +70,8 @@ public class Main {
         System.out.println(truck1);
         
         
-        // Management management = new Management();
-        // management.addItem(item1);
+        Management management = new Management();
+        management.addItem(item1);
+        management.removeItem(item1);
     }
 }
