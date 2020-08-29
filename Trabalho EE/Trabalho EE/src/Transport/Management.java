@@ -131,6 +131,12 @@ public class Management implements IManagement {
         return copyItems;
     }
 
+    /**
+     * Returns a copy of the collection of item from the given customer.
+     * 
+     * @param customer the number of items of the customer.
+     * @return the items of the customer.
+     */
     @Override
     public IItem[] getItems(ICustomer customer) {
         int count = 0;
