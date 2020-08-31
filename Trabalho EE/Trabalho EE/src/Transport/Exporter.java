@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Transport;
+import java.io.IOException;
+import transport.IExporter;
 
-/**
- *
- * @author samue
+/*
+* Nome: <Samuel Luciano Correia da Cunha>
+* Número: <8160526>
  */
-public class Exporter {
+public class Exporter implements IExporter {
+
+    @Override
+    public void export(String string) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

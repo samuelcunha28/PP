@@ -41,7 +41,7 @@ public class Management implements IManagement {
     private IVehicle[] vehicles;
     
     /**
-     * The number of vehicles
+     * The number of vehicles.
      */
     private int numberOfVehicles;
     
@@ -51,9 +51,19 @@ public class Management implements IManagement {
     private IDriver[] drivers;
     
     /**
-     * The number of drivers
+     * The number of drivers.
      */
     private int numberOfDrivers;
+    
+    /**
+     * Represents the management deliveries.
+     */
+    private IDelivery[] deliveries;
+    
+    /**
+     * The number of deliveries.
+     */
+    private int numberOfDeliveries;
 
     public Management() {
         this.numberOfItems = 0;
@@ -399,9 +409,21 @@ public class Management implements IManagement {
         return copyFleet;
     }
     
-
+    /**
+     * Adds a new delivery in the system. All items of the delivery must have previously
+     * been created in the system and must have a ASSIGNED.
+     * 
+     * @param delivery delivery to be inserted in the system.
+     * @return true if the delivery is inserted, false if the delivery already exists.
+     * @throws ManagementException if delivery is null;
+     * if delivery with items not in the system;
+     * if delivery items with status not ASSIGNED;
+     * if delivery has no items or the items cannot be stored inside the vehicle
+     * if delivery has no vehicle or cannot transport specific items
+     * if delivery has no driver or cannot drive the specific vehicle
+     */
     @Override
-    public boolean addDelivery(IDelivery id) throws ManagementException {
+    public boolean addDelivery(IDelivery delivery) throws ManagementException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

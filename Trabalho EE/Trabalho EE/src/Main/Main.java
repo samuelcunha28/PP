@@ -5,6 +5,7 @@ import HumanResources.Customer;
 import HumanResources.Destination;
 import HumanResources.Driver;
 import Transport.Box;
+import Transport.Exporter;
 import Transport.Item;
 import Transport.Management;
 import Transport.Truck;
@@ -12,6 +13,7 @@ import Transport.Vehicle;
 import exceptions.HRException;
 import exceptions.ManagementException;
 import hr.LicenseType;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
@@ -19,6 +21,7 @@ import transport.DriverStatus;
 import transport.ItemStatus;
 import transport.TransportationTypes;
 import transport.VehicleStatus;
+import transport.IExporter;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -31,7 +34,7 @@ public class Main {
      * @throws exceptions.HRException
      * @throws exceptions.ManagementException
      */
-    public static void main(String[] args) throws HRException, ManagementException {
+    public static void main(String[] args) throws HRException, ManagementException, IOException {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Destination destination2 = new Destination("2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
@@ -44,7 +47,6 @@ public class Main {
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 100000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.FREE, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
-        
         
         // System.out.println(customer1.getVat());
         // System.out.println(customer1.getName());
@@ -102,5 +104,8 @@ public class Main {
         // System.out.println(Arrays.toString(management.getFleet(TransportationTypes.FRAGILE)));
         System.out.println("");
         // System.out.println(Arrays.toString(management.getFleet(VehicleStatus.FREE, TransportationTypes.FRAGILE)));
+        
+        
+        
     }
 }
