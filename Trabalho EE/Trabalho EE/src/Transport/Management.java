@@ -49,11 +49,19 @@ public class Management implements IManagement {
      * Representes the management drivers.
      */
     private IDriver[] drivers;
+    
+    /**
+     * The number of drivers
+     */
+    private int numberOfDrivers;
 
     public Management() {
         this.numberOfItems = 0;
         this.items = new IItem[5];
+        this.numberOfVehicles = 0;
         this.vehicles = new IVehicle[5];
+        this.numberOfDrivers = 0;
+        this.drivers = new IDriver[5];
     }
 
     /**
@@ -240,18 +248,61 @@ public class Management implements IManagement {
         return true;
     }
 
+    /**
+     * Removes a vehicle from the fleet.
+     * 
+     * @param vehicle the vehicle to be removed from the fleet.
+     * @return true if the vehicle was removed, false if the vehicle do not exists.
+     * @throws ManagementException if the parameter is null.
+     */
     @Override
-    public boolean addDriver(IDriver id) throws ManagementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeVehicle(IVehicle vehicle) throws ManagementException {
+        if (vehicle == null) {
+            throw new ManagementExceptionImpl("The parameter is null");
+        }
+
+        for (int i = 0; i < this.numberOfVehicles; ++i) {
+            if (this.vehicles[i].equals(vehicle)) {
+                for (; i < this.numberOfVehicles - 1; i++) {
+                    this.vehicles[i] = this.vehicles[i + 1];
+                }
+                this.vehicles[i] = null;
+                this.numberOfVehicles--;
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Adds a driver to the system.
+     * 
+     * @param driver the driver to be added to the system.
+     * @return true if the driver was inserted, false if the driver already exists.
+     * @throws ManagementException if the parameter is null.
+     */
+    @Override
+    public boolean addDriver(IDriver driver) throws ManagementException {
+        if (driver == null) {
+            throw new ManagementExceptionImpl("The parameter is null");
+        }
+         
+        if (this.drivers.length == this.numberOfDrivers) {
+            IDriver[] clone = this.drivers;
+            this.drivers = new IDriver[this.drivers.length + 1];
+            for (int i = 0; i < clone.length; i++) {
+                this.drivers[i] = clone[i];
+            }
+        }
+
+        this.drivers[this.numberOfDrivers] = driver;
+        this.numberOfDrivers++;
+
+        return true;
     }
 
     @Override
     public boolean removeDriver(IDriver id) throws ManagementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean removeVehicle(IVehicle iv) throws ManagementException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

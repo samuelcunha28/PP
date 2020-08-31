@@ -88,5 +88,9 @@ public class Main {
         //System.out.println(Arrays.toString(management.getItems(ItemStatus.ASSIGNED)));
         System.out.println("");
         management.addVehicle(vehicle1);
+        // management.removeVehicle(vehicle1);
+        System.out.println("");
+        management.addDriver(driver1);
+        
     }
 }
