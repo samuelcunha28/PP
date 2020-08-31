@@ -327,9 +327,18 @@ public class Management implements IManagement {
         return false;
     }
 
+    /**
+     * Getter for all vehicle fleet.
+     * 
+     * @return A copy of all vehicle fleet.
+     */
     @Override
     public IVehicle[] getFleet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IVehicle[] copyFleet = new IVehicle[this.numberOfVehicles];
+        for (int i = 0; i < this.numberOfVehicles; i++) {
+            copyFleet[i] = this.vehicles[i];
+        }
+        return copyFleet;
     }
 
     @Override
