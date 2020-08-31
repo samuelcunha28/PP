@@ -91,6 +91,7 @@ public class Main {
         // management.removeVehicle(vehicle1);
         System.out.println("");
         management.addDriver(driver1);
-        
+        // management.removeDriver(driver1);
+        System.out.println("");
     }
 }

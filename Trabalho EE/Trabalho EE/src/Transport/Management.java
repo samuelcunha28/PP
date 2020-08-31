@@ -301,9 +301,30 @@ public class Management implements IManagement {
         return true;
     }
 
+    /**
+     * Removes a driver from the system.
+     * 
+     * @param driver the driver to be removed.
+     * @return true if the driver was removed, false if the driver do no exists
+     * @throws ManagementException if parameter is null
+     */
     @Override
-    public boolean removeDriver(IDriver id) throws ManagementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeDriver(IDriver driver) throws ManagementException {
+        if (driver == null) {
+            throw new ManagementExceptionImpl("The parameter is null");
+        }
+
+        for (int i = 0; i < this.numberOfDrivers; ++i) {
+            if (this.drivers[i].equals(driver)) {
+                for (; i < this.numberOfDrivers - 1; i++) {
+                    this.drivers[i] = this.drivers[i + 1];
+                }
+                this.drivers[i] = null;
+                this.numberOfDrivers--;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
