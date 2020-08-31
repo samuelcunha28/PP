@@ -118,9 +118,14 @@ public class Delivery extends Exporter implements IDelivery {
 
     }
 
+    /**
+     * Getter for the vehicle assigned to the delivery.
+     * 
+     * @return the vehicle assigned to the delivery, null if none. 
+     */
     @Override
     public IVehicle getVehicle() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.vehicle;
     }
 
     @Override

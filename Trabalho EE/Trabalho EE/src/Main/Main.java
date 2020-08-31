@@ -110,6 +110,8 @@ public class Main {
         // System.out.println(Arrays.toString(management.getFleet(VehicleStatus.FREE, TransportationTypes.FRAGILE)));
         System.out.println("");
         delivery1.setVehicle(vehicle2, driver1);
-        System.out.println(delivery1);
+        // System.out.println(delivery1);
+        System.out.println("");
+        System.out.println(delivery1.getVehicle());
     }
 }
