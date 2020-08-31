@@ -100,5 +100,7 @@ public class Main {
         // System.out.println(Arrays.toString(management.getFleet(VehicleStatus.FREE)));
         System.out.println("");
         // System.out.println(Arrays.toString(management.getFleet(TransportationTypes.FRAGILE)));
+        System.out.println("");
+        // System.out.println(Arrays.toString(management.getFleet(VehicleStatus.FREE, TransportationTypes.FRAGILE)));
     }
 }

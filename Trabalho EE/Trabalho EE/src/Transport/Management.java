@@ -344,7 +344,7 @@ public class Management implements IManagement {
     /**
      * Getter for all vehicle fleet based on the status.
      * 
-     * @param status the status for retrieving status.
+     * @param status the status for retrieving vehicles.
      * @return a copy of all vehicle fleet with given status.
      */
     @Override
@@ -363,8 +363,8 @@ public class Management implements IManagement {
     /**
      * Getter for all vehicle fleet based on the transportation type.
      * 
-     * @param transportationType transportation types for retrieving vehicles
-     * @return a copy of all vehicle fleet with given transportation type
+     * @param transportationType transportation types for retrieving vehicles.
+     * @return a copy of all vehicle fleet with given transportation type.
      */
     @Override
     public IVehicle[] getFleet(TransportationTypes transportationType) {
@@ -379,10 +379,26 @@ public class Management implements IManagement {
         return copyFleet;
     }
 
+    /**
+     * Getter for all vehicle fleet based on the status and transportation type.
+     * 
+     * @param status the status for retrieving vehicles.
+     * @param transportationType transportation types for retrieving vehicles.
+     * @return a copy of all vehicle fleet with given status and transportation type.
+     */
     @Override
-    public IVehicle[] getFleet(VehicleStatus vs, TransportationTypes tt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IVehicle[] getFleet(VehicleStatus status, TransportationTypes transportationType) {
+        int count = 0;
+        IVehicle[] copyFleet = new IVehicle[this.numberOfVehicles];
+        for (int i = 0; i < this.numberOfVehicles; i++) {
+            if (this.vehicles[i].getStatus().equals(status) && this.vehicles[i].getTransportationTypes().equals(transportationType)) {
+                copyFleet[count] = this.vehicles[i];
+                count++;
+            }
+        }
+        return copyFleet;
     }
+    
 
     @Override
     public boolean addDelivery(IDelivery id) throws ManagementException {
