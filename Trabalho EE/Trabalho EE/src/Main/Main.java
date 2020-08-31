@@ -96,5 +96,7 @@ public class Main {
         // management.removeDriver(driver1);
         System.out.println("");
         // System.out.println(Arrays.toString(management.getFleet()));
+        System.out.println("");
+        // System.out.println(Arrays.toString(management.getFleet(VehicleStatus.FREE)));
     }
 }

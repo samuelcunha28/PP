@@ -341,9 +341,23 @@ public class Management implements IManagement {
         return copyFleet;
     }
 
+    /**
+     * Getter for all vehicle fleet based on the status.
+     * 
+     * @param status the status for retrieving status.
+     * @return a copy of all vehicle fleet with given status.
+     */
     @Override
-    public IVehicle[] getFleet(VehicleStatus vs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IVehicle[] getFleet(VehicleStatus status) {
+        int count = 0;
+        IVehicle[] copyFleet = new IVehicle[this.numberOfVehicles];
+        for (int i = 0; i < this.numberOfVehicles; i++) {
+            if (this.vehicles[i].getStatus().equals(status)) {
+                copyFleet[count] = this.vehicles[i];
+                count++;
+            }
+        }
+        return copyFleet;
     }
 
     @Override
