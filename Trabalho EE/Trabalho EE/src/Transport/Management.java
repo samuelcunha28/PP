@@ -31,23 +31,29 @@ public class Management implements IManagement {
     private ItemStatus status;
 
     /**
-     * The number of licenses.
+     * The number of items.
      */
-    private int numberOfitems;
+    private int numberOfItems;
 
     /**
      * Representes the management vehicles.
      */
     private IVehicle[] vehicles;
-
+    
+    /**
+     * The number of vehicles
+     */
+    private int numberOfVehicles;
+    
     /**
      * Representes the management drivers.
      */
     private IDriver[] drivers;
 
     public Management() {
-        this.numberOfitems = 0;
+        this.numberOfItems = 0;
         this.items = new IItem[5];
+        this.vehicles = new IVehicle[5];
     }
 
     /**
@@ -66,7 +72,7 @@ public class Management implements IManagement {
             throw new ManagementExceptionImpl("The item is not delivered");
         } */
         if (iitem == null) {
-            throw new ManagementExceptionImpl("The item is null");
+            throw new ManagementExceptionImpl("The parameter is null");
         }
 
         if (iitem.getTransportationTypes() == null) {
@@ -77,7 +83,7 @@ public class Management implements IManagement {
          * if (iitem == iitem) { throw new ManagementExceptionImpl("The item
          * already exists"); }
          */
-        if (this.items.length == this.numberOfitems) {
+        if (this.items.length == this.numberOfItems) {
             IItem[] clone = this.items;
             this.items = new IItem[this.items.length + 1];
             for (int i = 0; i < clone.length; i++) {
@@ -85,8 +91,8 @@ public class Management implements IManagement {
             }
         }
 
-        this.items[this.numberOfitems] = iitem;
-        this.numberOfitems++;
+        this.items[this.numberOfItems] = iitem;
+        this.numberOfItems++;
 
         return true;
     }
@@ -96,21 +102,21 @@ public class Management implements IManagement {
      *
      * @param iitem item to be removed
      * @return true if the item is removed
-     * @throws ManagementException if the item is null
+     * @throws ManagementException if the parameter is null
      */
     @Override
     public boolean removeItem(IItem iitem) throws ManagementException {
         if (iitem == null) {
-            throw new ManagementExceptionImpl("The item is null");
+            throw new ManagementExceptionImpl("The parameter is null");
         }
 
-        for (int i = 0; i < this.numberOfitems; ++i) {
+        for (int i = 0; i < this.numberOfItems; ++i) {
             if (this.items[i].equals(iitem)) {
-                for (; i < this.numberOfitems - 1; i++) {
+                for (; i < this.numberOfItems - 1; i++) {
                     this.items[i] = this.items[i + 1];
                 }
                 this.items[i] = null;
-                this.numberOfitems--;
+                this.numberOfItems--;
                 return true;
             }
         }
@@ -124,8 +130,8 @@ public class Management implements IManagement {
      */
     @Override
     public IItem[] getItems() {
-        IItem[] copyItems = new IItem[this.numberOfitems];
-        for (int i = 0; i < this.numberOfitems; i++) {
+        IItem[] copyItems = new IItem[this.numberOfItems];
+        for (int i = 0; i < this.numberOfItems; i++) {
             copyItems[i] = this.items[i];
         }
         return copyItems;
@@ -140,8 +146,8 @@ public class Management implements IManagement {
     @Override
     public IItem[] getItems(ICustomer customer) {
         int count = 0;
-        IItem[] copyItems = new IItem[this.numberOfitems];
-        for (int i = 0; i < this.numberOfitems; i++) {
+        IItem[] copyItems = new IItem[this.numberOfItems];
+        for (int i = 0; i < this.numberOfItems; i++) {
             if (this.items[i].getCustomer().equals(customer)) {
                 copyItems[count] = this.items[i];
                 count++;
@@ -159,8 +165,8 @@ public class Management implements IManagement {
     @Override
     public IItem[] getItems(IDestination destination) {
         int count = 0;
-        IItem[] copyItems = new IItem[this.numberOfitems];
-        for (int i = 0; i < this.numberOfitems; i++) {
+        IItem[] copyItems = new IItem[this.numberOfItems];
+        for (int i = 0; i < this.numberOfItems; i++) {
             if (this.items[i].getDestination().equals(destination)) {
                 copyItems[count] = this.items[i];
                 count++;
@@ -170,15 +176,16 @@ public class Management implements IManagement {
     }
 
     /**
-     * Returns a cop+y of the collection of item with the given transportation type
-     * @param transportationType the transportation types 
-     * @return the items of the transportation types
+     * Returns a cop+y of the collection of item with the given transportation type.
+     * 
+     * @param transportationType the transportation types.
+     * @return the items of the transportation types.
      */
     @Override
     public IItem[] getItems(TransportationTypes transportationType) {
         int count = 0;
-        IItem[] copyItems = new IItem[this.numberOfitems];
-        for (int i = 0; i < this.numberOfitems; i++) {
+        IItem[] copyItems = new IItem[this.numberOfItems];
+        for (int i = 0; i < this.numberOfItems; i++) {
             if (this.items[i].getTransportationTypes().equals(transportationType)) {
                 copyItems[count] = this.items[i];
                 count++;
@@ -188,15 +195,16 @@ public class Management implements IManagement {
     }
 
     /**
-     * Returns a copy of the collection of item with the given item status
-     * @param itemStatus the item status
-     * @return the items of the item status
+     * Returns a copy of the collection of item with the given item status.
+     * 
+     * @param itemStatus the item status.
+     * @return the items of the item status.
      */
     @Override
     public IItem[] getItems(ItemStatus itemStatus) {
         int count = 0;
-        IItem[] copyItems = new IItem[this.numberOfitems];
-        for (int i = 0; i < this.numberOfitems; i++) {
+        IItem[] copyItems = new IItem[this.numberOfItems];
+        for (int i = 0; i < this.numberOfItems; i++) {
             if (this.items[i].getStatus().equals(itemStatus)) {
                 copyItems[count] = this.items[i];
                 count++;
@@ -205,9 +213,31 @@ public class Management implements IManagement {
         return copyItems;
     }
 
+    /**
+     * Adds a vehicle to the fleet.
+     * 
+     * @param vehicle the vehicle to be added to the fleet.
+     * @return true if the vehicle was inserted, false if the vehicle already exists.
+     * @throws ManagementException if the parameter is null.
+     */
     @Override
-    public boolean addVehicle(IVehicle iv) throws ManagementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addVehicle(IVehicle vehicle) throws ManagementException {
+        if (vehicle == null) {
+            throw new ManagementExceptionImpl("The parameter is null");
+        }
+         
+        if (this.vehicles.length == this.numberOfVehicles) {
+            IVehicle[] clone = this.vehicles;
+            this.vehicles = new IVehicle[this.vehicles.length + 1];
+            for (int i = 0; i < clone.length; i++) {
+                this.vehicles[i] = clone[i];
+            }
+        }
+
+        this.vehicles[this.numberOfVehicles] = vehicle;
+        this.numberOfVehicles++;
+
+        return true;
     }
 
     @Override

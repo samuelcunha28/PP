@@ -86,5 +86,7 @@ public class Main {
         //System.out.println(Arrays.toString(management.getItems(TransportationTypes.DANGEROUS)));
         System.out.println("");
         //System.out.println(Arrays.toString(management.getItems(ItemStatus.ASSIGNED)));
+        System.out.println("");
+        management.addVehicle(vehicle1);
     }
 }
