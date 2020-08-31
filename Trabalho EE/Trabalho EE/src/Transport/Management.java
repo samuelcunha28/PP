@@ -169,14 +169,40 @@ public class Management implements IManagement {
         return copyItems;
     }
 
+    /**
+     * Returns a cop+y of the collection of item with the given transportation type
+     * @param transportationType the transportation types 
+     * @return the items of the transportation types
+     */
     @Override
-    public IItem[] getItems(TransportationTypes tt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItem[] getItems(TransportationTypes transportationType) {
+        int count = 0;
+        IItem[] copyItems = new IItem[this.numberOfitems];
+        for (int i = 0; i < this.numberOfitems; i++) {
+            if (this.items[i].getTransportationTypes().equals(transportationType)) {
+                copyItems[count] = this.items[i];
+                count++;
+            }
+        }
+        return copyItems;
     }
 
+    /**
+     * Returns a copy of the collection of item with the given item status
+     * @param itemStatus the item status
+     * @return the items of the item status
+     */
     @Override
-    public IItem[] getItems(ItemStatus is) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItem[] getItems(ItemStatus itemStatus) {
+        int count = 0;
+        IItem[] copyItems = new IItem[this.numberOfitems];
+        for (int i = 0; i < this.numberOfitems; i++) {
+            if (this.items[i].getStatus().equals(itemStatus)) {
+                copyItems[count] = this.items[i];
+                count++;
+            }
+        }
+        return copyItems;
     }
 
     @Override

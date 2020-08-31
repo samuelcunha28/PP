@@ -40,7 +40,7 @@ public class Main {
         Box box1 = new Box(1, 1, 1, 1);
         Box box2 = new Box(2, 2, 2, 2);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
-        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.ASSIGNED);
+        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.ASSIGNED);
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 100000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.FREE, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         
@@ -81,6 +81,10 @@ public class Main {
         System.out.println("");
         // System.out.println(Arrays.toString(management.getItems(customer2)));
         System.out.println("");
-        System.out.println(Arrays.toString(management.getItems(destination1)));
+        // System.out.println(Arrays.toString(management.getItems(destination1)));
+        System.out.println("");
+        //System.out.println(Arrays.toString(management.getItems(TransportationTypes.DANGEROUS)));
+        System.out.println("");
+        //System.out.println(Arrays.toString(management.getItems(ItemStatus.ASSIGNED)));
     }
 }
