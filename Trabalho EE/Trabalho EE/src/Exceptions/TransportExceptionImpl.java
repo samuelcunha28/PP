@@ -1,10 +1,12 @@
 package Exceptions;
 
+import exceptions.TransportException;
+
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
 * Número: <8160526>
 */
-public class TransportExceptionImpl {
+public class TransportExceptionImpl extends TransportException {
 
     private String msg;
 

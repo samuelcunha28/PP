@@ -5,11 +5,13 @@ import HumanResources.Customer;
 import HumanResources.Destination;
 import HumanResources.Driver;
 import Transport.Box;
+import Transport.Delivery;
 import Transport.Exporter;
 import Transport.Item;
 import Transport.Management;
 import Transport.Truck;
 import Transport.Vehicle;
+import exceptions.DeliveryException;
 import exceptions.HRException;
 import exceptions.ManagementException;
 import hr.LicenseType;
@@ -34,7 +36,7 @@ public class Main {
      * @throws exceptions.HRException
      * @throws exceptions.ManagementException
      */
-    public static void main(String[] args) throws HRException, ManagementException, IOException {
+    public static void main(String[] args) throws HRException, ManagementException, IOException, DeliveryException {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Destination destination2 = new Destination("2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
@@ -47,6 +49,8 @@ public class Main {
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 100000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.FREE, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
+        Delivery delivery1 = new Delivery("1", null, null, null, destination2, ItemStatus.ASSIGNED);
+        
         
         // System.out.println(customer1.getVat());
         // System.out.println(customer1.getName());
@@ -104,8 +108,8 @@ public class Main {
         // System.out.println(Arrays.toString(management.getFleet(TransportationTypes.FRAGILE)));
         System.out.println("");
         // System.out.println(Arrays.toString(management.getFleet(VehicleStatus.FREE, TransportationTypes.FRAGILE)));
-        
-        
-        
+        System.out.println("");
+        delivery1.setVehicle(vehicle2, driver1);
+        System.out.println(delivery1);
     }
 }

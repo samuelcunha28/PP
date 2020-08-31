@@ -1,10 +1,12 @@
 package Exceptions;
 
+import exceptions.DeliveryException;
+
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
 * Número: <8160526>
 */
-public class DeliveryExceptionImpl {
+public class DeliveryExceptionImpl extends DeliveryException {
 
     private String msg;
 

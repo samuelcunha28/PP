@@ -157,6 +157,15 @@ public class Driver extends Person implements IDriver {
     }
 
     /**
+     * Getter for driver licenses
+     * 
+     * @return The driver licenses 
+     */
+    public LicenseType[] getLicenses() {
+        return licenses;
+    }
+
+    /**
      * Setter for driver status.
      *
      * @param ds The driver status.
