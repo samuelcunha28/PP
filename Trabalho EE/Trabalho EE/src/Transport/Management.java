@@ -360,9 +360,23 @@ public class Management implements IManagement {
         return copyFleet;
     }
 
+    /**
+     * Getter for all vehicle fleet based on the transportation type.
+     * 
+     * @param transportationType transportation types for retrieving vehicles
+     * @return a copy of all vehicle fleet with given transportation type
+     */
     @Override
-    public IVehicle[] getFleet(TransportationTypes tt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IVehicle[] getFleet(TransportationTypes transportationType) {
+        int count = 0;
+        IVehicle[] copyFleet = new IVehicle[this.numberOfVehicles];
+        for (int i = 0; i < this.numberOfVehicles; i++) {
+            if (this.vehicles[i].getTransportationTypes().equals(transportationType)) {
+                copyFleet[count] = this.vehicles[i];
+                count++;
+            }
+        }
+        return copyFleet;
     }
 
     @Override
