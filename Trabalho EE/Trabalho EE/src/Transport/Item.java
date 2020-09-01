@@ -201,6 +201,8 @@ public class Item extends Box implements IItem {
     public void setStatus(ItemStatus is) {
         this.status = is;
     }
+    
+    
 
     /**
      * Compares two Items.

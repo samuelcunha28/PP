@@ -15,6 +15,7 @@ import transport.IPosition;
 import transport.IVehicle;
 import transport.ItemStatus;
 import transport.VehicleStatus;
+import transport.IItemPacked;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -31,6 +32,8 @@ public class Delivery extends Exporter implements IDelivery {
      * The delivery vehicle.
      */
     private IVehicle vehicle;
+    
+    private double weight;
 
     /**
      * The delivery driver.
@@ -41,6 +44,14 @@ public class Delivery extends Exporter implements IDelivery {
      * The delivery items.
      */
     private IItem[] items;
+    
+    private IPosition[] positions;
+    
+    private IItem item;
+
+    private IItemPacked[] packedItems;
+
+    private int numberItems;
 
     /**
      * The delivery destination.
@@ -50,7 +61,13 @@ public class Delivery extends Exporter implements IDelivery {
     /**
      * The delivery item status
      */
-    private ItemStatus status;
+    private ItemStatus itemStatus;
+
+    private DriverStatus driverStatus;
+
+    private VehicleStatus vehicleStatus;
+    
+    private IPosition position;
 
     /**
      * Constructor of Delivery.
@@ -61,14 +78,16 @@ public class Delivery extends Exporter implements IDelivery {
      * @param items The delivery items.
      * @param destination The delivery destination.
      * @param status The delivery item status.
+     * @param position
      */
-    public Delivery(String id, IVehicle vehicle, IDriver driver, IItem[] items, IDestination destination, ItemStatus status) {
+    public Delivery(String id, IVehicle vehicle, IDriver driver, IItem[] items, IDestination destination, ItemStatus status, IPosition position) {
         this.id = id;
         this.vehicle = vehicle;
         this.driver = driver;
-        this.items = items;
+        this.items = new IItem[5];
         this.destination = destination;
-        this.status = status;
+        this.itemStatus = status;
+        this.positions = new IPosition[5];
     }
 
     /**
@@ -89,10 +108,11 @@ public class Delivery extends Exporter implements IDelivery {
      *
      * @param vehicle The vehicle to be assigned to the delivery
      * @param driver The driver to be assigned to the delivery
-     * @throws DeliveryException if any parameter is null if any item was
-     * already assigned to the delivery if the vehicle status is different from
-     * free if the Driver status is different from free if the driver do not
-     * have a license type that matched the allowed vehicle license types
+     * @throws DeliveryException if any parameter is null 
+     * if any item was already assigned to the delivery 
+     * if the vehicle status is different from free 
+     * if the Driver status is different from free 
+     * if the driver do not have a license type that matched the allowed vehicle license types
      */
     @Override
     public void setVehicle(IVehicle vehicle, IDriver driver) throws DeliveryException {
@@ -102,7 +122,7 @@ public class Delivery extends Exporter implements IDelivery {
         if (driver == null) {
             throw new DeliveryExceptionImpl("The parameter driver is null");
         }
-        if (items != null) {
+        if (items == null) {
             throw new DeliveryExceptionImpl("Any item was already assigned");
         }
         if (vehicle.getStatus() != vehicle.getStatus().FREE) {
@@ -120,18 +140,160 @@ public class Delivery extends Exporter implements IDelivery {
 
     /**
      * Getter for the vehicle assigned to the delivery.
-     * 
-     * @return the vehicle assigned to the delivery, null if none. 
+     *
+     * @return the vehicle assigned to the delivery, null if none.
      */
     @Override
     public IVehicle getVehicle() {
         return this.vehicle;
     }
 
-    @Override
-    public boolean load(IItem iitem, IPosition ip) throws DeliveryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * This method Checks if two {@link IItemPacked items} overlap, returning
+     * true if they do or false if they don't.
+     *
+     * @param item1 First {@link IItemPacked item} to check overlap.
+     * @param item2 Second {@link @link IItemPacked item} to check overlap.
+     * @return true if {@link @link IItemPacked items} overlap or false if they
+     * don't.
+     */
+    private boolean checkoverlap(IItemPacked item1, IItemPacked item2) {
+
+        if (item1 == null || item2 == null) {
+            return false;
+        }
+
+        if ((item2.getPosition().getX() < item1.getPosition().getX() + item1.getItem().getLength())
+                && (item2.getPosition().getX() + item2.getItem().getLength() > item1.getPosition().getX())
+                && (item2.getPosition().getY() < item1.getPosition().getY() + item1.getItem().getHeight())
+                && (item2.getPosition().getY() + item2.getItem().getHeight() > item1.getPosition().getY())
+                && (item2.getPosition().getZ() < item1.getPosition().getZ() + item1.getItem().getDepth())
+                && (item2.getPosition().getZ() + item2.getItem().getDepth() > item1.getPosition().getZ())) {
+            return true;
+        }
+        return false;
     }
+
+    /**
+     * Validates the {@link IContainer container} structure.Considering: if the
+     * {@link Box#volume volume} if lesser or equal to the current volume;if all
+     * {@link IItem items} are inside the {@link IContainer container};if non of
+     * the {@link IItem items} inside the {@link IContainer container} are
+     * overlapping.
+     *
+     * @throws Exceptions.DeliveryExceptionImpl
+     */
+    public void validate() throws DeliveryExceptionImpl {
+
+        IItemPacked[] packedItems = this.getPackedItems();
+
+        for (int i = 0; i < packedItems.length; i++) {
+            for (int j = i + 1; j < packedItems.length; j++) {
+                if (checkoverlap(packedItems[i], packedItems[j])) {
+                    throw new DeliveryExceptionImpl("Box overlap");
+                }
+            }
+        }
+
+    }
+    
+    /**
+     * Returns an array (without null positions) for the
+     * {@link IItemPacked items packed} in the {@link IContainer container}.
+     *
+     * @return the {@link IItemPacked items packed} in the
+     * {@link IContainer container}.
+     */
+    public IItemPacked[] getPackedItems() {
+        int i;
+
+        IItemPacked[] array = new ItemPacked[this.numberItems];
+
+        if (!this.empty()) {
+            for (i = 0; i < this.numberItems; i++) {
+                array[i] = this.packedItems[i];
+            }
+        } else {
+            return null;
+        }
+        return array;
+    }
+
+    /**
+     * Checks is the {@link IContainer container} is empty or not.
+     *
+     * @return true if the {@link IContainer container} is empty or false if
+     * {@link IContainer container} is not empty.
+     */
+    private boolean empty() {
+        return (this.numberItems == 0);
+    }
+
+    /**
+     * Load/add a new item to the delivery in a given position considering
+     * transportation restrictions. When the item is loaded/added/inserted, the
+     * delivery weight is updated to control the weight. If there isn't enough
+     * space in the collection, should be adjusted to store more packed items.
+     * Item status must be set to ASSIGNED.
+     *
+     * @param item item to be added.
+     * @param position position in which the item will be placed.
+     * @return true if inserted, false if the item already exists in the
+     * delivery.
+     * @throws DeliveryException if any parameter is null; 
+     * if item status is not NON_DELIVERED; 
+     * if no vehicle and/or driver are assigned; 
+     * if the vehicle status is different from IN PREPARATION; 
+     * if some item is ouside (or is overflowing) the delivery or if some item is overlapping with other item;
+     * if weight is exceeded; 
+     * if transportation restrictions of the current are not valid for the item
+     */
+    @Override
+    public boolean load(IItem item, IPosition position) throws DeliveryException {
+        if (item == null || position == null) {
+            throw new DeliveryExceptionImpl("The parameter is null");
+        }
+        if (item.getStatus() == ItemStatus.NON_DELIVERED) {
+            throw new DeliveryExceptionImpl("The item status is non delivered");
+        }
+        if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
+            throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
+        }
+        if (vehicle.getStatus() != VehicleStatus.IN_PREPARATION) {
+            throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
+        }
+        if (vehicle.getMaxWeight() < item.getWeight()) {
+            throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
+        }
+        
+        if (this.items.length == this.numberItems) {
+            IItem[] clone = this.items;
+            this.items = new IItem[this.items.length + 1];
+            for (int i = 0; i < clone.length; i++) {
+                this.items[i] = clone[i];
+            }
+        }
+        
+        this.items[this.numberItems] = item;
+        
+        if (this.positions.length == this.numberItems) {
+            IPosition[] clone = this.positions;
+            this.positions = new IPosition[this.positions.length + 1];
+            for (int i = 0; i < clone.length; i++) {
+                this.positions[i] = clone[i];
+            }
+        }
+        this.positions[this.numberItems] = position;
+        
+        
+        this.numberItems++;
+        
+        weight = vehicle.getMaxWeight() - item.getWeight();
+        
+        // validate();
+        return true;
+    }
+
 
     @Override
     public boolean unload(IItem iitem, ItemStatus is) throws DeliveryException {
@@ -182,6 +344,8 @@ public class Delivery extends Exporter implements IDelivery {
     public String toString() {
         return "\nID: " + id + "\nVehicle: " + vehicle + "\nDriver: " + driver
                 + "\nItems: " + Arrays.toString(items)
-                + "\nDestination: " + destination + "\nItem status: " + status;
+                + "\nDestination: " + destination + "\nItem status: " + itemStatus;
     }
 }
+
+    

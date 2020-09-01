@@ -60,7 +60,9 @@ public class ItemPacked implements IItemPacked {
     public void setPosition(IPosition position) {
         this.position = position;
     }
-
+    
+    
+    
     /**
      * To String method representing the Item Packed.
      *
