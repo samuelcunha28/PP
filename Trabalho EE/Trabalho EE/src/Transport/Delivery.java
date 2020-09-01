@@ -343,9 +343,57 @@ public class Delivery extends Exporter implements IDelivery {
         return false;
     }
 
+    /**
+     * Unloads/Removes all items considering a destination. When the item are removed, 
+     * the weight should be managed to validate delivery weight.
+     * 
+     * @param destination The item to be removed.
+     * @param itemStatus The status to be set for the items.
+     * @return True if removed, false if the item doesn't exists in the delivery.
+     * @throws DeliveryException if the parameter is null;
+     * if no vehicle and/or driver are assigned;
+     * parameter itemStatus is not ItemStatus.DELIVERED or ItemStatus.NON_DELIVERED;
+     * the vehicle status is different from in preparation or in transit.
+     */
     @Override
-    public boolean unload(IDestination id, ItemStatus is) throws DeliveryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean unload(IDestination destination, ItemStatus itemStatus) throws DeliveryException {
+        if (destination == null || itemStatus == null) {
+            throw new DeliveryExceptionImpl("The parameter is null");
+        }
+        if (itemStatus != (ItemStatus.NON_DELIVERED)) {
+            throw new DeliveryExceptionImpl("The item status is different than non delivered");
+        }
+        /*
+        if (item.getStatus() != (ItemStatus.DELIVERED)) {
+            throw new DeliveryExceptionImpl("The item status is different than delivered");
+        }
+        */
+        if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
+            throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
+        }
+        if (vehicle.getStatus() != VehicleStatus.IN_PREPARATION) {
+            throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
+        }
+        /*
+        if (vehicle.getStatus() != VehicleStatus.IN_TRANSIT) {
+            throw new DeliveryExceptionImpl("The vehicle status is not in transit");
+        }
+        */
+        for (int i = 0; i < this.numberItems; ++i) {
+
+            if (((Destination) destination).equals(this.packedItems[i].getItem().getDestination())) {
+                this.weight -= this.packedItems[i].getItem().getWeight();
+
+                for (; i < this.numberItems - 1; i++) {
+                    this.packedItems[i] = this.packedItems[i + 1];
+                }
+                this.packedItems[this.numberItems - 1] = null;
+                this.numberItems--;
+                this.itemStatus = itemStatus;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
