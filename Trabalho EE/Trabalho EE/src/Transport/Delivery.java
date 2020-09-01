@@ -69,6 +69,9 @@ public class Delivery extends Exporter implements IDelivery {
 
     private IPosition position;
 
+    public Delivery() {
+    }
+    
     /**
      * Constructor of Delivery.
      *
@@ -418,10 +421,26 @@ public class Delivery extends Exporter implements IDelivery {
 
         return copyRemaining;
     }
-
+    
+    /**
+     * Starts the transportation process. The vehicle must be defined as in transit.
+     * 
+     * @throws DeliveryException if no vehicle and/or driver are assigned;
+     * if the status is not in preparation
+     * if delivery is empty
+     */
     @Override
     public void start() throws DeliveryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
+            throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
+        }
+        if (vehicle.getStatus() != VehicleStatus.IN_PREPARATION) {
+            throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
+        }
+        if (isEmpty()) {
+            throw new DeliveryExceptionImpl("Empty delivery");
+        }
+        vehicle.setStatus(vehicleStatus.IN_TRANSIT);
     }
 
     @Override

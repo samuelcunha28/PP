@@ -131,5 +131,7 @@ public class Main {
         // System.out.println(Arrays.toString(delivery1.getRemainingItems()));
         System.out.println("");
        //System.out.println(Arrays.toString(delivery1.getRemainingDestinations()));
+        System.out.println("");
+        // delivery1.start();
     }
 }
