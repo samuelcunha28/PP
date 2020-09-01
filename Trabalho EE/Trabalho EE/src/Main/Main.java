@@ -49,11 +49,11 @@ public class Main {
         Position position1 = new Position(1, 1, 1);
         Position position2 = new Position(2, 2, 2);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
-        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.ASSIGNED);
-        Item item2 = new Item(2, 2, 2, 2, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.ASSIGNED);
+        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.NON_DELIVERED);
+        Item item2 = new Item(2, 2, 2, 2, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 10, ItemStatus.NON_DELIVERED);
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 100000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
-        Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.IN_PREPARATION, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
-        Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.FREE, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
+        Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.IN_TRANSIT, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
+        Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.IN_TRANSIT, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Delivery delivery1 = new Delivery("1", null, null, destination2, ItemStatus.ASSIGNED);
         
         
@@ -122,5 +122,6 @@ public class Main {
         System.out.println("");
         delivery1.load(item1, position1);
         delivery1.load(item2, position2);
+        delivery1.unload(item2, ItemStatus.DELIVERED);
     }
 }
