@@ -33,7 +33,15 @@ public class Delivery extends Exporter implements IDelivery {
      */
     private IVehicle vehicle;
 
+    /**
+     * The left weight for the delivery.
+     */
     private double weight;
+    
+    /**
+     * The total of items weight.
+     */
+    private double itemWeight;
 
     /**
      * The delivery driver.
@@ -44,13 +52,20 @@ public class Delivery extends Exporter implements IDelivery {
      * The delivery items.
      */
     private IItem[] items;
-
-    private IPosition[] positions;
-
+   
+    /**
+     * The delivery item.
+     */
     private IItem item;
 
+    /**
+     * The delivery packed items.
+     */
     private IItemPacked[] packedItems;
 
+    /**
+     * The delivery number of items.
+     */
     private int numberItems;
 
     /**
@@ -63,15 +78,16 @@ public class Delivery extends Exporter implements IDelivery {
      */
     private ItemStatus itemStatus;
 
+    /**
+     * The delivery driver status
+     */
     private DriverStatus driverStatus;
-
+    
+    /**
+     * The delivery vehicle status
+     */
     private VehicleStatus vehicleStatus;
 
-    private IPosition position;
-
-    public Delivery() {
-    }
-    
     /**
      * Constructor of Delivery.
      *
@@ -148,16 +164,14 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
-     * This method Checks if two {@link IItemPacked items} overlap, returning
+     * This method Checks if two packed items overlap, returning
      * true if they do or false if they don't.
      *
-     * @param item1 First {@link IItemPacked item} to check overlap.
-     * @param item2 Second {@link @link IItemPacked item} to check overlap.
-     * @return true if {@link @link IItemPacked items} overlap or false if they
-     * don't.
+     * @param item1 First IItemPacked to check overlap.
+     * @param item2 Second IItemPacked to check overlap.
+     * @return true if IItemPacked overlap or false if they don't.
      */
-    private boolean checkoverlap(IItemPacked item1, IItemPacked item2) {
-
+    private boolean checkOverLap(IItemPacked item1, IItemPacked item2) {
         if (item1 == null || item2 == null) {
             return false;
         }
@@ -174,13 +188,10 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
-     * Validates the {@link IContainer container} structure.Considering: if the
-     * {@link Box#volume volume} if lesser or equal to the current volume;if all
-     * {@link IItem items} are inside the {@link IContainer container};if non of
-     * the {@link IItem items} inside the {@link IContainer container} are
-     * overlapping.
+     * Validates the Packed Items structure.
+     * Considers if the packed items inside of the vehicle areoverlapping.
      *
-     * @throws Exceptions.DeliveryExceptionImpl
+     * @throws Exceptions.DeliveryExceptionImpl in case of overlap
      */
     public void validate() throws DeliveryExceptionImpl {
 
@@ -188,7 +199,7 @@ public class Delivery extends Exporter implements IDelivery {
 
         for (int i = 0; i < packedItems.length; i++) {
             for (int j = i + 1; j < packedItems.length; j++) {
-                if (checkoverlap(packedItems[i], packedItems[j])) {
+                if (checkOverLap(packedItems[i], packedItems[j])) {
                     throw new DeliveryExceptionImpl("Box overlap");
                 }
             }
@@ -274,7 +285,10 @@ public class Delivery extends Exporter implements IDelivery {
 
         this.numberItems++;
 
-        weight = vehicle.getMaxWeight() - item.getWeight();
+        for (int i = 0; i < this.numberItems; ++i) {
+            itemWeight = packedItems[i].getItem().getWeight();
+        }
+        weight = vehicle.getMaxWeight() - itemWeight;
 
         // validate();
         return true;
@@ -304,14 +318,9 @@ public class Delivery extends Exporter implements IDelivery {
         if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
             throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
         }
-        if (vehicle.getStatus() != VehicleStatus.IN_PREPARATION) {
-            throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
+        if ((vehicle.getStatus() != VehicleStatus.IN_PREPARATION) && (vehicle.getStatus() != VehicleStatus.IN_TRANSIT)) {
+            throw new DeliveryExceptionImpl("The vehicle status is not in preparation or in transit");
         }
-        /*
-        if (vehicle.getStatus() != VehicleStatus.IN_TRANSIT) {
-            throw new DeliveryExceptionImpl("The vehicle status is not in transit");
-        }
-         */
 
         for (int i = 0; i < this.numberItems; ++i) {
 
@@ -421,13 +430,13 @@ public class Delivery extends Exporter implements IDelivery {
 
         return copyRemaining;
     }
-    
+
     /**
-     * Starts the transportation process. The vehicle must be defined as in transit.
-     * 
-     * @throws DeliveryException if no vehicle and/or driver are assigned;
-     * if the status is not in preparation
-     * if delivery is empty
+     * Starts the transportation process. The vehicle must be defined as in
+     * transit.
+     *
+     * @throws DeliveryException if no vehicle and/or driver are assigned; if
+     * the status is not in preparation if delivery is empty
      */
     @Override
     public void start() throws DeliveryException {
@@ -444,11 +453,10 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
-     * Ends the transportation process.
-     * The status must be defined as free.
-     * Driver status must be set to free.
-     * The items should be unloaded with ItemStatus.NON_DELIVERED STATUS.
-     * 
+     * Ends the transportation process. The status must be defined as free.
+     * Driver status must be set to free. The items should be unloaded with
+     * ItemStatus.NON_DELIVERED STATUS.
+     *
      * @throws DeliveryException if vehicle status is different than in transit.
      */
     @Override
@@ -458,7 +466,7 @@ public class Delivery extends Exporter implements IDelivery {
         }
         vehicle.setStatus(vehicleStatus.FREE);
         driver.setStatus(driverStatus.FREE);
-        
+
         if (this.packedItems.length == this.numberItems) {
             IItemPacked[] clone = this.packedItems;
             this.packedItems = new ItemPacked[this.packedItems.length + 1];
@@ -470,12 +478,16 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
-     * 
-     * @return 
+     * Getter for the delivery weight based on the items weight
+     *
+     * @return the sum of items weights
      */
     @Override
     public double getCurrentWeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < this.numberItems; ++i) {
+            itemWeight += packedItems[i].getItem().getWeight();
+        }
+        return itemWeight;
     }
 
     /**
