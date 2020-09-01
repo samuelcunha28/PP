@@ -37,6 +37,9 @@ public class Main {
      * @param args the command line arguments
      * @throws exceptions.HRException
      * @throws exceptions.ManagementException
+     * @throws java.io.IOException
+     * @throws exceptions.DeliveryException
+     * @throws exceptions.PositionException
      */
     public static void main(String[] args) throws HRException, ManagementException, IOException, DeliveryException, PositionException {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
@@ -122,7 +125,7 @@ public class Main {
         System.out.println("");
         delivery1.load(item1, position1);
         delivery1.load(item2, position2);
-        // delivery1.unload(item2, ItemStatus.DELIVERED);
-        delivery1.unload(destination1, ItemStatus.NON_DELIVERED);
+        delivery1.unload(item2, ItemStatus.DELIVERED);
+        delivery1.unload(destination1, ItemStatus.DELIVERED);
     }
 }

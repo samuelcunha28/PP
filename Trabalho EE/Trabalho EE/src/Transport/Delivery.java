@@ -306,14 +306,9 @@ public class Delivery extends Exporter implements IDelivery {
         if (item == null || itemStatus == null) {
             throw new DeliveryExceptionImpl("The parameter is null");
         }
-        if (item.getStatus() != (ItemStatus.NON_DELIVERED)) {
-            throw new DeliveryExceptionImpl("The item status is different than non delivered");
+        if ((itemStatus != (ItemStatus.NON_DELIVERED)) && (itemStatus != (ItemStatus.DELIVERED))) {
+            throw new DeliveryExceptionImpl("The item status is different than non delivered or delivered");
         }
-        /*
-        if (item.getStatus() != (ItemStatus.DELIVERED)) {
-            throw new DeliveryExceptionImpl("The item status is different than delivered");
-        }
-        */
         if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
             throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
         }
@@ -360,14 +355,9 @@ public class Delivery extends Exporter implements IDelivery {
         if (destination == null || itemStatus == null) {
             throw new DeliveryExceptionImpl("The parameter is null");
         }
-        if (itemStatus != (ItemStatus.NON_DELIVERED)) {
-            throw new DeliveryExceptionImpl("The item status is different than non delivered");
+        if ((itemStatus != (ItemStatus.NON_DELIVERED)) && (itemStatus != (ItemStatus.DELIVERED))) {
+            throw new DeliveryExceptionImpl("The item status is different than non delivered or delivered");
         }
-        /*
-        if (item.getStatus() != (ItemStatus.DELIVERED)) {
-            throw new DeliveryExceptionImpl("The item status is different than delivered");
-        }
-        */
         if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
             throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
         }
