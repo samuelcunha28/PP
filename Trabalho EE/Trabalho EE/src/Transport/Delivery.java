@@ -206,7 +206,7 @@ public class Delivery extends Exporter implements IDelivery {
 
         IItemPacked[] array = new ItemPacked[this.numberItems];
 
-        if (!this.empty()) {
+        if (!this.isEmpty()) {
             for (i = 0; i < this.numberItems; i++) {
                 array[i] = this.packedItems[i];
             }
@@ -214,16 +214,6 @@ public class Delivery extends Exporter implements IDelivery {
             return null;
         }
         return array;
-    }
-
-    /**
-     * Checks is the {@link IContainer container} is empty or not.
-     *
-     * @return true if the {@link IContainer container} is empty or false if
-     * {@link IContainer container} is not empty.
-     */
-    private boolean empty() {
-        return (this.numberItems == 0);
     }
 
     /**
@@ -386,9 +376,14 @@ public class Delivery extends Exporter implements IDelivery {
         return false;
     }
 
+    /**
+     * Returns if delivery is empty.
+     * 
+     * @return true if delivery is empty, false otherwise. 
+     */
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (this.numberItems == 0);
     }
 
     @Override
