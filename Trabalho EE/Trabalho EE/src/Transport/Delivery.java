@@ -32,7 +32,7 @@ public class Delivery extends Exporter implements IDelivery {
      * The delivery vehicle.
      */
     private IVehicle vehicle;
-    
+
     private double weight;
 
     /**
@@ -44,9 +44,9 @@ public class Delivery extends Exporter implements IDelivery {
      * The delivery items.
      */
     private IItem[] items;
-    
+
     private IPosition[] positions;
-    
+
     private IItem item;
 
     private IItemPacked[] packedItems;
@@ -66,7 +66,7 @@ public class Delivery extends Exporter implements IDelivery {
     private DriverStatus driverStatus;
 
     private VehicleStatus vehicleStatus;
-    
+
     private IPosition position;
 
     /**
@@ -105,11 +105,10 @@ public class Delivery extends Exporter implements IDelivery {
      *
      * @param vehicle The vehicle to be assigned to the delivery
      * @param driver The driver to be assigned to the delivery
-     * @throws DeliveryException if any parameter is null 
-     * if any item was already assigned to the delivery 
-     * if the vehicle status is different from free 
-     * if the Driver status is different from free 
-     * if the driver do not have a license type that matched the allowed vehicle license types
+     * @throws DeliveryException if any parameter is null if any item was
+     * already assigned to the delivery if the vehicle status is different from
+     * free if the Driver status is different from free if the driver do not
+     * have a license type that matched the allowed vehicle license types
      */
     @Override
     public void setVehicle(IVehicle vehicle, IDriver driver) throws DeliveryException {
@@ -193,7 +192,7 @@ public class Delivery extends Exporter implements IDelivery {
         }
 
     }
-    
+
     /**
      * Returns an array (without null positions) for the
      * {@link IItemPacked items packed} in the {@link IContainer container}.
@@ -227,13 +226,12 @@ public class Delivery extends Exporter implements IDelivery {
      * @param position position in which the item will be placed.
      * @return true if inserted, false if the item already exists in the
      * delivery.
-     * @throws DeliveryException if any parameter is null; 
-     * if item status is not NON_DELIVERED; 
-     * if no vehicle and/or driver are assigned; 
-     * if the vehicle status is different from IN PREPARATION; 
-     * if some item is ouside (or is overflowing) the delivery or if some item is overlapping with other item;
-     * if weight is exceeded; 
-     * if transportation restrictions of the current are not valid for the item
+     * @throws DeliveryException if any parameter is null; if item status is not
+     * NON_DELIVERED; if no vehicle and/or driver are assigned; if the vehicle
+     * status is different from IN PREPARATION; if some item is ouside (or is
+     * overflowing) the delivery or if some item is overlapping with other item;
+     * if weight is exceeded; if transportation restrictions of the current are
+     * not valid for the item
      */
     @Override
     public boolean load(IItem item, IPosition position) throws DeliveryException {
@@ -252,8 +250,8 @@ public class Delivery extends Exporter implements IDelivery {
         if (vehicle.getMaxWeight() < item.getWeight()) {
             throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
         }
-        
-       if (this.numberItems != 0) {
+
+        if (this.numberItems != 0) {
             for (IItemPacked itempacked : this.getPackedItems()) {
                 if (itempacked.getItem().equals(item)) {
                     return false;
@@ -270,26 +268,27 @@ public class Delivery extends Exporter implements IDelivery {
         }
 
         this.packedItems[this.numberItems] = new ItemPacked(item, position);
-        
+
         this.numberItems++;
-        
+
         weight = vehicle.getMaxWeight() - item.getWeight();
-        
+
         // validate();
         return true;
     }
 
     /**
-     * Unloads/Removes an item from the delivery. When the item is removed, the weight 
-     * should be managed to validate delivery weight.
-     * 
+     * Unloads/Removes an item from the delivery. When the item is removed, the
+     * weight should be managed to validate delivery weight.
+     *
      * @param item The item to be removed.
      * @param itemStatus The status to be set for the items.
-     * @return True if removed, false if the item doesn't exists in the delivery.
-     * @throws DeliveryException if the parameter is null;
-     * if no vehicle and/or driver are assigned;
-     * parameter itemStatus is not ItemStatus.DELIVERED or ItemStatus.NON_DELIVERED;
-     * the vehicle status is different from in preparation or in transit.
+     * @return True if removed, false if the item doesn't exists in the
+     * delivery.
+     * @throws DeliveryException if the parameter is null; if no vehicle and/or
+     * driver are assigned; parameter itemStatus is not ItemStatus.DELIVERED or
+     * ItemStatus.NON_DELIVERED; the vehicle status is different from in
+     * preparation or in transit.
      */
     @Override
     public boolean unload(IItem item, ItemStatus itemStatus) throws DeliveryException {
@@ -309,8 +308,8 @@ public class Delivery extends Exporter implements IDelivery {
         if (vehicle.getStatus() != VehicleStatus.IN_TRANSIT) {
             throw new DeliveryExceptionImpl("The vehicle status is not in transit");
         }
-        */
-        
+         */
+
         for (int i = 0; i < this.numberItems; ++i) {
 
             if (((Item) item).equals(this.packedItems[i].getItem())) {
@@ -329,16 +328,17 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
-     * Unloads/Removes all items considering a destination. When the item are removed, 
-     * the weight should be managed to validate delivery weight.
-     * 
+     * Unloads/Removes all items considering a destination. When the item are
+     * removed, the weight should be managed to validate delivery weight.
+     *
      * @param destination The item to be removed.
      * @param itemStatus The status to be set for the items.
-     * @return True if removed, false if the item doesn't exists in the delivery.
-     * @throws DeliveryException if the parameter is null;
-     * if no vehicle and/or driver are assigned;
-     * parameter itemStatus is not ItemStatus.DELIVERED or ItemStatus.NON_DELIVERED;
-     * the vehicle status is different from in preparation or in transit.
+     * @return True if removed, false if the item doesn't exists in the
+     * delivery.
+     * @throws DeliveryException if the parameter is null; if no vehicle and/or
+     * driver are assigned; parameter itemStatus is not ItemStatus.DELIVERED or
+     * ItemStatus.NON_DELIVERED; the vehicle status is different from in
+     * preparation or in transit.
      */
     @Override
     public boolean unload(IDestination destination, ItemStatus itemStatus) throws DeliveryException {
@@ -358,7 +358,7 @@ public class Delivery extends Exporter implements IDelivery {
         if (vehicle.getStatus() != VehicleStatus.IN_TRANSIT) {
             throw new DeliveryExceptionImpl("The vehicle status is not in transit");
         }
-        */
+         */
         for (int i = 0; i < this.numberItems; ++i) {
 
             if (((Destination) destination).equals(this.packedItems[i].getItem().getDestination())) {
@@ -377,23 +377,46 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
-     * Returns if delivery is empty.
-     * 
-     * @return true if delivery is empty, false otherwise. 
+     * Method that returns if delivery is empty.
+     *
+     * @return true if delivery is empty, false otherwise.
      */
     @Override
     public boolean isEmpty() {
         return (this.numberItems == 0);
     }
 
+    /**
+     * Method that returns the items that are not delivered
+     *
+     * @return items that are not delivered.
+     */
     @Override
     public IItem[] getRemainingItems() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IItem[] copyRemaining = new IItem[this.numberItems];
+        if (itemStatus == ItemStatus.NON_DELIVERED) {
+            for (int i = 0; i < this.numberItems; i++) {
+                copyRemaining[i] = this.items[i];
+            }
+        }
+        return copyRemaining;
     }
 
+    /**
+     * Method that returns the destination of the items to be delivered.
+     *
+     * @return The destinations of the items to be delivered, null if none
+     * exist.
+     */
     @Override
     public IDestination[] getRemainingDestinations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IDestination[] copyRemaining = new IDestination[this.numberItems];
+
+        for (int i = 0; i < this.numberItems; i++) {
+            copyRemaining[i] = this.packedItems[i].getItem().getDestination();
+        }
+
+        return copyRemaining;
     }
 
     @Override
@@ -423,5 +446,3 @@ public class Delivery extends Exporter implements IDelivery {
                 + "\nDestination: " + destination + "\nItem status: " + itemStatus;
     }
 }
-
-    

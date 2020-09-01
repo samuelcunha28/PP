@@ -126,6 +126,10 @@ public class Main {
         delivery1.load(item1, position1);
         delivery1.load(item2, position2);
         // delivery1.unload(item2, ItemStatus.DELIVERED);
-        delivery1.unload(destination1, ItemStatus.DELIVERED);
+        // delivery1.unload(destination1, ItemStatus.DELIVERED);
+        System.out.println("");
+        // System.out.println(Arrays.toString(delivery1.getRemainingItems()));
+        System.out.println("");
+       //System.out.println(Arrays.toString(delivery1.getRemainingDestinations()));
     }
 }
