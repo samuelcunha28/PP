@@ -191,7 +191,7 @@ public class Delivery extends Exporter implements IDelivery {
      * Validates the Packed Items structure.
      * Considers if the packed items inside of the vehicle areoverlapping.
      *
-     * @throws Exceptions.DeliveryExceptionImpl in case of overlap
+     * @throws Exceptions.DeliveryExceptionImpl in case of overlap.
      */
     public void validate() throws DeliveryExceptionImpl {
 
@@ -208,11 +208,9 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
-     * Returns an array (without null positions) for the
-     * {@link IItemPacked items packed} in the {@link IContainer container}.
+     * Returns an array for the packed items. 
      *
-     * @return the {@link IItemPacked items packed} in the
-     * {@link IContainer container}.
+     * @return the packed items.
      */
     public IItemPacked[] getPackedItems() {
         int i;
