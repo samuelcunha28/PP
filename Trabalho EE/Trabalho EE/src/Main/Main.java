@@ -54,7 +54,7 @@ public class Main {
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 100000.00, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.IN_PREPARATION, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.FREE, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
-        Delivery delivery1 = new Delivery("1", null, null, null, destination2, ItemStatus.ASSIGNED, null);
+        Delivery delivery1 = new Delivery("1", null, null, destination2, ItemStatus.ASSIGNED);
         
         
         // System.out.println(customer1.getVat());

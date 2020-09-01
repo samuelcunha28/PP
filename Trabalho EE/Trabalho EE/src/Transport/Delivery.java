@@ -75,19 +75,16 @@ public class Delivery extends Exporter implements IDelivery {
      * @param id The delivery id.
      * @param vehicle The delivery vehicle.
      * @param driver The delivery driver.
-     * @param items The delivery items.
      * @param destination The delivery destination.
      * @param status The delivery item status.
-     * @param position
      */
-    public Delivery(String id, IVehicle vehicle, IDriver driver, IItem[] items, IDestination destination, ItemStatus status, IPosition position) {
+    public Delivery(String id, IVehicle vehicle, IDriver driver, IDestination destination, ItemStatus status) {
         this.id = id;
         this.vehicle = vehicle;
         this.driver = driver;
-        this.items = new IItem[5];
         this.destination = destination;
         this.itemStatus = status;
-        this.positions = new IPosition[5];
+        this.packedItems = new ItemPacked[5];
     }
 
     /**
@@ -122,7 +119,7 @@ public class Delivery extends Exporter implements IDelivery {
         if (driver == null) {
             throw new DeliveryExceptionImpl("The parameter driver is null");
         }
-        if (items == null) {
+        if (items != null) {
             throw new DeliveryExceptionImpl("Any item was already assigned");
         }
         if (vehicle.getStatus() != vehicle.getStatus().FREE) {
@@ -266,25 +263,23 @@ public class Delivery extends Exporter implements IDelivery {
             throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
         }
         
-        if (this.items.length == this.numberItems) {
-            IItem[] clone = this.items;
-            this.items = new IItem[this.items.length + 1];
-            for (int i = 0; i < clone.length; i++) {
-                this.items[i] = clone[i];
+       if (this.numberItems != 0) {
+            for (IItemPacked itempacked : this.getPackedItems()) {
+                if (itempacked.getItem().equals(item)) {
+                    return false;
+                }
             }
         }
-        
-        this.items[this.numberItems] = item;
-        
-        if (this.positions.length == this.numberItems) {
-            IPosition[] clone = this.positions;
-            this.positions = new IPosition[this.positions.length + 1];
+
+        if (this.packedItems.length == this.numberItems) {
+            IItemPacked[] clone = this.packedItems;
+            this.packedItems = new ItemPacked[this.packedItems.length + 1];
             for (int i = 0; i < clone.length; i++) {
-                this.positions[i] = clone[i];
+                this.packedItems[i] = clone[i];
             }
         }
-        this.positions[this.numberItems] = position;
-        
+
+        this.packedItems[this.numberItems] = new ItemPacked(item, position);
         
         this.numberItems++;
         
@@ -294,9 +289,20 @@ public class Delivery extends Exporter implements IDelivery {
         return true;
     }
 
-
+    /**
+     * Unloads/Removes an item from the delivery. When the item is removed, the weight 
+     * should be managed to validate delivery weight.
+     * 
+     * @param item The item to be removed.
+     * @param itemStatus The status to be set for the items.
+     * @return True if removed, false if the item doesn't exists in the delivery.
+     * @throws DeliveryException if the parameter is null;
+     * if no vehicle and/or driver are assigned;
+     * parameter itemStatus is not ItemStatus.DELIVERED or ItemStatus.NON_DELIVERED;
+     * the vehicle status is different from in preparation or in transit.
+     */
     @Override
-    public boolean unload(IItem iitem, ItemStatus is) throws DeliveryException {
+    public boolean unload(IItem item, ItemStatus itemStatus) throws DeliveryException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
