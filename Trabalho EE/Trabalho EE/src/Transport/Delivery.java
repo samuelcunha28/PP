@@ -443,11 +443,36 @@ public class Delivery extends Exporter implements IDelivery {
         vehicle.setStatus(vehicleStatus.IN_TRANSIT);
     }
 
+    /**
+     * Ends the transportation process.
+     * The status must be defined as free.
+     * Driver status must be set to free.
+     * The items should be unloaded with ItemStatus.NON_DELIVERED STATUS.
+     * 
+     * @throws DeliveryException if vehicle status is different than in transit.
+     */
     @Override
     public void end() throws DeliveryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (vehicle.getStatus() != VehicleStatus.IN_TRANSIT) {
+            throw new DeliveryExceptionImpl("The vehicle status is not in transit");
+        }
+        vehicle.setStatus(vehicleStatus.FREE);
+        driver.setStatus(driverStatus.FREE);
+        
+        if (this.packedItems.length == this.numberItems) {
+            IItemPacked[] clone = this.packedItems;
+            this.packedItems = new ItemPacked[this.packedItems.length + 1];
+            for (int i = 0; i < clone.length; i++) {
+                this.packedItems[i] = clone[i];
+                unload(item, ItemStatus.NON_DELIVERED);
+            }
+        }
     }
 
+    /**
+     * 
+     * @return 
+     */
     @Override
     public double getCurrentWeight() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

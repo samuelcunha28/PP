@@ -132,6 +132,7 @@ public class Main {
         System.out.println("");
        //System.out.println(Arrays.toString(delivery1.getRemainingDestinations()));
         System.out.println("");
-        // delivery1.start();
+        delivery1.start();
+        delivery1.end();
     }
 }
