@@ -41,7 +41,7 @@ public class Main {
      * @throws exceptions.DeliveryException
      * @throws exceptions.PositionException
      */
-    public static void main(String[] args) throws HRException, ManagementException, IOException, DeliveryException, PositionException {
+    public static void main(String[] args) throws HRException, ManagementException, IOException, DeliveryException, PositionException, Exception {
         Address address1 = new Address("Porto", "Porto", 1, "Porto", "Portugal");
         Destination destination1 = new Destination("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Destination destination2 = new Destination("2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
@@ -52,8 +52,8 @@ public class Main {
         Position position1 = new Position(1, 1, 1);
         Position position2 = new Position(2, 2, 2);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
-        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.NON_DELIVERED);
-        Item item2 = new Item(2, 2, 2, 2, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination2, 5, ItemStatus.NON_DELIVERED);
+        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.ASSIGNED);
+        Item item2 = new Item(2, 2, 2, 2, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination2, 5, ItemStatus.ASSIGNED);
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 6000, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.IN_TRANSIT, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.IN_TRANSIT, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
@@ -132,10 +132,13 @@ public class Main {
         System.out.println("");
        //System.out.println(Arrays.toString(delivery1.getRemainingDestinations()));
         System.out.println("");
-        //delivery1.start();
-        //delivery1.end();
+        // delivery1.start();
+        // delivery1.end();
         
         // System.out.println("Peso items: " + delivery1.getCurrentWeight());
         management.addDelivery(delivery1);
+        // management.deliveredItem("1", "1");
+        
+        // management.startDelivery("1");
     }
 }

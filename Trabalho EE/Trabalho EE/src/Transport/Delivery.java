@@ -259,9 +259,11 @@ public class Delivery extends Exporter implements IDelivery {
         if (item == null || position == null) {
             throw new DeliveryExceptionImpl("The parameter is null");
         }
+        /*
         if (item.getStatus() != ItemStatus.NON_DELIVERED) {
             throw new DeliveryExceptionImpl("The item status is non delivered");
         }
+        */
         if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
             throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
         }
@@ -401,6 +403,7 @@ public class Delivery extends Exporter implements IDelivery {
         return (this.numberItems == 0);
     }
 
+    
     /**
      * Method that returns the items that are not delivered
      *

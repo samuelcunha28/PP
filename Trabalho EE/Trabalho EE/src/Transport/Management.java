@@ -13,7 +13,9 @@ import transport.ItemStatus;
 import transport.TransportationTypes;
 import transport.VehicleStatus;
 import Exceptions.ManagementExceptionImpl;
+import java.util.Arrays;
 import transport.DriverStatus;
+import transport.IItemPacked;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -25,6 +27,13 @@ public class Management implements IManagement {
      * Represents the management items.
      */
     private IItem[] items;
+
+    /**
+     * The management item.
+     */
+    private IItem item;
+
+    private IItemPacked pack;
 
     /**
      * The status of the item.
@@ -40,36 +49,41 @@ public class Management implements IManagement {
      * Representes the management vehicles.
      */
     private IVehicle[] vehicles;
-    
+
     /**
      * The number of vehicles.
      */
     private int numberOfVehicles;
-    
+
     /**
      * Representes the management drivers.
      */
     private IDriver[] drivers;
-    
+
     /**
      * The delivery driver.
      */
     private IDriver driver;
-    
+
     /**
      * The number of drivers.
      */
     private int numberOfDrivers;
-    
+
     /**
      * Represents the management deliveries.
      */
     private IDelivery[] deliveries;
-    
+
     /**
      * The number of deliveries.
      */
     private int numberOfDeliveries;
+
+    /**
+     * The management delivery.
+     */
+    private IDelivery delivery;
 
     public Management() {
         this.numberOfItems = 0;
@@ -165,7 +179,7 @@ public class Management implements IManagement {
 
     /**
      * Returns a copy of the collection of item from the given customer.
-     * 
+     *
      * @param customer the number of items of the customer.
      * @return the items of the customer.
      */
@@ -184,7 +198,7 @@ public class Management implements IManagement {
 
     /**
      * Returns a copy of the collection of item with a given destination.
-     * 
+     *
      * @param destination the destination of the items.
      * @return the items of the destination.
      */
@@ -202,8 +216,9 @@ public class Management implements IManagement {
     }
 
     /**
-     * Returns a cop+y of the collection of item with the given transportation type.
-     * 
+     * Returns a cop+y of the collection of item with the given transportation
+     * type.
+     *
      * @param transportationType the transportation types.
      * @return the items of the transportation types.
      */
@@ -222,7 +237,7 @@ public class Management implements IManagement {
 
     /**
      * Returns a copy of the collection of item with the given item status.
-     * 
+     *
      * @param itemStatus the item status.
      * @return the items of the item status.
      */
@@ -241,9 +256,10 @@ public class Management implements IManagement {
 
     /**
      * Adds a vehicle to the fleet.
-     * 
+     *
      * @param vehicle the vehicle to be added to the fleet.
-     * @return true if the vehicle was inserted, false if the vehicle already exists.
+     * @return true if the vehicle was inserted, false if the vehicle already
+     * exists.
      * @throws ManagementException if the parameter is null.
      */
     @Override
@@ -251,7 +267,7 @@ public class Management implements IManagement {
         if (vehicle == null) {
             throw new ManagementExceptionImpl("The parameter is null");
         }
-         
+
         if (this.vehicles.length == this.numberOfVehicles) {
             IVehicle[] clone = this.vehicles;
             this.vehicles = new IVehicle[this.vehicles.length + 1];
@@ -268,9 +284,10 @@ public class Management implements IManagement {
 
     /**
      * Removes a vehicle from the fleet.
-     * 
+     *
      * @param vehicle the vehicle to be removed from the fleet.
-     * @return true if the vehicle was removed, false if the vehicle do not exists.
+     * @return true if the vehicle was removed, false if the vehicle do not
+     * exists.
      * @throws ManagementException if the parameter is null.
      */
     @Override
@@ -291,12 +308,13 @@ public class Management implements IManagement {
         }
         return false;
     }
-    
+
     /**
      * Adds a driver to the system.
-     * 
+     *
      * @param driver the driver to be added to the system.
-     * @return true if the driver was inserted, false if the driver already exists.
+     * @return true if the driver was inserted, false if the driver already
+     * exists.
      * @throws ManagementException if the parameter is null.
      */
     @Override
@@ -304,7 +322,7 @@ public class Management implements IManagement {
         if (driver == null) {
             throw new ManagementExceptionImpl("The parameter is null");
         }
-         
+
         if (this.drivers.length == this.numberOfDrivers) {
             IDriver[] clone = this.drivers;
             this.drivers = new IDriver[this.drivers.length + 1];
@@ -321,7 +339,7 @@ public class Management implements IManagement {
 
     /**
      * Removes a driver from the system.
-     * 
+     *
      * @param driver the driver to be removed.
      * @return true if the driver was removed, false if the driver do no exists
      * @throws ManagementException if parameter is null
@@ -347,7 +365,7 @@ public class Management implements IManagement {
 
     /**
      * Getter for all vehicle fleet.
-     * 
+     *
      * @return A copy of all vehicle fleet.
      */
     @Override
@@ -361,7 +379,7 @@ public class Management implements IManagement {
 
     /**
      * Getter for all vehicle fleet based on the status.
-     * 
+     *
      * @param status the status for retrieving vehicles.
      * @return a copy of all vehicle fleet with given status.
      */
@@ -380,7 +398,7 @@ public class Management implements IManagement {
 
     /**
      * Getter for all vehicle fleet based on the transportation type.
-     * 
+     *
      * @param transportationType transportation types for retrieving vehicles.
      * @return a copy of all vehicle fleet with given transportation type.
      */
@@ -399,10 +417,11 @@ public class Management implements IManagement {
 
     /**
      * Getter for all vehicle fleet based on the status and transportation type.
-     * 
+     *
      * @param status the status for retrieving vehicles.
      * @param transportationType transportation types for retrieving vehicles.
-     * @return a copy of all vehicle fleet with given status and transportation type.
+     * @return a copy of all vehicle fleet with given status and transportation
+     * type.
      */
     @Override
     public IVehicle[] getFleet(VehicleStatus status, TransportationTypes transportationType) {
@@ -416,40 +435,44 @@ public class Management implements IManagement {
         }
         return copyFleet;
     }
-    
+
     /**
-     * Adds a new delivery in the system. All items of the delivery must have previously
-     * been created in the system and must have a ASSIGNED.
-     * 
+     * Adds a new delivery in the system. All items of the delivery must have
+     * previously been created in the system and must have a ASSIGNED.
+     *
      * @param delivery delivery to be inserted in the system.
-     * @return true if the delivery is inserted, false if the delivery already exists.
-     * @throws ManagementException if delivery is null;
-     * if delivery with items not in the system;
-     * if delivery items with status not ASSIGNED;
-     * if delivery has no items or the items cannot be stored inside the vehicle
-     * if delivery has no vehicle or cannot transport specific items
-     * if delivery has no driver or cannot drive the specific vehicle
+     * @return true if the delivery is inserted, false if the delivery already
+     * exists.
+     * @throws ManagementException if delivery is null; if delivery with items
+     * not in the system; if delivery items with status not ASSIGNED; if
+     * delivery has no items or the items cannot be stored inside the vehicle;
+     * if delivery has no vehicle or cannot transport specific items if delivery
+     * has no driver or cannot drive the specific vehicle
      */
     @Override
     public boolean addDelivery(IDelivery delivery) throws ManagementException {
         if (delivery == null) {
             throw new ManagementExceptionImpl("The delivery is null");
         }
-        if (status == ItemStatus.ASSIGNED) {
+        /*
+        if (status != ItemStatus.ASSIGNED) {
             throw new ManagementExceptionImpl("The delivery items are not assigned");
         }
+         */
         if (delivery.isEmpty()) {
             throw new ManagementExceptionImpl("The delivery has no items");
         }
         if (delivery.getVehicle() == null) {
             throw new ManagementExceptionImpl("The delivery has no vehicles available");
         }
-        /*
-        if (driver.getStatus() == DriverStatus.FREE) {
-            throw new ManagementExceptionImpl("The driver status is free");
+        if (delivery.getCurrentWeight() > delivery.getVehicle().getMaxWeight()) {
+            throw new ManagementExceptionImpl("The delivery has no capacity");
         }
-    */
-        
+        Delivery tmp = (Delivery) delivery;
+        if (tmp.getDriver() == null) {
+            throw new ManagementExceptionImpl("The delivery has no driver");
+        }
+
         if (this.deliveries.length == this.numberOfDeliveries) {
             IDelivery[] clone = this.deliveries;
             this.deliveries = new IDelivery[this.deliveries.length + 1];
@@ -464,9 +487,40 @@ public class Management implements IManagement {
         return true;
     }
 
+    /**
+     * Confirms a delivered item. The item must have a state of ASSIGNED. Item
+     * status must be changed to delivered.
+     *
+     * @param idDelivery The delivery id
+     * @param reference The item reference
+     * @throws Exception if delivery or item is null if delivery or item is
+     * invalid Item do not have a ASSIGNED status
+     */
     @Override
-    public void deliveredItem(String string, String string1) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deliveredItem(String idDelivery, String reference) throws Exception {
+        if (idDelivery == null || reference == null) {
+            throw new ManagementExceptionImpl("The delivery id and/or reference are null");
+        }
+
+        int deliveryPosition = -1;
+        for (int i = 0; i < deliveries.length; i++) {
+            if (idDelivery == deliveries[i].getId()) {
+                deliveryPosition = i;
+                break;
+            }
+        }
+        
+        Delivery tmp = (Delivery) deliveries[deliveryPosition];
+        IItemPacked[] items = tmp.getPackedItems();
+        
+        for (int i = 0; i < items.length; i++) {
+            if (reference == items[i].getItem().getReference()) {
+                items[i].getItem().setStatus(ItemStatus.DELIVERED);
+                break;
+            }
+        }
+        
+        System.out.println(Arrays.toString(items));
     }
 
     @Override
@@ -474,19 +528,42 @@ public class Management implements IManagement {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Checks the state of a item in the system.
+     *
+     * @param reference The item reference.
+     * @return The item status.
+     * @throws ManagementException if the item does not exist
+     */
     @Override
-    public ItemStatus checkItemStatus(String string) throws Exception {
+    public ItemStatus checkItemStatus(String reference) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Starts a given delivery.
+     *
+     * @param idDelivery The delivery reference.
+     * @throws DeliveryException From starts method.
+     */
     @Override
-    public void startDelivery(String string) throws DeliveryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void startDelivery(String idDelivery) throws DeliveryException {
+
+        //delivery.start();
+        System.out.println("Delivery " + idDelivery + " has started");
     }
 
+    /**
+     * Ends a given delivery.
+     *
+     * @param idDelivery The delivery reference.
+     * @throws DeliveryException From end method.
+     */
     @Override
-    public void stopDelivery(String string) throws DeliveryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void stopDelivery(String idDelivery) throws DeliveryException {
+
+        delivery.end();
+        System.out.println("Delivery " + idDelivery + " has ended");
     }
 
 }
