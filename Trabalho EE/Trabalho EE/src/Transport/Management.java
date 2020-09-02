@@ -509,23 +509,53 @@ public class Management implements IManagement {
                 break;
             }
         }
-        
+
         Delivery tmp = (Delivery) deliveries[deliveryPosition];
         IItemPacked[] items = tmp.getPackedItems();
-        
+
         for (int i = 0; i < items.length; i++) {
             if (reference == items[i].getItem().getReference()) {
                 items[i].getItem().setStatus(ItemStatus.DELIVERED);
                 break;
             }
         }
-        
+
         System.out.println(Arrays.toString(items));
     }
 
+    /**
+     * Confirms delivered items to a given destination. The items must have a
+     * previous state of ASSIGNED Item status must be changed to DELIVERED
+     *
+     * @param idDelivery The delivery id
+     * @param destination The item destination
+     * @throws ManagementException if delivery or item is null; delivery or item
+     * is invalid; Item do not have a ASSIGNED status.
+     */
     @Override
-    public void deliveredItem(String string, IDestination id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deliveredItem(String idDelivery, IDestination destination) throws Exception {
+        if (idDelivery == null || destination == null) {
+            throw new ManagementExceptionImpl("The delivery id and/or destination are null");
+        }
+
+        int deliveryPosition = -1;
+        for (int i = 0; i < deliveries.length; i++) {
+            if (idDelivery == deliveries[i].getId()) {
+                deliveryPosition = i;
+                break;
+            }
+        }
+
+        Delivery tmp = (Delivery) deliveries[deliveryPosition];
+        IItemPacked[] items = tmp.getPackedItems();
+
+        for (int i = 0; i < items.length; i++) {
+            if (destination == items[i].getItem().getDestination()) {
+                items[i].getItem().setStatus(ItemStatus.DELIVERED);
+            }
+        }
+
+        System.out.println(Arrays.toString(items));
     }
 
     /**
@@ -537,7 +567,21 @@ public class Management implements IManagement {
      */
     @Override
     public ItemStatus checkItemStatus(String reference) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (reference == null) {
+            throw new ManagementExceptionImpl("The reference is null");
+        }
+
+        for (int i = 0; i < deliveries.length; i++) {
+            Delivery tmp = (Delivery) deliveries[i];
+            IItemPacked[] items = tmp.getPackedItems();
+            for (int j = 0; j < items.length; j++) {
+                if (items[j].getItem().getReference() == reference) {
+                    return items[j].getItem().getStatus();
+
+                }
+            }
+        }
+        throw new ManagementExceptionImpl("Item does not exist");
     }
 
     /**
@@ -548,8 +592,12 @@ public class Management implements IManagement {
      */
     @Override
     public void startDelivery(String idDelivery) throws DeliveryException {
-
-        //delivery.start();
+        for (int i = 0; i < deliveries.length; i++) {
+            if (deliveries[i].getId() == idDelivery) {
+                deliveries[i].start();
+                break;
+            }
+        }
         System.out.println("Delivery " + idDelivery + " has started");
     }
 
@@ -561,9 +609,13 @@ public class Management implements IManagement {
      */
     @Override
     public void stopDelivery(String idDelivery) throws DeliveryException {
-
-        delivery.end();
-        System.out.println("Delivery " + idDelivery + " has ended");
+        for (int i = 0; i < deliveries.length; i++) {
+            if (deliveries[i].getId() == idDelivery) {
+                deliveries[i].end();
+                break;
+            }
+        }
+        System.out.println("Delivery " + idDelivery + " has started");
     }
 
 }

@@ -53,7 +53,7 @@ public class Main {
         Position position2 = new Position(2, 2, 2);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
         Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.ASSIGNED);
-        Item item2 = new Item(2, 2, 2, 2, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination2, 5, ItemStatus.ASSIGNED);
+        Item item2 = new Item(2, 2, 2, 2, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.ASSIGNED);
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 6000, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.IN_TRANSIT, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.IN_TRANSIT, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
@@ -138,7 +138,12 @@ public class Main {
         // System.out.println("Peso items: " + delivery1.getCurrentWeight());
         management.addDelivery(delivery1);
         // management.deliveredItem("1", "1");
+        // management.deliveredItem("1", destination1);
         
-        // management.startDelivery("1");
+        // System.out.println(management.checkItemStatus("1"));
+        
+        management.startDelivery("1");
+        management.stopDelivery("1");
+        
     }
 }
