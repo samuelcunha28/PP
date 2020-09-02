@@ -135,6 +135,7 @@ public class Main {
         //delivery1.start();
         //delivery1.end();
         
-        //System.out.println("Peso items: " + delivery1.getCurrentWeight());
+        // System.out.println("Peso items: " + delivery1.getCurrentWeight());
+        management.addDelivery(delivery1);
     }
 }

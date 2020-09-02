@@ -13,6 +13,7 @@ import transport.ItemStatus;
 import transport.TransportationTypes;
 import transport.VehicleStatus;
 import Exceptions.ManagementExceptionImpl;
+import transport.DriverStatus;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -51,6 +52,11 @@ public class Management implements IManagement {
     private IDriver[] drivers;
     
     /**
+     * The delivery driver.
+     */
+    private IDriver driver;
+    
+    /**
      * The number of drivers.
      */
     private int numberOfDrivers;
@@ -72,6 +78,8 @@ public class Management implements IManagement {
         this.vehicles = new IVehicle[5];
         this.numberOfDrivers = 0;
         this.drivers = new IDriver[5];
+        this.numberOfDeliveries = 0;
+        this.deliveries = new IDelivery[5];
     }
 
     /**
@@ -424,7 +432,36 @@ public class Management implements IManagement {
      */
     @Override
     public boolean addDelivery(IDelivery delivery) throws ManagementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (delivery == null) {
+            throw new ManagementExceptionImpl("The delivery is null");
+        }
+        if (status == ItemStatus.ASSIGNED) {
+            throw new ManagementExceptionImpl("The delivery items are not assigned");
+        }
+        if (delivery.isEmpty()) {
+            throw new ManagementExceptionImpl("The delivery has no items");
+        }
+        if (delivery.getVehicle() == null) {
+            throw new ManagementExceptionImpl("The delivery has no vehicles available");
+        }
+        /*
+        if (driver.getStatus() == DriverStatus.FREE) {
+            throw new ManagementExceptionImpl("The driver status is free");
+        }
+    */
+        
+        if (this.deliveries.length == this.numberOfDeliveries) {
+            IDelivery[] clone = this.deliveries;
+            this.deliveries = new IDelivery[this.deliveries.length + 1];
+            for (int i = 0; i < clone.length; i++) {
+                this.deliveries[i] = clone[i];
+            }
+        }
+
+        this.deliveries[this.numberOfDeliveries] = delivery;
+        this.numberOfDeliveries++;
+
+        return true;
     }
 
     @Override

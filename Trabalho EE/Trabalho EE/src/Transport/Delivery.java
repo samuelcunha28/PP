@@ -162,6 +162,15 @@ public class Delivery extends Exporter implements IDelivery {
     public IVehicle getVehicle() {
         return this.vehicle;
     }
+    
+    /**
+     * Getter for the driver assigned to the delivery.
+     * 
+     * @return the driver assigned to the delivery, null if none.
+     */
+    public IDriver getDriver() {
+        return this.driver;
+    }
 
     /**
      * This method Checks if two packed items overlap, returning
@@ -361,14 +370,10 @@ public class Delivery extends Exporter implements IDelivery {
         if ((driver.getStatus() != DriverStatus.ASSIGNED) || (vehicle == null)) {
             throw new DeliveryExceptionImpl("Null vehicle or no driver assigned");
         }
-        if (vehicle.getStatus() != VehicleStatus.IN_PREPARATION) {
+        if ((vehicle.getStatus() != VehicleStatus.IN_PREPARATION) && (vehicle.getStatus() != VehicleStatus.IN_TRANSIT)) {
             throw new DeliveryExceptionImpl("The vehicle status is not in preparation");
         }
-        /*
-        if (vehicle.getStatus() != VehicleStatus.IN_TRANSIT) {
-            throw new DeliveryExceptionImpl("The vehicle status is not in transit");
-        }
-         */
+       
         for (int i = 0; i < this.numberItems; ++i) {
 
             if (((Destination) destination).equals(this.packedItems[i].getItem().getDestination())) {
