@@ -173,6 +173,15 @@ public class Delivery extends Exporter implements IDelivery {
     }
 
     /**
+     * Getter for the Items Status.
+     * 
+     * @return The item status. 
+     */
+    public ItemStatus getItemStatus() {
+        return itemStatus;
+    }
+
+    /**
      * This method Checks if two packed items overlap, returning
      * true if they do or false if they don't.
      *

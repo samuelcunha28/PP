@@ -142,8 +142,8 @@ public class Main {
         
         // System.out.println(management.checkItemStatus("1"));
         
-        management.startDelivery("1");
-        management.stopDelivery("1");
+        // management.startDelivery("1");
+        // management.stopDelivery("1");
         
     }
 }

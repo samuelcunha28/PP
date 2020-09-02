@@ -14,7 +14,6 @@ import transport.TransportationTypes;
 import transport.VehicleStatus;
 import Exceptions.ManagementExceptionImpl;
 import java.util.Arrays;
-import transport.DriverStatus;
 import transport.IItemPacked;
 
 /*
@@ -27,18 +26,6 @@ public class Management implements IManagement {
      * Represents the management items.
      */
     private IItem[] items;
-
-    /**
-     * The management item.
-     */
-    private IItem item;
-
-    private IItemPacked pack;
-
-    /**
-     * The status of the item.
-     */
-    private ItemStatus status;
 
     /**
      * The number of items.
@@ -59,11 +46,6 @@ public class Management implements IManagement {
      * Representes the management drivers.
      */
     private IDriver[] drivers;
-
-    /**
-     * The delivery driver.
-     */
-    private IDriver driver;
 
     /**
      * The number of drivers.
@@ -114,15 +96,9 @@ public class Management implements IManagement {
         if (iitem == null) {
             throw new ManagementExceptionImpl("The parameter is null");
         }
-
         if (iitem.getTransportationTypes() == null) {
             throw new ManagementExceptionImpl("The item has no transportation type");
         }
-
-        /**
-         * if (iitem == iitem) { throw new ManagementExceptionImpl("The item
-         * already exists"); }
-         */
         if (this.items.length == this.numberOfItems) {
             IItem[] clone = this.items;
             this.items = new IItem[this.items.length + 1];
@@ -454,11 +430,10 @@ public class Management implements IManagement {
         if (delivery == null) {
             throw new ManagementExceptionImpl("The delivery is null");
         }
-        /*
-        if (status != ItemStatus.ASSIGNED) {
-            throw new ManagementExceptionImpl("The delivery items are not assigned");
+        Delivery del1 = (Delivery) delivery;
+        if (del1.getItemStatus() != ItemStatus.ASSIGNED) {
+            throw new ManagementExceptionImpl("The item status is not assigned");
         }
-         */
         if (delivery.isEmpty()) {
             throw new ManagementExceptionImpl("The delivery has no items");
         }
@@ -468,8 +443,8 @@ public class Management implements IManagement {
         if (delivery.getCurrentWeight() > delivery.getVehicle().getMaxWeight()) {
             throw new ManagementExceptionImpl("The delivery has no capacity");
         }
-        Delivery tmp = (Delivery) delivery;
-        if (tmp.getDriver() == null) {
+        Delivery del2 = (Delivery) delivery;
+        if (del2.getDriver() == null) {
             throw new ManagementExceptionImpl("The delivery has no driver");
         }
 
@@ -483,7 +458,6 @@ public class Management implements IManagement {
 
         this.deliveries[this.numberOfDeliveries] = delivery;
         this.numberOfDeliveries++;
-
         return true;
     }
 
@@ -493,8 +467,8 @@ public class Management implements IManagement {
      *
      * @param idDelivery The delivery id
      * @param reference The item reference
-     * @throws Exception if delivery or item is null if delivery or item is
-     * invalid Item do not have a ASSIGNED status
+     * @throws Exception if delivery or item is null; 
+     
      */
     @Override
     public void deliveredItem(String idDelivery, String reference) throws Exception {
@@ -519,7 +493,6 @@ public class Management implements IManagement {
                 break;
             }
         }
-
         System.out.println(Arrays.toString(items));
     }
 
@@ -529,13 +502,18 @@ public class Management implements IManagement {
      *
      * @param idDelivery The delivery id
      * @param destination The item destination
-     * @throws ManagementException if delivery or item is null; delivery or item
-     * is invalid; Item do not have a ASSIGNED status.
+     * @throws ManagementException if delivery or item is null; 
+     * delivery or item is invalid; 
+     * Item do not have a ASSIGNED status.
      */
     @Override
     public void deliveredItem(String idDelivery, IDestination destination) throws Exception {
         if (idDelivery == null || destination == null) {
             throw new ManagementExceptionImpl("The delivery id and/or destination are null");
+        }
+        Delivery del = (Delivery) delivery;
+        if (del.getItemStatus() != ItemStatus.ASSIGNED) {
+            throw new ManagementExceptionImpl("The item status  is not assigned");
         }
 
         int deliveryPosition = -1;
