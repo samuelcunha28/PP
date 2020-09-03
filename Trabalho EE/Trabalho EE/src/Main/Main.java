@@ -27,7 +27,6 @@ import transport.DriverStatus;
 import transport.ItemStatus;
 import transport.TransportationTypes;
 import transport.VehicleStatus;
-import transport.IExporter;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -139,18 +138,17 @@ public class Main {
         
         // System.out.println("Peso items: " + delivery1.getCurrentWeight());
         management.addDelivery(delivery1);
-        // management.deliveredItem("1", "1");
-        // management.deliveredItem("1", destination1);
         
         // System.out.println(management.checkItemStatus("1"));
         
         management.startDelivery("1");
+        // management.deliveredItem("1", "1");
+        // management.deliveredItem("1", destination1);
         // management.stopDelivery("1");
         
         Exporter export = new Exporter(delivery1, "Delivery1.json");
         export.export("Delivery1.json");
-        // delivery1.export("Delivery1");
-        // GUI.render("Delivery1.json");
+        GUI.render("Delivery1.json");
         
     }
 }    

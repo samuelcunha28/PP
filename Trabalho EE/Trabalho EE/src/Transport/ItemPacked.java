@@ -61,8 +61,6 @@ public class ItemPacked implements IItemPacked {
         this.position = position;
     }
     
-    
-    
     /**
      * To String method representing the Item Packed.
      *

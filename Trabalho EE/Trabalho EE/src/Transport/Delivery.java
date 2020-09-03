@@ -3,10 +3,8 @@ package Transport;
 import exceptions.DeliveryException;
 import Exceptions.DeliveryExceptionImpl;
 import HumanResources.Destination;
-import HumanResources.Driver;
 import hr.IDestination;
 import hr.IDriver;
-import hr.LicenseType;
 import java.io.IOException;
 import java.util.Arrays;
 import transport.DriverStatus;
@@ -517,9 +515,14 @@ public class Delivery  implements IDelivery {
                 + "\nItems: " + Arrays.toString(items)
                 + "\nDestination: " + destination + "\nItem status: " + itemStatus;
     }
-
+    
+    /**
+     * Serialize an object to a specific format that can be stored.
+     * 
+     * @param string The file system location in which the data will be stored.
+     * @throws IOException 
+     */
     @Override
     public void export(String string) throws IOException {
-       
     }
 }

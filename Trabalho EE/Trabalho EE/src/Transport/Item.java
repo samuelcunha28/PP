@@ -1,6 +1,5 @@
 package Transport;
 
-import exceptions.BoxException;
 import hr.ICustomer;
 import hr.IDestination;
 import java.util.Arrays;

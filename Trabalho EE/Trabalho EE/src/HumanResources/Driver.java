@@ -140,7 +140,6 @@ public class Driver extends Person implements IDriver {
         for (i = 0; i < this.numberOfLicenses; ++i) {
             if (lt.equals(this.licenses[i])) {
                 return true;
-
             }
         }
         return false;

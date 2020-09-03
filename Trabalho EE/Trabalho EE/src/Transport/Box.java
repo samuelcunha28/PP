@@ -143,8 +143,6 @@ public class Box implements IBox {
         this.color = color;
     }
     
-    
-    
     /**
      * To String method representing the Box.
      * @return String with all the information about the box.

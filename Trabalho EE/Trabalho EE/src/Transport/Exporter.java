@@ -6,8 +6,6 @@ import transport.IExporter;
 import java.io.FileWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import transport.Color;
-import transport.IBox;
 import transport.IItem;
 import transport.IItemPacked;
 import transport.IVehicle;
@@ -58,19 +56,35 @@ public class Exporter implements IExporter {
         this.GUIpath = GUIpath;
     }
 
+    /**
+     * Setter for Gui path.
+     * 
+     * @param GUIpath The GUI path.
+     */
     public void setGUIpath(String GUIpath) {
         this.GUIpath = GUIpath;
     }
-
+    
+    /**
+     * Serialize an object to a specific format that can be stored.
+     * 
+     * @param string The file system location in which the data will be stored.
+     * @throws IOException 
+     */
     @Override
     public void export(String string) throws IOException {
         try (FileWriter file = new FileWriter(this.GUIpath)) {
             file.write(serializeGUI().toJSONString());
-        }
+        } 
     }
 
     /**
-     *
+     * Serializes an Delivery acording to render method.
+     * 
+     * @return an JSONObject that can be written to a file
+     * @throws IOException Signals that an I/O exception of some sort has
+     * occurred. This class is the general class of exceptions produced by
+     * failed or interrupted I/O operations.
      */
     private JSONObject serializeGUI() throws IOException {
         JSONObject obj = new JSONObject();

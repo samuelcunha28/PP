@@ -1,4 +1,5 @@
 package HumanResources;
+
 import hr.IAddress;
 import hr.ICustomer;
 import java.time.LocalDate;
