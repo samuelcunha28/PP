@@ -67,6 +67,9 @@ public class Management implements IManagement {
      */
     private IDelivery delivery;
 
+    /**
+     * Constructor of management
+     */
     public Management() {
         this.numberOfItems = 0;
         this.items = new IItem[5];
@@ -429,11 +432,13 @@ public class Management implements IManagement {
     public boolean addDelivery(IDelivery delivery) throws ManagementException {
         if (delivery == null) {
             throw new ManagementExceptionImpl("The delivery is null");
-        }
+        } 
+        /*
         Delivery del1 = (Delivery) delivery;
         if (del1.getItemStatus() != ItemStatus.ASSIGNED) {
             throw new ManagementExceptionImpl("The item status is not assigned");
         }
+        */
         if (delivery.isEmpty()) {
             throw new ManagementExceptionImpl("The delivery has no items");
         }
@@ -593,7 +598,6 @@ public class Management implements IManagement {
                 break;
             }
         }
-        System.out.println("Delivery " + idDelivery + " has started");
+        System.out.println("Delivery " + idDelivery + " has ended");
     }
-
 }

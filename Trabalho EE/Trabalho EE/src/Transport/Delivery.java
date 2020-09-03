@@ -7,6 +7,7 @@ import HumanResources.Driver;
 import hr.IDestination;
 import hr.IDriver;
 import hr.LicenseType;
+import java.io.IOException;
 import java.util.Arrays;
 import transport.DriverStatus;
 import transport.IDelivery;
@@ -21,7 +22,7 @@ import transport.IItemPacked;
 * Nome: <Samuel Luciano Correia da Cunha>
 * Número: <8160526>
  */
-public class Delivery extends Exporter implements IDelivery {
+public class Delivery  implements IDelivery {
 
     /**
      * The delivery id.
@@ -115,7 +116,7 @@ public class Delivery extends Exporter implements IDelivery {
     public String getId() {
         return this.id;
     }
-
+    
     /**
      * Assigns the vehicle and the driver to the delivery. The vehicle must have
      * the free status and after assignment, the status must be changed to IN
@@ -308,7 +309,7 @@ public class Delivery extends Exporter implements IDelivery {
         }
         weight = vehicle.getMaxWeight() - itemWeight;
 
-        // validate();
+        validate();
         return true;
     }
 
@@ -515,5 +516,10 @@ public class Delivery extends Exporter implements IDelivery {
         return "\nID: " + id + "\nVehicle: " + vehicle + "\nDriver: " + driver
                 + "\nItems: " + Arrays.toString(items)
                 + "\nDestination: " + destination + "\nItem status: " + itemStatus;
+    }
+
+    @Override
+    public void export(String string) throws IOException {
+       
     }
 }

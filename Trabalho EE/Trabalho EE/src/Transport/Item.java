@@ -5,6 +5,7 @@ import hr.ICustomer;
 import hr.IDestination;
 import java.util.Arrays;
 import java.util.Objects;
+import transport.Color;
 import transport.IItem;
 import transport.ItemStatus;
 import transport.TransportationTypes;
@@ -49,6 +50,11 @@ public class Item extends Box implements IItem {
      * The item status.
      */
     private ItemStatus status;
+    
+    /**
+     * The item color
+     */
+    private Color color;
 
     /**
      * Constructor of Item.
@@ -65,7 +71,7 @@ public class Item extends Box implements IItem {
      * @param weight The item weight.
      * @param status The item status.
      */
-    public Item(int depth, int height, int length, int volume, String reference, String description, TransportationTypes[] types, ICustomer customer, IDestination destination, double weight, ItemStatus status) {
+    public Item(int depth, int height, int length, int volume, String reference, String description, TransportationTypes[] types, ICustomer customer, IDestination destination, double weight, ItemStatus status, Color color) {
         super(depth, height, length, volume);
         this.reference = reference;
         this.description = description;
@@ -74,6 +80,7 @@ public class Item extends Box implements IItem {
         this.destination = destination;
         this.weight = weight;
         this.status = status;
+        this.color = color;
     }
 
     /**
@@ -202,8 +209,24 @@ public class Item extends Box implements IItem {
         this.status = is;
     }
     
+    /**
+     * Getter for the item color.
+     * 
+     * @return The item color.
+     */
+    public Color getColor() {
+        return color;
+    }
     
-
+    /**
+     * Setter for the item color.
+     * 
+     * @param color The item color.
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    
     /**
      * Compares two Items.
      *

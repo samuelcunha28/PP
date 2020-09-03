@@ -16,11 +16,13 @@ import exceptions.DeliveryException;
 import exceptions.HRException;
 import exceptions.ManagementException;
 import exceptions.PositionException;
+import gui.GUI;
 import hr.LicenseType;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
+import transport.Color;
 import transport.DriverStatus;
 import transport.ItemStatus;
 import transport.TransportationTypes;
@@ -47,13 +49,13 @@ public class Main {
         Destination destination2 = new Destination("2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
         Customer customer1 = new Customer("1234", "123", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12));
         Customer customer2 = new Customer("2", "2", address1, "sam", LocalDate.of(2000, Month.NOVEMBER, 26));
-        Box box1 = new Box(1, 1, 1, 1);
-        Box box2 = new Box(2, 2, 2, 2);
-        Position position1 = new Position(1, 1, 1);
-        Position position2 = new Position(2, 2, 2);
+        Box box1 = new Box(1, 1, 1, 1, Color.aqua);
+        Box box2 = new Box(1, 1, 1, 1, Color.fuchsia);
+        Position position1 = new Position(0, 0, 0);
+        Position position2 = new Position(1, 0, 0);
         Driver driver1 = new Driver("1", address1, "samuel", LocalDate.of(1998, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 12), DriverStatus.FREE);
-        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.ASSIGNED);
-        Item item2 = new Item(2, 2, 2, 2, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.ASSIGNED);
+        Item item1 = new Item(1, 1, 1, 1, "1", "1", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.ASSIGNED, Color.aqua);
+        Item item2 = new Item(1, 1, 1, 1, "2", "2", new TransportationTypes[]{TransportationTypes.DANGEROUS}, customer1, destination1, 5, ItemStatus.ASSIGNED, Color.blue);
         Vehicle vehicle1 = new Vehicle("AA-00-AA", 6000, VehicleStatus.FREE, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Vehicle vehicle2 = new Vehicle("CC-00-CC", 2000.00, VehicleStatus.IN_TRANSIT, box1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
         Truck truck1 = new Truck("BB-00-BB", 12000, VehicleStatus.IN_TRANSIT, item1, new TransportationTypes[]{TransportationTypes.FRAGILE, TransportationTypes.DANGEROUS}, new LicenseType[]{LicenseType.A, LicenseType.B});
@@ -89,7 +91,7 @@ public class Main {
         
         Management management = new Management();
         management.addItem(item1);
-        management.addItem(item2);
+        //management.addItem(item2);
         // management.removeItem(item1);
         System.out.println("");
         System.out.println("");
@@ -142,8 +144,13 @@ public class Main {
         
         // System.out.println(management.checkItemStatus("1"));
         
-        // management.startDelivery("1");
+        management.startDelivery("1");
         // management.stopDelivery("1");
         
+        Exporter export = new Exporter(delivery1, "Delivery1.json");
+        export.export("Delivery1.json");
+        // delivery1.export("Delivery1");
+        // GUI.render("Delivery1.json");
+        
     }
-}
+}    

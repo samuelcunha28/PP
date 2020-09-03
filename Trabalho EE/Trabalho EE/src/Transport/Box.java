@@ -2,6 +2,7 @@ package Transport;
 import transport.IBox;
 import exceptions.BoxException;
 import Exceptions.BoxExceptionImpl;
+import transport.Color;
 
 /*
 * Nome: <Samuel Luciano Correia da Cunha>
@@ -23,6 +24,8 @@ public class Box implements IBox {
      * The Box length.
      */
     private int length;
+    
+    private Color color;
     
     /**
      * The Box volume.
@@ -61,6 +64,32 @@ public class Box implements IBox {
         this.length = length;
         this.volume = depth * height * length;
     }
+
+    public Box(int depth, int height, int length, int volume, Color color) {
+        if (depth >= 0) {
+            this.depth = depth;
+        } else {
+            throw new BoxExceptionImpl("The value for depth is invalid");
+        }
+        
+        if (height >= 0) {
+            this.height = height;
+        } else {
+            throw new BoxExceptionImpl("The value for height is invalid");
+        }
+        
+        if (length >= 0) {
+            this.length = length;
+        } else {
+            throw new BoxExceptionImpl("The value for length is invalid");
+        }
+        
+        this.depth = depth;
+        this.height = height;
+        this.length = length;
+        this.volume = depth * height * length;
+        this.color = color;   
+    }
     
     /**
      * Getter for depth.
@@ -97,6 +126,24 @@ public class Box implements IBox {
     public int getVolume() {
         return this.volume;
     }
+
+    /**
+     * 
+     * @return 
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * 
+     * @param color 
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    
+    
     
     /**
      * To String method representing the Box.
