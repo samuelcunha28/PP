@@ -68,8 +68,7 @@ public class Driver extends Person implements IDriver {
      *
      * @param lt The license type to be added.
      * @return True if inserted, false otherwise.
-     * @throws HRException if licenseType is null && DriverStatus is different
-     * from free.
+     * @throws HRException if licenseType is null and DriverStatus is different from free.
      */
     @Override
     public boolean addLicense(LicenseType lt) throws HRException {
@@ -99,7 +98,7 @@ public class Driver extends Person implements IDriver {
      *
      * @param lt The license type to be removed.
      * @return True if removed, false otherwise.
-     * @throws HRException if licenseType is null && DriverStatus is different
+     * @throws HRException if licenseType is null and DriverStatus is different
      * from free.
      */
     @Override
