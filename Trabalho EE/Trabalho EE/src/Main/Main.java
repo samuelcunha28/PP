@@ -147,7 +147,6 @@ public class Main {
         management.stopDelivery("1");
         
         Exporter export = new Exporter(delivery1, "Delivery1.json");
-        // export.export("Delivery1.json");
         export.export("Delivery1.json");
         GUI.render("Delivery1.json");
         
