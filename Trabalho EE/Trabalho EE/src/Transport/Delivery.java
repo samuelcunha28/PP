@@ -5,6 +5,7 @@ import Exceptions.DeliveryExceptionImpl;
 import HumanResources.Destination;
 import hr.IDestination;
 import hr.IDriver;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import transport.DriverStatus;
@@ -21,7 +22,7 @@ import transport.IItemPacked;
 * Número: <8160526>
  */
 public class Delivery  implements IDelivery {
-
+    
     /**
      * The delivery id.
      */
@@ -523,6 +524,6 @@ public class Delivery  implements IDelivery {
      * @throws IOException 
      */
     @Override
-    public void export(String string) throws IOException {
+    public void export(String string) throws IOException { 
     }
 }

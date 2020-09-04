@@ -6,7 +6,6 @@ import transport.IExporter;
 import java.io.FileWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import transport.IItem;
 import transport.IItemPacked;
 import transport.IVehicle;
 
@@ -22,28 +21,10 @@ public class Exporter implements IExporter {
      */
     private IDelivery delivery;
 
-    private IItem item;
-
-    private IDelivery[] deliveries;
-
-    private IItemPacked[] pack;
-
     /**
      * Exporter path to a file were the delivery info will be stored.
      */
     private String GUIpath;
-
-    public IDelivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(IDelivery delivery) {
-        this.delivery = delivery;
-    }
-
-    public String getGUIpath() {
-        return GUIpath;
-    }
 
     /**
      * Constructor of Exporter.
@@ -54,6 +35,32 @@ public class Exporter implements IExporter {
     public Exporter(IDelivery delivery, String GUIpath) {
         this.delivery = delivery;
         this.GUIpath = GUIpath;
+    }
+    
+    /**
+     * Getter for the exporter delivery.
+     * 
+     * @return The exporter delivery. 
+     */
+    public IDelivery getDelivery() {
+        return delivery;
+    }
+    
+    /**
+     * Setter for the exporter delivery.
+     * 
+     * @param delivery The Delivery.
+     */
+    public void setDelivery(IDelivery delivery) {
+        this.delivery = delivery;
+    }
+    
+    /**
+     * Getter for the path file were delivery info will be stored
+     * @return 
+     */
+    public String getGUIpath() {
+        return GUIpath;
     }
 
     /**
@@ -74,7 +81,7 @@ public class Exporter implements IExporter {
     @Override
     public void export(String string) throws IOException {
         try (FileWriter file = new FileWriter(this.GUIpath)) {
-            file.write(serializeGUI().toJSONString());
+            file.write(serializeDeliveryGUI().toJSONString());
         } 
     }
 
@@ -86,21 +93,21 @@ public class Exporter implements IExporter {
      * occurred. This class is the general class of exceptions produced by
      * failed or interrupted I/O operations.
      */
-    private JSONObject serializeGUI() throws IOException {
+    private JSONObject serializeDeliveryGUI() throws IOException {
         JSONObject obj = new JSONObject();
         JSONObject item;
         JSONArray items = new JSONArray();
 
-        Delivery del1 = (Delivery) delivery;
+        Delivery deliver = (Delivery) delivery;
 
-        IVehicle vcl = del1.getVehicle();
+        IVehicle vcl = deliver.getVehicle();
         Box box = (Box) vcl.getCargoBox();
 
         obj.put("depth", box.getDepth());
         obj.put("color", box.getColor().toString());
         obj.put("length", box.getLength());
 
-        IItemPacked[] temp = del1.getPackedItems();
+        IItemPacked[] temp = deliver.getPackedItems();
 
         for (int i = 0; i < temp.length; i++) {
             item = new JSONObject();

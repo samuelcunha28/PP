@@ -142,11 +142,12 @@ public class Main {
         // System.out.println(management.checkItemStatus("1"));
         
         management.startDelivery("1");
-        // management.deliveredItem("1", "1");
+        management.deliveredItem("1", "1");
         // management.deliveredItem("1", destination1);
-        // management.stopDelivery("1");
+        management.stopDelivery("1");
         
         Exporter export = new Exporter(delivery1, "Delivery1.json");
+        // export.export("Delivery1.json");
         export.export("Delivery1.json");
         GUI.render("Delivery1.json");
         
